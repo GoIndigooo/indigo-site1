@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Indigo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#04000E;--ink2:#0A0020;--ink3:#120030;--lift:#1C0040;
+  --neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--pink:#FF2D9B;
+  --yel:#FFD600;--mint:#00FF9F;--org:#FF6B35;
+  --W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;
+  --bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(139,92,246,.03) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);
+  background-size:64px 64px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;
+  background:rgba(4,0,14,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--bord)}
+.nav-w{width:100%;max-width:1200px;margin:0 auto;padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px}
+.logo svg{width:30px;height:38px}
+.logo-txt{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:5px;
+  background:linear-gradient(90deg,var(--neon2),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;
+  color:var(--mt);transition:all .2s;padding:7px 14px;border:1px solid transparent}
+.nav-links a:hover{color:var(--lt);border-color:var(--bord)}
+.nav-links a.active{color:var(--cyan);border-color:rgba(0,229,255,.3);background:rgba(0,229,255,.05)}
+.nav-login{color:var(--mint)!important;border-color:rgba(0,255,159,.4)!important;
+  background:rgba(0,255,159,.07)!important;font-family:'Share Tech Mono',monospace!important;
+  font-size:10px!important;letter-spacing:1px!important}
+.nav-login:hover{background:rgba(0,255,159,.15)!important}
+.nav-cta{color:var(--neon)!important;border-color:rgba(139,92,246,.45)!important;
+  background:rgba(139,92,246,.08)!important}
+.nav-cta:hover{background:rgba(139,92,246,.18)!important}
+
+/* LAYOUT */
+.wrap{max-width:1200px;margin:0 auto;padding:0 48px}
+section{position:relative;z-index:2}
+
+/* PAGE HERO */
+.page-hero{padding:140px 48px 72px;text-align:center;border-bottom:3px solid var(--neon)}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:2px;color:var(--mt);margin-bottom:28px;transition:color .2s}
+.back-link:hover{color:var(--cyan)}
+.page-hero h1{font-family:'Orbitron',monospace;font-size:clamp(36px,6vw,72px);font-weight:900;
+  line-height:1.0;color:var(--W);margin-bottom:20px}
+.page-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--yel),var(--pink),var(--neon2),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-hero p{font-size:19px;color:var(--lt);max-width:560px;margin:0 auto;line-height:1.65}
+
+/* MAIN LAYOUT — 2 col */
+.contact-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;
+  padding:100px 0;align-items:start}
+
+/* LEFT — contact info */
+.contact-info{}
+.ci-block{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--bord)}
+.ci-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.ci-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--cyan);display:block;margin-bottom:10px}
+.ci-title{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;color:var(--W);margin-bottom:6px}
+.ci-body{font-size:15px;color:var(--mt);line-height:1.65}
+.ci-body strong{color:var(--lt)}
+.ci-body a{color:var(--neon);transition:color .2s}
+.ci-body a:hover{color:var(--cyan)}
+
+/* Stat pills */
+.ci-stats{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.ci-stat{display:flex;align-items:center;gap:12px;padding:12px 16px;
+  background:var(--ink2);border:1px solid var(--bord)}
+.cs-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;white-space:nowrap}
+.css1{color:var(--mint)}.css2{color:var(--neon)}.css3{color:var(--yel)}
+.cs-lbl{font-size:13px;color:var(--mt)}
+
+/* Live indicator */
+.live-row{display:flex;align-items:center;gap:8px;margin-top:12px;
+  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mint)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--mint);animation:blink 1.6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* RIGHT — form */
+.contact-form-wrap{background:var(--ink2);border:1px solid var(--bord);position:relative}
+.contact-form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--neon),var(--neon2),var(--cyan))}
+.form-header{padding:28px 32px 20px;border-bottom:1px solid var(--bord)}
+.form-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--W);margin-bottom:4px}
+.form-sub{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt)}
+
+/* The form */
+.cform{padding:28px 32px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px}
+.form-group:last-of-type{margin-bottom:24px}
+.flabel{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--cyan);display:block;margin-bottom:8px}
+.finput,.fselect,.ftextarea{
+  width:100%;background:var(--ink);border:1px solid var(--bord);
+  color:var(--W);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:500;
+  padding:13px 16px;outline:none;transition:border-color .2s;
+  -webkit-appearance:none;appearance:none}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--neon)}
+.finput::placeholder,.ftextarea::placeholder{color:var(--mt)}
+.ftextarea{resize:vertical;min-height:130px;line-height:1.55}
+.fselect{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237C6B9E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center}
+.fselect option{background:var(--ink2)}
+
+/* Budget hint */
+.budget-hint{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;
+  color:var(--mt);margin-top:6px}
+
+/* Checkboxes */
+.checks{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.check-row{display:flex;align-items:center;gap:10px;cursor:pointer}
+.check-row input[type="checkbox"]{
+  width:16px;height:16px;flex-shrink:0;cursor:pointer;
+  accent-color:var(--neon)}
+.check-label{font-size:14px;color:var(--lt)}
+
+/* Submit button */
+.form-submit{
+  width:100%;padding:16px;font-family:'Orbitron',monospace;
+  font-size:12px;font-weight:700;letter-spacing:2px;
+  color:var(--W);border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--neon),var(--neon2));
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  transition:opacity .2s,transform .15s}
+.form-submit:hover{opacity:.88;transform:translateY(-2px)}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* Success / error states */
+.form-status{display:none;padding:14px 16px;margin-bottom:20px;
+  font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;line-height:1.6}
+.form-status.success{background:rgba(0,255,159,.08);border:1px solid rgba(0,255,159,.3);
+  border-left:3px solid var(--mint);color:var(--mint)}
+.form-status.error{background:rgba(255,45,155,.08);border:1px solid rgba(255,45,155,.3);
+  border-left:3px solid var(--pink);color:var(--pink)}
+.form-status.show{display:block}
+
+/* Privacy note */
+.privacy-note{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;
+  color:var(--mt);margin-top:14px;line-height:1.7;text-align:center}
+.privacy-note a{color:var(--mt);text-decoration:underline}
+
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid var(--bord);
+  padding:40px 0 24px;position:relative;z-index:2}
+.fbar{display:flex;justify-content:space-between;align-items:center}
+.fbar p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt)}
+.fbar-links{display:flex;gap:24px}
+.fbar-links a{font-family:'Share Tech Mono',monospace;font-size:9px;
+  letter-spacing:1px;color:var(--mt);transition:color .2s}
+.fbar-links a:hover{color:var(--lt)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s,transform .65s}
+.rv.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .contact-layout{grid-template-columns:1fr;gap:48px}
+  .wrap,.nav-w{padding:0 32px}
+}
+@media(max-width:768px){
+  .wrap,.nav-w,.page-hero{padding-left:24px;padding-right:24px}
+  .form-row{grid-template-columns:1fr}
+  .cform{padding:24px}
+  .form-header{padding:22px 24px 16px}
+  .nav-links{display:none}
+}
+
+/* ─── MOBILE HAMBURGER ─── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;cursor:pointer;background:none;border:1px solid var(--bord);
+  padding:7px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--bord2)}
+.hamburger span{display:block;height:2px;background:var(--lt);border-radius:1px;
+  transition:transform .25s,opacity .25s,width .25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;width:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile slide-down menu */
+.mobile-menu{
+  display:none;position:fixed;top:68px;left:0;right:0;z-index:199;
+  background:rgba(4,0,14,.97);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--bord2);
+  flex-direction:column;padding:8px 0 16px;
+  transform:translateY(-8px);opacity:0;
+  transition:transform .25s ease,opacity .25s ease}
+.mobile-menu.open{transform:translateY(0);opacity:1}
+.mobile-menu a{
+  font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;
+  color:var(--mt);padding:14px 28px;display:block;
+  border-bottom:1px solid rgba(139,92,246,.08);transition:color .2s,background .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--W);background:rgba(139,92,246,.08)}
+.mobile-menu a.active{color:var(--cyan)}
+.mobile-menu .mm-login{color:var(--mint)!important}
+.mobile-menu .mm-cta{
+  color:var(--W)!important;background:linear-gradient(135deg,var(--neon),var(--neon2))!important;
+  margin:10px 24px 0;text-align:center;font-weight:700;border:none!important}
+.mobile-menu .mm-cta:hover{opacity:.88!important}
+
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-links{display:none!important}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-w">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 40 50" fill="none">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient>
+        </defs>
+        <rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/>
+        <rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/>
+        <rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/>
+        <rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/>
+        <polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/>
+        <line x1="13" y1="9" x2="27" y2="9" stroke="white" stroke-width="1.5" opacity=".9"/>
+        <circle cx="20" cy="9" r="2.5" fill="#FFD600"/>
+      </svg>
+      <span class="logo-txt">INDIGO</span>
+    </a>
+    <div class="nav-links">
+      <a href="how-it-works.html">HOW IT WORKS</a>
+      <a href="skills.html">SKILLS</a>
+      <a href="peer-review.html">PEER REVIEW</a>
+      <a href="results.html">RESULTS</a>
+      <a href="vs-competitors.html">VS COMPETITORS</a>
+      <a href="contact.html" class="active">CONTACT</a>
+      <a href="indigo_portal.html" class="nav-login">CLIENT LOGIN</a>
+      <a href="index.html#pricing" class="nav-cta">GET STARTED</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="how-it-works.html">HOW IT WORKS</a>
+  <a href="skills.html">SKILLS</a>
+  <a href="peer-review.html">PEER REVIEW</a>
+  <a href="results.html">RESULTS</a>
+  <a href="vs-competitors.html">VS COMPETITORS</a>
+  <a href="contact.html" class="active">CONTACT</a>
+  <a href="indigo_portal.html" class="mm-login">CLIENT LOGIN</a>
+  <a href="index.html#pricing" class="mm-cta">GET STARTED →</a>
+</div>
+
+<!-- PAGE HERO -->
+<section style="background:var(--ink2)">
+  <div class="page-hero">
+    <a href="index.html" class="back-link">← BACK TO HOME</a>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--cyan);display:block;margin-bottom:16px">// GET IN TOUCH</span>
+    <h1>Let's talk about<br><em>your campaigns.</em></h1>
+    <p>Tell us your market, your goals, and your budget. We'll show you exactly what Indigo would build — before you commit to anything.</p>
+  </div>
+</section>
+
+<!-- MAIN -->
+<section style="background:var(--ink)">
+  <div class="wrap">
+    <div class="contact-layout">
+
+      <!-- LEFT: Info -->
+      <div class="contact-info">
+
+        <div class="ci-block rv">
+          <span class="ci-label">// RESPONSE TIME</span>
+          <div class="ci-title">We reply within 24 hours</div>
+          <p class="ci-body">Every message goes directly to our team. You'll hear back with a clear answer — not a sales pitch — about whether Indigo is the right fit for your business.</p>
+          <div class="live-row"><span class="live-dot"></span>AGENT ACTIVE — CAMPAIGNS RUNNING NOW</div>
+        </div>
+
+        <div class="ci-block rv d1">
+          <span class="ci-label">// WHAT TO EXPECT</span>
+          <div class="ci-title">No hard sell. Just the truth.</div>
+          <p class="ci-body">Tell us your service, your market, and your current ad spend. We'll tell you honestly whether Indigo makes sense — and if it does, what we'd build first.</p>
+        </div>
+
+        <div class="ci-block rv d1">
+          <span class="ci-label">// DIRECT CONTACT</span>
+          <div class="ci-title">Prefer to talk first?</div>
+          <p class="ci-body">Fill out the form and we'll reach out to you directly. We respond to every submission personally — no automated follow-ups.</p>
+        </div>
+
+        <div class="rv d2">
+          <span class="ci-label">// LIVE RESULTS</span>
+          <div class="ci-stats">
+            <div class="ci-stat">
+              <span class="cs-val css1">$94</span>
+              <span class="cs-lbl">Average cost per lead — Google verified</span>
+            </div>
+            <div class="ci-stat">
+              <span class="cs-val css2">12.22%</span>
+              <span class="cs-lbl">Click-through rate — 3× industry average</span>
+            </div>
+            <div class="ci-stat">
+              <span class="cs-val css3">24hr</span>
+              <span class="cs-lbl">From first message to live campaign</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="contact-form-wrap rv d1">
+        <div class="form-header">
+          <div class="form-title">Start the conversation</div>
+          <div class="form-sub">// TAKES ABOUT 2 MINUTES · REPLY WITHIN 24 HOURS</div>
+        </div>
+
+        <form class="cform" id="contact-form"
+              action="https://formspree.io/f/mzdyjbvb"
+              method="POST">
+
+          <!-- Hidden field — routes reply-to correctly -->
+          <input type="hidden" name="_replyto" value="">
+
+          <div class="form-status" id="form-status"></div>
+
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <label class="flabel" for="fname">FIRST NAME</label>
+              <input class="finput" type="text" id="fname" name="first_name"
+                     placeholder="Daniel" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="flabel" for="lname">LAST NAME</label>
+              <input class="finput" type="text" id="lname" name="last_name"
+                     placeholder="Smith" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <label class="flabel" for="email">EMAIL ADDRESS</label>
+              <input class="finput" type="email" id="email" name="email"
+                     placeholder="you@company.com" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="flabel" for="phone">PHONE (OPTIONAL)</label>
+              <input class="finput" type="tel" id="phone" name="phone"
+                     placeholder="+1 (555) 000-0000">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="flabel" for="business">BUSINESS NAME</label>
+            <input class="finput" type="text" id="business" name="business_name"
+                   placeholder="Apex Restoration" required>
+          </div>
+
+          <div class="form-group">
+            <label class="flabel" for="service">SERVICE / INDUSTRY</label>
+            <input class="finput" type="text" id="service" name="service_type"
+                   placeholder="e.g. Water Damage Restoration, HVAC, Plumbing" required>
+          </div>
+
+          <div class="form-group">
+            <label class="flabel" for="market">TARGET MARKET</label>
+            <input class="finput" type="text" id="market" name="target_market"
+                   placeholder="e.g. Charlotte NC, Dallas TX, South Florida" required>
+          </div>
+
+          <div class="form-group">
+            <label class="flabel" for="budget">MONTHLY AD BUDGET</label>
+            <select class="finput fselect" id="budget" name="monthly_budget" required>
+              <option value="" disabled selected>Select your budget range</option>
+              <option value="Under $1,000">Under $1,000/mo</option>
+              <option value="$1,000 - $2,500">$1,000 – $2,500/mo</option>
+              <option value="$2,500 - $5,000">$2,500 – $5,000/mo</option>
+              <option value="$5,000 - $10,000">$5,000 – $10,000/mo</option>
+              <option value="$10,000 - $25,000">$10,000 – $25,000/mo</option>
+              <option value="$25,000+">$25,000+/mo</option>
+            </select>
+            <div class="budget-hint">Indigo works from $1K/mo spend — no minimum contract</div>
+          </div>
+
+          <div class="form-group">
+            <label class="flabel" for="situation">CURRENT SITUATION</label>
+            <select class="finput fselect" id="situation" name="current_situation">
+              <option value="" disabled selected>Where are you right now?</option>
+              <option value="No Google Ads currently">No Google Ads running currently</option>
+              <option value="Running ads, want better results">Running ads — want better results</option>
+              <option value="Using an agency, want to switch">Using an agency — want to switch</option>
+              <option value="Using another AI tool">Using another AI tool (AdTurbo, Madgicx, etc.)</option>
+              <option value="Just getting started">Just getting started in paid search</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="flabel" for="message">ANYTHING ELSE?</label>
+            <textarea class="ftextarea" id="message" name="message"
+                      placeholder="Tell us anything else — specific goals, problem campaigns, markets you want to expand into, or questions you have. The more context, the better."></textarea>
+          </div>
+
+          <div style="margin-bottom:20px">
+            <div class="flabel">I'M INTERESTED IN</div>
+            <div class="checks">
+              <label class="check-row">
+                <input type="checkbox" name="interest_new_campaign" value="yes">
+                <span class="check-label">Building a new Google Ads campaign from scratch</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" name="interest_takeover" value="yes">
+                <span class="check-label">Taking over an existing underperforming campaign</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" name="interest_new_market" value="yes">
+                <span class="check-label">Expanding into a new market or city</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" name="interest_demo" value="yes">
+                <span class="check-label">Seeing a demo before committing</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit" id="submit-btn">
+            SEND MESSAGE →
+          </button>
+
+          <p class="privacy-note">
+            Your information is sent directly to the Indigo team and never sold or shared.
+            We'll reach out to you personally within 24 hours.
+          </p>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fbar">
+      <p>© 2026 INDIGO · AI-POWERED GOOGLE ADS · go.indigo.ai</p>
+      <div class="fbar-links">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="results.html">Results</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="indigo_portal.html">Client Login</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Scroll reveals */
+const ro = new IntersectionObserver(
+  es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('on') }),
+  {threshold:.08}
+);
+document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+/* Form submission via fetch (no page redirect) */
+const form   = document.getElementById('contact-form');
+const status = document.getElementById('form-status');
+const btn    = document.getElementById('submit-btn');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  // Set reply-to to submitter's email
+  const emailField = form.querySelector('[name="email"]');
+  form.querySelector('[name="_replyto"]').value = emailField.value;
+
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+  status.className = 'form-status';
+  status.style.display = 'none';
+
+  try {
+    const data = new FormData(form);
+    const res  = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      status.textContent = '✓ MESSAGE SENT — We\'ll reply to ' + emailField.value + ' within 24 hours.';
+      status.className = 'form-status success show';
+      form.reset();
+    } else {
+      const json = await res.json();
+      throw new Error(json.error || 'Submission failed');
+    }
+  } catch(err) {
+    status.textContent = '✗ SOMETHING WENT WRONG — Please try again or call us directly.';
+    status.className = 'form-status error show';
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'SEND MESSAGE →';
+  status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+
+/* Nav scroll */
+window.addEventListener('scroll', () =>
+  document.querySelector('nav').style.borderBottomColor =
+    window.scrollY > 60 ? 'rgba(139,92,246,.5)' : 'rgba(139,92,246,.2)'
+);
+</script>
+<script>
+/* Hamburger menu */
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  });
+  // Close on link click
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  // Close on outside click
+  document.addEventListener('click', function(e){
+    if(!btn.contains(e.target) && !menu.contains(e.target)){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
+</body>
+</html>

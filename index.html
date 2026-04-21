@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indigo — AI That Builds, Launches & Runs Your Google Ads</title>
+<meta name="description" content="Indigo builds Google Ads campaigns from scratch, writes every word of copy, and launches in 24 hours. Flat $299/mo. No setup. No agency.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root{
+  --ink:#04000E;--ink2:#0A0020;--ink3:#120030;--lift:#1C0040;--slate:#F0EEFF;
+  --neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--pink:#FF2D9B;
+  --yel:#FFD600;--mint:#00FF9F;--org:#FF6B35;
+  --W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;
+  --bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(139,92,246,.03) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);
+  background-size:64px 64px}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;
+  background:rgba(4,0,14,.94);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--bord);transition:border-color .3s}
+nav.scrolled{border-color:var(--bord2)}
+.nav-w{width:100%;max-width:1200px;margin:0 auto;padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px}
+.logo svg{width:30px;height:38px}
+.logo-txt{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:5px;
+  background:linear-gradient(90deg,var(--neon2),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;
+  color:var(--mt);transition:all .2s;padding:7px 14px;border:1px solid transparent}
+.nav-links a:hover{color:var(--lt);border-color:var(--bord)}
+.nav-links a.active{color:var(--cyan);border-color:rgba(0,229,255,.3);background:rgba(0,229,255,.05)}
+.nav-cta{color:var(--neon)!important;border-color:rgba(139,92,246,.45)!important;
+  background:rgba(139,92,246,.08)!important;transition:background .2s!important}
+.nav-cta:hover{background:rgba(139,92,246,.18)!important}
+
+/* ─── TICKER ─── */
+.ticker{position:relative;z-index:2;height:36px;overflow:hidden;display:flex;align-items:center;
+  margin-top:68px;background:linear-gradient(90deg,var(--neon),var(--neon2))}
+.ticker-inner{display:flex;white-space:nowrap;animation:tick 32s linear infinite}
+.ticker-inner span{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:var(--ink);padding:0 40px;border-right:1px solid rgba(4,0,14,.2)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── BUTTONS ─── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Orbitron',monospace;
+  font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 32px;
+  cursor:pointer;border:none;transition:opacity .2s,transform .15s;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.btn:hover{opacity:.88;transform:translateY(-2px)}
+.btn-solid{background:linear-gradient(135deg,var(--neon),var(--neon2));color:var(--W)}
+.btn-out{background:transparent;color:var(--cyan);border:1px solid var(--cyan)}
+.btn-out:hover{background:rgba(0,229,255,.08)}
+.btn-ghost{background:rgba(139,92,246,.1);border:1px solid var(--bord);color:var(--lt);font-size:10px;padding:10px 22px}
+.btn-ghost:hover{border-color:var(--bord2);color:var(--W)}
+.btn-white{background:var(--W);color:var(--ink);font-size:12px;padding:18px 44px}
+.btn-ghost-white{background:transparent;color:var(--W);border:1px solid rgba(255,255,255,.35);padding:14px 30px}
+
+/* ─── LAYOUT ─── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 48px}
+.pad{padding:100px 0}
+.pad-lg{padding:120px 0}
+.pad-sm{padding:70px 0}
+section{position:relative;z-index:2}
+.s-dark{background:var(--ink)}
+.s-dark2{background:var(--ink2)}
+.s-lift{background:var(--lift)}
+.s-neon{background:linear-gradient(135deg,var(--ink3) 0%,#200050 100%)}
+.s-white{background:var(--slate)}
+
+/* ─── TYPE ─── */
+.tag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--cyan);display:block;margin-bottom:10px}
+.tag-dark{color:var(--neon)}
+.h2{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(28px,4vw,48px);line-height:1.08;color:var(--W);margin-bottom:16px}
+.h2 em,.h2-dark em{font-style:normal;background:linear-gradient(90deg,var(--pink),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h2-dark{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(28px,4vw,48px);line-height:1.08;color:var(--ink);margin-bottom:16px}
+.lead{font-size:18px;line-height:1.7;color:var(--lt)}
+.lead-dark{font-size:18px;line-height:1.7;color:#4B3B70}
+
+/* ─── REVEAL ─── */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .65s,transform .65s}
+.rv.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:120px 48px 80px;overflow:hidden;position:relative;z-index:2}
+.hero-glow{position:absolute;left:50%;top:40%;width:900px;height:600px;
+  background:radial-gradient(ellipse,rgba(200,64,255,.12) 0%,transparent 65%);
+  transform:translate(-50%,-50%);pointer-events:none}
+.hero-glow2{position:absolute;right:-200px;top:20%;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(0,229,255,.07) 0%,transparent 70%);pointer-events:none}
+.hero-live{display:inline-flex;align-items:center;gap:8px;margin-bottom:28px;
+  background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);
+  padding:6px 18px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--neon);
+  animation:fu .6s .1s both}
+.pip{width:6px;height:6px;border-radius:50%;background:var(--mint);animation:blink 1.6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-h{font-family:'Orbitron',monospace;font-size:clamp(40px,7vw,86px);font-weight:900;line-height:1.0;animation:fu .7s .2s both}
+.hero-h .l1{color:var(--W);display:block;margin-bottom:4px}
+.hero-h .l2{display:block;background:linear-gradient(90deg,var(--yel) 0%,var(--pink) 35%,var(--neon2) 65%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:19px;color:var(--lt);line-height:1.65;max-width:560px;margin:20px auto 40px;animation:fu .7s .35s both}
+.hero-btns{display:flex;gap:14px;justify-content:center;margin-bottom:72px;animation:fu .7s .5s both}
+.hero-proof{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--bord);background:var(--ink2);animation:fu .7s .65s both;max-width:800px;width:100%}
+.hp{padding:22px 28px;border-right:1px solid var(--bord);text-align:center;position:relative}
+.hp:last-child{border-right:none}
+.hp::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.hp1::before{background:var(--mint)}.hp2::before{background:var(--neon)}.hp3::before{background:var(--yel)}.hp4::before{background:var(--cyan)}
+.hp-v{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;display:block;margin-bottom:4px}
+.hp1 .hp-v{color:var(--mint)}.hp2 .hp-v{color:var(--neon)}.hp3 .hp-v{color:var(--yel)}.hp4 .hp-v{color:var(--cyan)}
+.hp-l{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mt)}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* ══════════════════════════════
+   SECTION PREVIEW CARDS
+   (teaser + learn more button)
+══════════════════════════════ */
+.preview-section{border-top:1px solid var(--bord)}
+
+/* Section header with nav */
+.section-nav{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px}
+.section-nav-left{}
+.section-nav-right{flex-shrink:0}
+
+/* Preview grid — 3-col by default */
+.preview-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px}
+.preview-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:32px}
+.preview-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+
+/* Generic preview card */
+.pv-card{background:var(--panel,var(--ink2));border:1px solid var(--bord);padding:28px 24px;
+  position:relative;transition:border-color .25s,transform .2s}
+.pv-card:hover{border-color:var(--bord2);transform:translateY(-3px)}
+.pv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.pvc-1::before{background:var(--neon)}.pvc-2::before{background:var(--cyan)}.pvc-3::before{background:var(--mint)}
+.pvc-4::before{background:var(--yel)}.pvc-5::before{background:var(--pink)}.pvc-6::before{background:var(--org)}
+.pv-num{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1px;
+  margin-bottom:12px;display:block}
+.pvc-1 .pv-num{color:var(--neon)}.pvc-2 .pv-num{color:var(--cyan)}.pvc-3 .pv-num{color:var(--mint)}
+.pvc-4 .pv-num{color:var(--yel)}.pvc-5 .pv-num{color:var(--pink)}.pvc-6 .pv-num{color:var(--org)}
+.pv-title{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--W);margin-bottom:8px}
+.pv-body{font-size:14px;color:var(--mt);line-height:1.6}
+
+/* Step preview card (numbered, How It Works) */
+.step-pv{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--bord);margin-bottom:32px}
+.spv{padding:28px 24px;border-right:1px solid var(--bord);position:relative}
+.spv:last-child{border-right:none}
+.spv::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.spv1::before{background:var(--neon)}.spv2::before{background:var(--cyan)}.spv3::before{background:var(--mint)}.spv4::before{background:var(--yel)}
+.spv-n{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;display:block;margin-bottom:10px}
+.spv1 .spv-n{color:var(--neon)}.spv2 .spv-n{color:var(--cyan)}.spv3 .spv-n{color:var(--mint)}.spv4 .spv-n{color:var(--yel)}
+.spv-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--W);margin-bottom:7px}
+.spv-body{font-size:13px;color:var(--mt);line-height:1.55}
+
+/* Proof stats preview */
+.proof-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.pp-stat{background:var(--slate);border:1px solid #D4C8FF;padding:24px 18px;position:relative}
+.pp-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.pps1::before{background:var(--mint)}.pps2::before{background:var(--neon)}
+.pps3::before{background:var(--yel)}.pps4::before{background:var(--cyan)}
+.pp-v{font-family:'Orbitron',monospace;font-size:32px;font-weight:900;display:block;margin-bottom:4px}
+.pps1 .pp-v{color:#5500CC}.pps2 .pp-v{color:#7B4FFF}.pps3 .pp-v{color:#B060CC}.pps4 .pp-v{color:#0099BB}
+.pp-l{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:#6B5A8A}
+
+/* Google quote mini */
+.gq-mini{padding:22px 24px;border-left:4px solid var(--neon);background:var(--ink);border:1px solid var(--bord);border-left:4px solid var(--neon)}
+.gqm-text{font-size:16px;color:var(--lt);line-height:1.65;font-style:italic;margin-bottom:12px}
+.gqm-text em{color:var(--cyan);font-style:normal;font-weight:700}
+.gqm-src{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mt)}
+.gqm-badge{display:inline-flex;align-items:center;gap:5px;margin-top:8px;background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.28);padding:3px 10px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--cyan)}
+
+/* VS preview mini-table */
+.mini-table{width:100%;border-collapse:collapse;border:1px solid var(--bord);margin-bottom:32px}
+.mini-table th,.mini-table td{padding:11px 14px;text-align:center;border-bottom:1px solid var(--bord);border-right:1px solid var(--bord);font-size:13px}
+.mini-table th:last-child,.mini-table td:last-child{border-right:none}
+.mini-table thead th{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1px;background:var(--ink2)}
+.mini-table thead .ci{background:rgba(139,92,246,.2);color:var(--W);border-top:2px solid var(--neon)}
+.mini-table thead .cc{color:var(--mt)}
+.mini-table .rl{text-align:left!important;color:var(--lt);background:var(--ink3)!important;padding-left:16px!important;font-weight:600}
+.mini-table .ci{background:rgba(139,92,246,.05)}
+.ic{color:var(--mint);font-size:15px}.xc{color:#3D3060;font-size:15px}
+
+/* Pricing preview cards */
+.price-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.pp-card{background:rgba(255,255,255,.04);border:1px solid var(--bord);padding:24px 22px;
+  position:relative;backdrop-filter:blur(4px);transition:transform .2s,border-color .2s}
+.pp-card:hover{transform:translateY(-4px);border-color:var(--bord2)}
+.pp-card.hot{border-color:rgba(0,229,255,.4)}
+.pp-stripe{height:3px;margin:-24px -22px 18px}
+.pps-a{background:var(--neon)}.pps-b{background:linear-gradient(90deg,var(--cyan),var(--mint))}.pps-c{background:var(--yel)}
+.pp-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--W);margin-bottom:3px}
+.pp-scope{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mt);margin-bottom:12px}
+.pp-price{font-family:'Orbitron',monospace;font-size:40px;font-weight:900;line-height:1;margin-bottom:4px}
+.ppp-a{color:var(--neon)}.ppp-b{color:var(--cyan)}.ppp-c{color:var(--yel)}
+.pp-term{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mt)}
+.pop-tag{background:var(--cyan);color:var(--ink);font-family:'Share Tech Mono',monospace;
+  font-size:8px;letter-spacing:2px;font-weight:700;padding:3px 10px;display:inline-block;margin-bottom:8px}
+
+/* Section divider label */
+.divider-cta{display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;background:rgba(139,92,246,.06);border:1px solid var(--bord);margin-top:8px}
+.dc-txt{font-size:15px;color:var(--lt)}
+.dc-txt strong{color:var(--W)}
+
+/* ══════════════════════════════
+   FINAL CTA
+══════════════════════════════ */
+#cta{text-align:center;border-top:3px solid var(--neon);overflow:hidden;position:relative}
+.cta-blob{position:absolute;left:50%;top:50%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(200,64,255,.1) 0%,transparent 65%);transform:translate(-50%,-50%);pointer-events:none}
+.cta-inner{position:relative;z-index:2;max-width:740px;margin:0 auto}
+.cta-h{font-family:'Orbitron',monospace;font-size:clamp(28px,4vw,50px);font-weight:900;color:var(--W);line-height:1.08;margin-bottom:18px}
+.cta-h em{font-style:normal;background:linear-gradient(90deg,var(--pink),var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-sub{font-size:18px;color:var(--lt);line-height:1.65;margin-bottom:44px}
+.cta-btns{display:flex;gap:14px;justify-content:center;margin-bottom:24px}
+.cta-note{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt)}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28px;position:relative;z-index:2}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px}
+.fl-name{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:4px;display:block;margin-bottom:10px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fl-desc{font-size:14px;color:var(--mt);line-height:1.7;max-width:230px}
+.fch{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--cyan);margin-bottom:12px}
+.fcl{display:flex;flex-direction:column;gap:8px}
+.fcl a{font-size:14px;color:var(--mt);transition:color .2s}
+.fcl a:hover{color:var(--lt)}
+.fbar{border-top:1px solid var(--bord);padding-top:22px;display:flex;justify-content:space-between;align-items:center}
+.fbar p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt)}
+.fagent{display:flex;align-items:center;gap:7px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mint)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .wrap,.nav-w{padding:0 32px}
+  .preview-3,.preview-4{grid-template-columns:1fr 1fr}
+  .step-pv{grid-template-columns:1fr 1fr}
+  .spv:nth-child(2){border-right:none}.spv:nth-child(3){border-top:1px solid var(--bord)}
+  .proof-preview{grid-template-columns:1fr 1fr}
+  .price-preview,.fg{grid-template-columns:1fr 1fr;gap:32px}
+  .mini-table{font-size:12px}
+}
+@media(max-width:768px){
+  .wrap,.nav-w{padding:0 24px}
+  #hero{padding:120px 24px 72px}
+  .hero-btns,.cta-btns{flex-direction:column;align-items:center}
+  .hero-proof{grid-template-columns:1fr 1fr}
+  .hp:nth-child(2){border-right:none}.hp:nth-child(3),.hp:nth-child(4){border-top:1px solid var(--bord)}
+  .preview-3,.preview-4,.preview-2,.step-pv,.proof-preview,.price-preview{grid-template-columns:1fr}
+  .spv{border-right:none;border-bottom:1px solid var(--bord)}
+  .nav-links{display:none}
+  .fg{grid-template-columns:1fr;gap:28px}
+  .fbar{flex-direction:column;gap:12px;text-align:center}
+  .section-nav{flex-direction:column;align-items:flex-start;gap:16px}
+}
+
+.nav-login{color:var(--mint)!important;border-color:rgba(0,255,159,.4)!important;
+  background:rgba(0,255,159,.07)!important;font-family:'Share Tech Mono',monospace!important;
+  font-size:10px!important;letter-spacing:1px!important}
+.nav-login:hover{background:rgba(0,255,159,.15)!important}
+
+/* ─── MOBILE HAMBURGER ─── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;cursor:pointer;background:none;border:1px solid var(--bord);
+  padding:7px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--bord2)}
+.hamburger span{display:block;height:2px;background:var(--lt);border-radius:1px;
+  transition:transform .25s,opacity .25s,width .25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;width:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile slide-down menu */
+.mobile-menu{
+  display:none;position:fixed;top:68px;left:0;right:0;z-index:199;
+  background:rgba(4,0,14,.97);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--bord2);
+  flex-direction:column;padding:8px 0 16px;
+  transform:translateY(-8px);opacity:0;
+  transition:transform .25s ease,opacity .25s ease}
+.mobile-menu.open{transform:translateY(0);opacity:1}
+.mobile-menu a{
+  font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;
+  color:var(--mt);padding:14px 28px;display:block;
+  border-bottom:1px solid rgba(139,92,246,.08);transition:color .2s,background .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--W);background:rgba(139,92,246,.08)}
+.mobile-menu a.active{color:var(--cyan)}
+.mobile-menu .mm-login{color:var(--mint)!important}
+.mobile-menu .mm-cta{
+  color:var(--W)!important;background:linear-gradient(135deg,var(--neon),var(--neon2))!important;
+  margin:10px 24px 0;text-align:center;font-weight:700;border:none!important}
+.mobile-menu .mm-cta:hover{opacity:.88!important}
+
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-links{display:none!important}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-w">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 40 50" fill="none">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient>
+        </defs>
+        <rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/>
+        <rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/>
+        <rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/>
+        <rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/>
+        <polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/>
+        <line x1="13" y1="9" x2="27" y2="9" stroke="white" stroke-width="1.5" opacity=".9"/>
+        <circle cx="20" cy="9" r="2.5" fill="#FFD600"/>
+      </svg>
+      <span class="logo-txt">INDIGO</span>
+    </a>
+    <div class="nav-links">
+      <a href="how-it-works.html">HOW IT WORKS</a>
+      <a href="skills.html">SKILLS</a>
+      <a href="peer-review.html">PEER REVIEW</a>
+      <a href="results.html">RESULTS</a>
+      <a href="vs-competitors.html">VS COMPETITORS</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="indigo_portal.html" class="nav-login">CLIENT LOGIN</a>
+      <a href="#pricing" class="nav-cta">GET STARTED</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="how-it-works.html">HOW IT WORKS</a>
+  <a href="skills.html">SKILLS</a>
+  <a href="peer-review.html">PEER REVIEW</a>
+  <a href="results.html">RESULTS</a>
+  <a href="vs-competitors.html">VS COMPETITORS</a>
+  <a href="contact.html">CONTACT</a>
+  <a href="indigo_portal.html" class="mm-login">CLIENT LOGIN</a>
+  <a href="#pricing" class="mm-cta">GET STARTED →</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>● AGENT ACTIVE</span><span>12.22% CTR — 3× INDUSTRY AVG</span><span>$94 AVG CPA — GOOGLE VERIFIED</span><span>122 CONVERSIONS THIS MONTH</span><span>LIVE IN 24 HOURS</span><span>FLAT $299/MO — NO % OF SPEND</span><span>BUILDS EVERY CAMPAIGN FROM SCRATCH</span><span>WRITES ALL YOUR AD COPY</span>
+    <span>● AGENT ACTIVE</span><span>12.22% CTR — 3× INDUSTRY AVG</span><span>$94 AVG CPA — GOOGLE VERIFIED</span><span>122 CONVERSIONS THIS MONTH</span><span>LIVE IN 24 HOURS</span><span>FLAT $299/MO — NO % OF SPEND</span><span>BUILDS EVERY CAMPAIGN FROM SCRATCH</span><span>WRITES ALL YOUR AD COPY</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="s-dark">
+  <div class="hero-glow"></div><div class="hero-glow2"></div>
+  <div class="hero-live"><span class="pip"></span>AI AGENT RUNNING — 5 CAMPAIGNS LIVE</div>
+  <h1 class="hero-h">
+    <span class="l1">Other tools optimize your ads.</span>
+    <span class="l2">Indigo builds them.</span>
+  </h1>
+  <p class="hero-sub">AdTurbo, Madgicx, and Optmyzr all require you to set up campaigns first. Indigo starts from nothing — researching your market, writing every word of copy, and launching in under 24 hours.</p>
+  <div class="hero-btns">
+    <a href="#pricing" class="btn btn-solid">START FOR $299/MO →</a>
+    <a href="results.html" class="btn btn-out">SEE VERIFIED RESULTS</a>
+  </div>
+  <div class="hero-proof">
+    <div class="hp hp1"><span class="hp-v" id="v1">$94</span><span class="hp-l">AVG COST / LEAD</span></div>
+    <div class="hp hp2"><span class="hp-v" id="v2">122</span><span class="hp-l">CONVERSIONS / MO</span></div>
+    <div class="hp hp3"><span class="hp-v" id="v3">12.22%</span><span class="hp-l">CLICK-THROUGH RATE</span></div>
+    <div class="hp hp4"><span class="hp-v">24hr</span><span class="hp-l">CAMPAIGN LAUNCH</span></div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS PREVIEW ══ -->
+<section class="s-lift pad-sm preview-section">
+  <div class="wrap">
+    <div class="section-nav rv">
+      <div>
+        <span class="tag">// HOW IT WORKS</span>
+        <h2 class="h2" style="margin-bottom:6px">From zero to live <em>in 24 hours</em></h2>
+        <p class="lead" style="font-size:16px">No setup. No brief. Tell Indigo your market — the agent handles everything else.</p>
+      </div>
+      <a href="how-it-works.html" class="btn btn-ghost">FULL BREAKDOWN →</a>
+    </div>
+    <div class="step-pv rv d1">
+      <div class="spv spv1"><span class="spv-n">01</span><div class="spv-title">You name the market</div><p class="spv-body">Service type + target city. That's your only input.</p></div>
+      <div class="spv spv2"><span class="spv-n">02</span><div class="spv-title">Indigo builds everything</div><p class="spv-body">Keywords, copy, ad groups, bidding — fully autonomous.</p></div>
+      <div class="spv spv3"><span class="spv-n">03</span><div class="spv-title">Live in 24 hours</div><p class="spv-body">Campaigns launch. Agent monitors CPA 24/7, auto-optimizing.</p></div>
+      <div class="spv spv4"><span class="spv-n">04</span><div class="spv-title">Leads flow. You scale.</div><p class="spv-body">New market? Another 24-hour autonomous build.</p></div>
+    </div>
+    <div class="divider-cta rv d2">
+      <span class="dc-txt">See the full process — <strong>campaign build, live dashboard, and agent actions explained</strong></span>
+      <a href="how-it-works.html" class="btn btn-ghost">SEE FULL PROCESS →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS PREVIEW ══ -->
+<section class="s-dark2 pad-sm preview-section">
+  <div class="wrap">
+    <div class="section-nav rv">
+      <div>
+        <span class="tag">// CAMPAIGN SKILLS</span>
+        <h2 class="h2" style="margin-bottom:6px">The agent doesn't guess. It <em>knows your industry.</em></h2>
+        <p class="lead" style="font-size:16px">Six deep skill domains powering every campaign Indigo builds.</p>
+      </div>
+      <a href="skills.html" class="btn btn-ghost">ALL 6 SKILLS →</a>
+    </div>
+    <div class="preview-3 rv d1">
+      <div class="pv-card pvc-1">
+        <span class="pv-num">01</span>
+        <div class="pv-title">Keyword Intelligence</div>
+        <p class="pv-body">Maps high-intent queries by service type, geo, urgency, and commercial intent — with negatives from day one.</p>
+      </div>
+      <div class="pv-card pvc-2">
+        <span class="pv-num">02</span>
+        <div class="pv-title">AI Copywriting</div>
+        <p class="pv-body">Writes all RSA headlines, descriptions, sitelinks, and callouts — original copy for your exact market.</p>
+      </div>
+      <div class="pv-card pvc-3">
+        <span class="pv-num">03</span>
+        <div class="pv-title">Bid Strategy</div>
+        <p class="pv-body">Selects and configures the right bidding model for each campaign stage — auto-adjusting as data builds.</p>
+      </div>
+    </div>
+    <div class="divider-cta rv d2">
+      <span class="dc-txt">Plus <strong>Campaign Architecture, Competitive Analysis, and Performance Optimization</strong></span>
+      <a href="skills.html" class="btn btn-ghost">VIEW ALL SKILLS →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PEER REVIEW PREVIEW ══ -->
+<section class="s-lift pad-sm preview-section">
+  <div class="wrap">
+    <div class="section-nav rv">
+      <div>
+        <span class="tag">// PEER REVIEW</span>
+        <h2 class="h2" style="margin-bottom:6px">Every campaign reviewed before it <em>spends a dollar.</em></h2>
+        <p class="lead" style="font-size:16px">A second agent audits every campaign against 40+ benchmarks before launch.</p>
+      </div>
+      <a href="peer-review.html" class="btn btn-ghost">SEE THE PROCESS →</a>
+    </div>
+    <div class="preview-3 rv d1">
+      <div class="pv-card pvc-1">
+        <span class="pv-num">9.4 / 10</span>
+        <div class="pv-title">Copy Quality Score</div>
+        <p class="pv-body">Every headline scored for relevance, clarity, urgency signal, and character efficiency before launch.</p>
+      </div>
+      <div class="pv-card pvc-2">
+        <span class="pv-num">9.1 / 10</span>
+        <div class="pv-title">Structure Score</div>
+        <p class="pv-body">Ad group hygiene, keyword overlap, match type distribution, and negative keyword coverage — all verified.</p>
+      </div>
+      <div class="pv-card pvc-3">
+        <span class="pv-num">8.7 / 10</span>
+        <div class="pv-title">Bid Logic Score</div>
+        <p class="pv-body">Bidding strategy and CPA targets validated against market benchmarks for your specific geo and service.</p>
+      </div>
+    </div>
+    <div class="divider-cta rv d2">
+      <span class="dc-txt">See the full <strong>5-step review process and live review terminal output</strong></span>
+      <a href="peer-review.html" class="btn btn-ghost">SEE FULL REVIEW →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTS PREVIEW ══ -->
+<section class="s-white pad-sm preview-section" style="border-top:3px solid var(--neon)">
+  <div class="wrap">
+    <div class="section-nav rv">
+      <div>
+        <span class="tag tag-dark">// VERIFIED RESULTS</span>
+        <h2 class="h2-dark" style="margin-bottom:6px">Real campaigns. <em>Real numbers.</em></h2>
+        <p class="lead-dark" style="font-size:16px">Google-verified data from live Indigo campaigns — not projections.</p>
+      </div>
+      <a href="results.html" class="btn btn-solid">FULL RESULTS →</a>
+    </div>
+    <div class="proof-preview rv d1">
+      <div class="pp-stat pps1"><span class="pp-v">12.22%</span><span class="pp-l">CLICK-THROUGH RATE</span></div>
+      <div class="pp-stat pps2"><span class="pp-v">$94</span><span class="pp-l">AVG COST PER LEAD</span></div>
+      <div class="pp-stat pps3"><span class="pp-v">122</span><span class="pp-l">CONVERSIONS / MO</span></div>
+      <div class="pp-stat pps4"><span class="pp-v">$65K</span><span class="pp-l">REVENUE COLLECTED</span></div>
+    </div>
+    <div class="gq-mini rv d2">
+      <p class="gqm-text">"This campaign is showing <em>incredible intent</em> — 13.12% conversion rate with a very low cost per conversion. We're flagging this account for immediate scaling."</p>
+      <span class="gqm-src">— GOOGLE POINT OF CONTACT · VERIFIED ACCOUNT REVIEW · MARCH 2026</span>
+      <div><span class="gqm-badge">✓ GOOGLE VERIFIED</span></div>
+    </div>
+    <div style="text-align:right;margin-top:16px" class="rv d3">
+      <a href="results.html" class="btn btn-solid">SEE ALL RESULTS →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VS COMPETITORS PREVIEW ══ -->
+<section class="s-dark2 pad-sm preview-section">
+  <div class="wrap">
+    <div class="section-nav rv">
+      <div>
+        <span class="tag">// VS COMPETITORS</span>
+        <h2 class="h2" style="margin-bottom:6px">We've studied every competitor. <em>Here's the truth.</em></h2>
+        <p class="lead" style="font-size:16px">The key differences between Indigo and every major AI ad platform.</p>
+      </div>
+      <a href="vs-competitors.html" class="btn btn-ghost">FULL COMPARISON →</a>
+    </div>
+    <table class="mini-table rv d1">
+      <thead>
+        <tr>
+          <th style="text-align:left;background:#0A001F;color:var(--lt)">CAPABILITY</th>
+          <th class="ci">INDIGO</th><th class="cc">ADTURBO</th><th class="cc">MADGICX</th><th class="cc">OPTMYZR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="rl">Builds campaigns from scratch</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
+        <tr><td class="rl">Writes all ad copy</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
+        <tr><td class="rl">Live in under 24 hours</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
+        <tr><td class="rl">Flat fee — no % of spend</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="ic">✓</span></td></tr>
+      </tbody>
+    </table>
+    <div class="divider-cta rv d2">
+      <span class="dc-txt">Full 10-row comparison + AdTurbo, Madgicx, Optmyzr, and agencies — <strong>plus the pricing math</strong></span>
+      <a href="vs-competitors.html" class="btn btn-ghost">SEE FULL COMPARISON →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section id="pricing" class="s-neon pad-lg">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:48px" class="rv">
+      <span class="tag">// FLAT MONTHLY PRICING — NO % OF SPEND</span>
+      <h2 class="h2">Simple pricing. <em>No surprises.</em></h2>
+      <p class="lead" style="max-width:500px;margin:0 auto 20px">No setup fees. No contracts. The AI does everything — pick a tier.</p>
+      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.28);padding:9px 20px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--org)">
+        <strong style="color:var(--W)">At $10K/mo ad spend:</strong> competitors charge $500–$2,000 in fees. Indigo: flat $299–$499.
+      </div>
+    </div>
+    <div class="price-preview rv d1">
+      <div class="pp-card">
+        <div class="pp-stripe pps-a"></div>
+        <div class="pp-name">Starter</div>
+        <div class="pp-scope">1 CAMPAIGN</div>
+        <div class="pp-price ppp-a">$299</div>
+        <div class="pp-term">/month · cancel anytime</div>
+      </div>
+      <div class="pp-card hot">
+        <div class="pp-stripe pps-b"></div>
+        <span class="pop-tag">MOST POPULAR</span>
+        <div class="pp-name">Growth</div>
+        <div class="pp-scope">2–3 CAMPAIGNS</div>
+        <div class="pp-price ppp-b">$399</div>
+        <div class="pp-term">/month · cancel anytime</div>
+      </div>
+      <div class="pp-card">
+        <div class="pp-stripe pps-c"></div>
+        <div class="pp-name">Scale</div>
+        <div class="pp-scope">4–5 CAMPAIGNS</div>
+        <div class="pp-price ppp-c">$499</div>
+        <div class="pp-term">/month · cancel anytime</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center" class="rv d2">
+      <a href="contact.html" class="btn btn-white">GET STARTED →</a>
+      <a href="contact.html" class="btn btn-ghost-white">TALK TO US FIRST</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="s-dark pad-lg">
+  <div class="cta-blob"></div>
+  <div class="wrap">
+    <div class="cta-inner rv">
+      <h2 class="cta-h">Stop managing ads.<br>Let <em>Indigo</em> manage them.</h2>
+      <p class="cta-sub">Your competitors are still logging into dashboards, tweaking bids, and writing copy manually. Indigo runs your entire Google Ads operation — for less per month than a single hour with an agency.</p>
+      <div class="cta-btns">
+        <a href="#pricing" class="btn btn-white">START FOR $299/MO →</a>
+        <a href="contact.html" class="btn btn-ghost-white">TALK TO US FIRST</a>
+      </div>
+      <p class="cta-note">● NO SETUP FEES · NO CONTRACTS · CANCEL ANYTIME · LIVE IN 24 HOURS</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <span class="fl-name">INDIGO</span>
+        <p class="fl-desc">The only AI that builds, launches, and runs your Google Ads from scratch. Flat pricing. Zero setup.</p>
+      </div>
+      <div>
+        <div class="fch">LEARN MORE</div>
+        <div class="fcl">
+          <a href="how-it-works.html">How It Works</a>
+          <a href="skills.html">Agent Skills</a>
+          <a href="peer-review.html">Peer Review</a>
+          <a href="results.html">Results</a>
+          <a href="vs-competitors.html">Vs. Competitors</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="fch">PRODUCT</div>
+        <div class="fcl">
+          <a href="#pricing">Pricing</a>
+          <a href="vs-competitors.html">Vs. AdTurbo</a>
+          <a href="vs-competitors.html">Vs. Madgicx</a>
+          <a href="vs-competitors.html">Vs. Optmyzr</a>
+        </div>
+      </div>
+      <div>
+        <div class="fch">COMPANY</div>
+        <div class="fcl">
+          <a href="contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="fbar">
+      <p>© 2026 INDIGO · AI-POWERED GOOGLE ADS · go.indigo.ai</p>
+      <div class="fagent"><span style="width:6px;height:6px;border-radius:50%;background:var(--mint);display:inline-block;animation:blink 1.6s infinite"></span>AGENT ACTIVE</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+function count(id,end,pre,suf,dec){const el=document.getElementById(id);if(!el)return;let t=0;const id2=setInterval(()=>{t+=14;const p=Math.min(t/1800,1),v=p*end;el.textContent=pre+(dec?(v.toFixed(dec)):(Math.floor(v)))+suf;if(t>=1800)clearInterval(id2)},14)}
+const ho=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;count('v1',94,'$','',0);count('v2',122,'','',0);count('v3',12.22,'','%',2);ho.disconnect()})},{threshold:.5});
+const hp=document.querySelector('.hero-proof');if(hp)ho.observe(hp);
+</script>
+<script>
+/* Hamburger menu */
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  });
+  // Close on link click
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  // Close on outside click
+  document.addEventListener('click', function(e){
+    if(!btn.contains(e.target) && !menu.contains(e.target)){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
+</body>
+</html>

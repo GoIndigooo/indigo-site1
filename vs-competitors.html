@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vs. Competitors — Indigo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#04000E;--ink2:#0A0020;--ink3:#120030;--lift:#1C0040;--neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--pink:#FF2D9B;--yel:#FFD600;--mint:#00FF9F;--org:#FF6B35;--red:#FF3B3B;--W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;--bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(139,92,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);background-size:64px 64px}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;background:rgba(4,0,14,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--bord)}
+.nav-w{width:100%;max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px}.logo svg{width:30px;height:38px}
+.logo-txt{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:5px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mt);transition:all .2s;padding:7px 14px;border:1px solid transparent}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan);border-color:rgba(0,229,255,.3);background:rgba(0,229,255,.05)}
+.nav-cta{color:var(--neon)!important;border-color:rgba(139,92,246,.45)!important;background:rgba(139,92,246,.08)!important}
+.wrap{max-width:1200px;margin:0 auto;padding:0 48px}
+.pad{padding:100px 0}.s-dark{background:var(--ink)}.s-dark2{background:var(--ink2)}.s-lift{background:var(--lift)}
+.tag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--cyan);display:block;margin-bottom:12px}
+.h2{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.08;color:var(--W);margin-bottom:18px}
+.h2 em{font-style:normal;background:linear-gradient(90deg,var(--pink),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.lead{font-size:18px;line-height:1.7;color:var(--lt)}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .65s,transform .65s}
+.rv.on{opacity:1;transform:none}.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.btn{display:inline-flex;align-items:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 32px;cursor:pointer;border:none;transition:opacity .2s,transform .15s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.btn:hover{opacity:.88;transform:translateY(-2px)}
+.btn-solid{background:linear-gradient(135deg,var(--neon),var(--neon2));color:var(--W)}
+.btn-ghost{background:rgba(139,92,246,.1);border:1px solid var(--bord);color:var(--lt);font-size:10px;padding:10px 22px}
+.btn-ghost:hover{border-color:var(--bord2);color:var(--W)}
+.page-hero{padding:140px 48px 80px;text-align:center;position:relative;z-index:2;border-bottom:1px solid var(--bord)}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt);margin-bottom:28px;transition:color .2s}
+.back-link:hover{color:var(--cyan)}
+.page-hero h1{font-family:'Orbitron',monospace;font-size:clamp(32px,5vw,64px);font-weight:900;line-height:1.0;color:var(--W);margin-bottom:20px}
+.page-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--yel),var(--pink),var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-hero p{font-size:20px;color:var(--lt);max-width:620px;margin:0 auto;line-height:1.65}
+/* Competitor cards */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:52px}
+.comp-card{background:var(--ink2);border:1px solid var(--bord);position:relative;overflow:hidden}
+.comp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.cc-at::before{background:linear-gradient(90deg,#2563eb,#1d4ed8)}.cc-mg::before{background:linear-gradient(90deg,#7c3aed,#6d28d9)}.cc-op::before{background:linear-gradient(90deg,#0891b2,#0e7490)}.cc-ag::before{background:linear-gradient(90deg,var(--mt),#443366)}
+.cc-head{padding:22px 26px 16px;border-bottom:1px solid var(--bord);display:flex;justify-content:space-between;align-items:flex-start}
+.cc-name{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:3px}
+.cc-type{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt)}
+.cc-pricing{text-align:right}
+.cc-price{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--org)}
+.cc-note{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--mt);margin-top:2px}
+.cc-body{padding:18px 26px 22px}
+.cc-claim{font-size:15px;color:var(--lt);line-height:1.6;margin-bottom:16px;padding-left:12px;border-left:2px solid var(--bord)}
+.cc-gaps{display:flex;flex-direction:column;gap:9px}
+.cc-gap{display:flex;gap:8px;font-size:14px;color:var(--mt);line-height:1.45;align-items:flex-start}
+.cc-gap::before{content:'↳';color:var(--red);flex-shrink:0;font-family:'Share Tech Mono',monospace;font-size:11px;margin-top:1px}
+.cc-gap strong{color:var(--lt)}
+.cc-win{margin:0 26px 22px;padding:10px 14px;background:rgba(0,255,159,.06);border:1px solid rgba(0,255,159,.2);border-left:3px solid var(--mint);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mint);letter-spacing:.5px}
+/* Full table */
+.ctable{width:100%;border-collapse:collapse;border:1px solid var(--bord);margin-bottom:20px}
+.ctable th,.ctable td{padding:14px 18px;text-align:center;border-bottom:1px solid var(--bord);border-right:1px solid var(--bord);font-size:14px}
+.ctable th:last-child,.ctable td:last-child{border-right:none}
+.ctable thead th{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1px;background:var(--ink2);padding:16px 18px}
+.ctable thead .ci{background:linear-gradient(180deg,rgba(139,92,246,.22),rgba(139,92,246,.06));color:var(--W);border-top:3px solid var(--neon)}
+.ctable thead .cc2{color:var(--mt)}
+.ctable tbody tr:hover td{background:rgba(139,92,246,.03)}
+.rl{text-align:left!important;font-weight:600;color:var(--lt);background:var(--ink3)!important;padding-left:22px!important}
+.ctable .ci{background:rgba(139,92,246,.06)}
+.ic{color:var(--mint);font-size:17px}.xc{color:#3D3060;font-size:17px}.pc{color:var(--yel);font-family:'Share Tech Mono',monospace;font-size:10px}
+.ctable tfoot td{background:var(--ink2);font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--mt)}
+.ctable tfoot .ci{background:rgba(139,92,246,.15);color:var(--mint);font-size:14px;font-weight:700}
+/* Spend callout */
+.spend-call{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px 28px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.22);border-left:4px solid var(--org)}
+.sc-text{font-size:16px;color:var(--lt);line-height:1.55}
+.sc-text strong{color:var(--org)}.sc-text s{color:var(--mt)}
+.sc-num{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:var(--mint);white-space:nowrap;text-align:right}
+.sc-num small{display:block;font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--mt);letter-spacing:1px;margin-top:2px}
+footer{background:var(--ink);border-top:1px solid var(--bord);padding:40px 0 24px;position:relative;z-index:2}
+.fbar{display:flex;justify-content:space-between;align-items:center}
+.fbar p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt)}
+.fbar-links{display:flex;gap:24px}
+.fbar-links a{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--mt);transition:color .2s}
+.fbar-links a:hover{color:var(--lt)}
+@media(max-width:1024px){.comp-grid{grid-template-columns:1fr}.ctable{font-size:12px}.ctable th,.ctable td{padding:10px 8px}}
+@media(max-width:768px){.wrap,.nav-w,.page-hero{padding-left:24px;padding-right:24px}.nav-links{display:none}.spend-call{flex-direction:column;align-items:flex-start}}
+
+.nav-login{color:var(--mint)!important;border-color:rgba(0,255,159,.4)!important;
+  background:rgba(0,255,159,.07)!important;font-family:'Share Tech Mono',monospace!important;
+  font-size:10px!important;letter-spacing:1px!important}
+.nav-login:hover{background:rgba(0,255,159,.15)!important}
+
+/* ─── MOBILE HAMBURGER ─── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;cursor:pointer;background:none;border:1px solid var(--bord);
+  padding:7px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--bord2)}
+.hamburger span{display:block;height:2px;background:var(--lt);border-radius:1px;
+  transition:transform .25s,opacity .25s,width .25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;width:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile slide-down menu */
+.mobile-menu{
+  display:none;position:fixed;top:68px;left:0;right:0;z-index:199;
+  background:rgba(4,0,14,.97);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--bord2);
+  flex-direction:column;padding:8px 0 16px;
+  transform:translateY(-8px);opacity:0;
+  transition:transform .25s ease,opacity .25s ease}
+.mobile-menu.open{transform:translateY(0);opacity:1}
+.mobile-menu a{
+  font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;
+  color:var(--mt);padding:14px 28px;display:block;
+  border-bottom:1px solid rgba(139,92,246,.08);transition:color .2s,background .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--W);background:rgba(139,92,246,.08)}
+.mobile-menu a.active{color:var(--cyan)}
+.mobile-menu .mm-login{color:var(--mint)!important}
+.mobile-menu .mm-cta{
+  color:var(--W)!important;background:linear-gradient(135deg,var(--neon),var(--neon2))!important;
+  margin:10px 24px 0;text-align:center;font-weight:700;border:none!important}
+.mobile-menu .mm-cta:hover{opacity:.88!important}
+
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-links{display:none!important}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<nav>
+  <div class="nav-w">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 40 50" fill="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient></defs><rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/><rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/><polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/></svg>
+      <span class="logo-txt">INDIGO</span>
+    </a>
+    <div class="nav-links">
+      <a href="how-it-works.html">HOW IT WORKS</a><a href="skills.html">SKILLS</a>
+      <a href="peer-review.html">PEER REVIEW</a><a href="results.html">RESULTS</a>
+      <a href="vs-competitors.html" class="active">VS COMPETITORS</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="indigo_portal.html" class="nav-login">CLIENT LOGIN</a>
+      <a href="index.html#pricing" class="nav-cta">GET STARTED</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="how-it-works.html">HOW IT WORKS</a>
+  <a href="skills.html">SKILLS</a>
+  <a href="peer-review.html">PEER REVIEW</a>
+  <a href="results.html">RESULTS</a>
+  <a href="vs-competitors.html" class="active">VS COMPETITORS</a>
+  <a href="contact.html">CONTACT</a>
+  <a href="indigo_portal.html" class="mm-login">CLIENT LOGIN</a>
+  <a href="index.html#pricing" class="mm-cta">GET STARTED →</a>
+</div>
+
+<section class="s-dark2">
+  <div class="page-hero">
+    <a href="index.html" class="back-link">← BACK TO HOME</a>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--cyan);display:block;margin-bottom:16px">// THE HONEST COMPARISON</span>
+    <h1>We've studied every competitor.<br><em>Here's what they won't tell you.</em></h1>
+    <p>Most AI ad tools require humans to do the hard work first. We broke down what each platform actually does — and what it doesn't — so you can make an informed decision.</p>
+  </div>
+</section>
+
+<section class="s-dark pad">
+  <div class="wrap">
+    <div class="rv" style="margin-bottom:48px">
+      <span class="tag">// PLATFORM BREAKDOWN</span>
+      <h2 class="h2">What each platform <em>actually does</em></h2>
+    </div>
+    <div class="comp-grid rv d1">
+      <div class="comp-card cc-at">
+        <div class="cc-head"><div><div class="cc-name">AdTurbo</div><div class="cc-type">AI BID AUTOMATION · GOOGLE &amp; META</div></div><div class="cc-pricing"><div class="cc-price">% of spend</div><div class="cc-note">PRICING SCALES WITH YOUR BUDGET</div></div></div>
+        <div class="cc-body">
+          <p class="cc-claim">Claims to put your ads on "autopilot" — automated bidding, budget rules, and performance alerts across Google and Meta.</p>
+          <div class="cc-gaps">
+            <div class="cc-gap"><strong>You still build all campaigns.</strong> AdTurbo manages existing campaigns — it doesn't create them. You set up ad groups, pick keywords, write copy, and upload creative before AdTurbo touches anything.</div>
+            <div class="cc-gap"><strong>No copywriting.</strong> Ad headlines, descriptions, and extensions are entirely on you. AdTurbo only manages the bidding layer.</div>
+            <div class="cc-gap"><strong>% of spend pricing compounds.</strong> At $10K/mo spend that fee grows fast — the more you scale, the more you pay for the same service level.</div>
+            <div class="cc-gap"><strong>New markets require manual rebuild.</strong> Every new campaign or location means starting the build process again yourself.</div>
+          </div>
+        </div>
+        <div class="cc-win">✓ INDIGO DOES EVERYTHING ADTURBO AUTOMATES — PLUS BUILDS THE CAMPAIGNS IT NEEDS TO AUTOMATE</div>
+      </div>
+      <div class="comp-card cc-mg">
+        <div class="cc-head"><div><div class="cc-name">Madgicx</div><div class="cc-type">AI AD INTELLIGENCE · META-FOCUSED</div></div><div class="cc-pricing"><div class="cc-price">$49–$199/mo</div><div class="cc-note">PLUS % OF AD SPEND ABOVE TIER</div></div></div>
+        <div class="cc-body">
+          <p class="cc-claim">AI-powered ad manager with audience intelligence and automated budget rules — primarily built for Meta (Facebook/Instagram) audiences.</p>
+          <div class="cc-gaps">
+            <div class="cc-gap"><strong>Primarily Meta, not Google.</strong> Madgicx's core product is Facebook/Instagram audience optimisation. Google Ads is secondary and less capable.</div>
+            <div class="cc-gap"><strong>Audience optimisation, not campaign creation.</strong> Finds better audiences for ads that already exist — it doesn't build, write, or launch campaigns.</div>
+            <div class="cc-gap"><strong>Creative analysis, not creative generation.</strong> Tells you which creatives are working. Doesn't produce any copy or assets for you.</div>
+            <div class="cc-gap"><strong>Hybrid pricing.</strong> Base subscription plus % of spend above thresholds means your costs aren't predictable as you scale.</div>
+          </div>
+        </div>
+        <div class="cc-win">✓ INDIGO IS GOOGLE-NATIVE, BUILDS FROM SCRATCH, AND WRITES COPY MADGICX NEVER PRODUCES</div>
+      </div>
+      <div class="comp-card cc-op">
+        <div class="cc-head"><div><div class="cc-name">Optmyzr</div><div class="cc-type">PPC OPTIMISATION TOOLS · GOOGLE ADS</div></div><div class="cc-pricing"><div class="cc-price">$208–$499/mo</div><div class="cc-note">ANNUAL CONTRACT REQUIRED</div></div></div>
+        <div class="cc-body">
+          <p class="cc-claim">Rule-based PPC management with some AI features — designed to help PPC managers work faster on accounts they're already managing.</p>
+          <div class="cc-gaps">
+            <div class="cc-gap"><strong>Built for PPC professionals, not businesses.</strong> Optmyzr assumes you have a dedicated PPC manager — it makes their job faster, it doesn't replace them.</div>
+            <div class="cc-gap"><strong>Rule-based at its core.</strong> The "AI" is largely smart automation rules — not a generative system that independently builds and runs campaigns.</div>
+            <div class="cc-gap"><strong>Annual contract required.</strong> You're locked in, even on the highest tiers. No monthly flexibility.</div>
+            <div class="cc-gap"><strong>No campaign creation, no copywriting.</strong> Like every other tool — you bring the campaigns, Optmyzr adjusts the settings.</div>
+          </div>
+        </div>
+        <div class="cc-win">✓ INDIGO DOES IN 24 HOURS WHAT TAKES AN OPTMYZR CUSTOMER WEEKS TO SET UP MANUALLY</div>
+      </div>
+      <div class="comp-card cc-ag">
+        <div class="cc-head"><div><div class="cc-name">Traditional PPC Agency</div><div class="cc-type">MANAGED SERVICES · FULL SERVICE</div></div><div class="cc-pricing"><div class="cc-price">$1,500–$5,000+</div><div class="cc-note">PER MONTH RETAINER</div></div></div>
+        <div class="cc-body">
+          <p class="cc-claim">Full-service Google Ads management — strategy, campaign build, copywriting, optimisation, and reporting in one monthly retainer.</p>
+          <div class="cc-gaps">
+            <div class="cc-gap"><strong>Cost is prohibitive for most businesses.</strong> $2,000–$5,000/mo before you spend a dollar on actual ads. Budget goes to overhead, not performance.</div>
+            <div class="cc-gap"><strong>Slow to launch.</strong> Onboarding, briefing, build rounds, review — a typical agency takes 2–4 weeks to launch a campaign.</div>
+            <div class="cc-gap"><strong>Human bottlenecks.</strong> Nights, weekends, and holidays mean campaigns go unmonitored. No agency checks CPA at 2am.</div>
+            <div class="cc-gap"><strong>New market = new negotiation.</strong> Expanding into a new city or service line means more budget, more meetings, more lead time.</div>
+          </div>
+        </div>
+        <div class="cc-win">✓ INDIGO DOES EVERYTHING A FULL-SERVICE AGENCY DOES — IN 24HRS, AT $299/MO, 24/7</div>
+      </div>
+    </div>
+
+    <div class="rv d2" style="margin-bottom:20px;overflow-x:auto">
+      <table class="ctable">
+        <thead>
+          <tr><th style="text-align:left;width:28%;color:var(--lt)">CAPABILITY</th><th class="ci">INDIGO</th><th class="cc2">ADTURBO</th><th class="cc2">MADGICX</th><th class="cc2">OPTMYZR</th><th class="cc2">AGENCY</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="rl">Builds campaigns from scratch</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="pc">Manual</span></td></tr>
+          <tr><td class="rl">Writes all ad copy &amp; headlines</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="pc">Extra cost</span></td></tr>
+          <tr><td class="rl">Full keyword research + architecture</td><td class="ci"><span class="ic">✓</span></td><td><span class="pc">Partial</span></td><td><span class="xc">✗</span></td><td><span class="pc">Partial</span></td><td><span class="pc">Manual</span></td></tr>
+          <tr><td class="rl">New market launch — autonomous</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="pc">Weeks wait</span></td></tr>
+          <tr><td class="rl">Live in under 24 hours</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
+          <tr><td class="rl">24/7 autonomous CPA monitoring</td><td class="ci"><span class="ic">✓</span></td><td><span class="ic">✓</span></td><td><span class="pc">Partial</span></td><td><span class="ic">✓</span></td><td><span class="xc">✗</span></td></tr>
+          <tr><td class="rl">Budget reallocation to winners</td><td class="ci"><span class="ic">✓</span></td><td><span class="ic">✓</span></td><td><span class="ic">✓</span></td><td><span class="ic">✓</span></td><td><span class="pc">Slow</span></td></tr>
+          <tr><td class="rl">Flat fee — no % of spend</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="pc">Partial</span></td><td><span class="ic">✓</span></td><td><span class="xc">✗</span></td></tr>
+          <tr><td class="rl">No annual contract</td><td class="ci"><span class="ic">✓</span></td><td><span class="pc">Varies</span></td><td><span class="pc">Varies</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
+          <tr><td class="rl">Google-verified results</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td class="rl" style="font-family:'Orbitron',monospace;font-size:10px;color:var(--W)">STARTING PRICE</td><td class="ci">$299/mo flat</td><td style="color:var(--org)">% of spend</td><td style="color:var(--org)">$49–$199/mo<br>+ % of spend</td><td style="color:var(--org)">$208–$499/mo<br>annual contract</td><td style="color:var(--org)">$1,500–$5K+<br>/mo retainer</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="spend-call rv d3">
+      <div class="sc-text">At <strong>$10,000/month ad spend</strong>, a 10% platform fee costs you <s>$1,000/mo extra</s> on top of your budget. Indigo is <strong>flat $299–$499/mo</strong> — the same whether you spend $5K or $100K. The more you scale, the less Indigo costs as a % of budget.</div>
+      <div class="sc-num">SAVE $700+/MO<small>vs % of spend pricing</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="s-lift" style="padding:60px 0;border-top:1px solid var(--bord)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <div>
+      <div style="font-family:'Orbitron',monospace;font-size:18px;font-weight:700;color:var(--W);margin-bottom:6px">Seen enough? Let's get started.</div>
+      <div style="font-size:16px;color:var(--mt)">Campaigns built from scratch. No setup. Flat $299/mo.</div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="index.html#pricing" class="btn btn-solid">GET STARTED →</a>
+      <a href="results.html" class="btn btn-ghost">SEE RESULTS →</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><div class="fbar"><p>© 2026 INDIGO · go.indigo.ai</p><div class="fbar-links"><a href="index.html">Home</a><a href="how-it-works.html">How It Works</a><a href="skills.html">Skills</a><a href="peer-review.html">Peer Review</a><a href="results.html">Results</a></div></div></div></footer>
+<script>const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.08});document.querySelectorAll('.rv').forEach(el=>ro.observe(el));</script>
+<script>
+/* Hamburger menu */
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  });
+  // Close on link click
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  // Close on outside click
+  document.addEventListener('click', function(e){
+    if(!btn.contains(e.target) && !menu.contains(e.target)){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
+</body></html>
