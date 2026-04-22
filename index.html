@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indigo — AI That Builds, Launches & Runs Your Google Ads</title>
+<title>Indigo â AI That Builds, Launches & Runs Your Google Ads</title>
 <meta name="description" content="Indigo builds Google Ads campaigns from scratch, writes every word of copy, and launches in 24 hours. Flat $299/mo. No setup. No agency.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-/* ─── TOKENS ─── */
+/* âââ TOKENS âââ */
 :root{
   --ink:#04000E;--ink2:#0A0020;--ink3:#120030;--lift:#1C0040;--slate:#F0EEFF;
   --neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--pink:#FF2D9B;
@@ -25,7 +25,7 @@ a{text-decoration:none;color:inherit}
   linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);
   background-size:64px 64px}
 
-/* ─── NAV ─── */
+/* âââ NAV âââ */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;
   background:rgba(4,0,14,.94);backdrop-filter:blur(24px);
   border-bottom:1px solid var(--bord);transition:border-color .3s}
@@ -46,7 +46,7 @@ nav.scrolled{border-color:var(--bord2)}
   background:rgba(139,92,246,.08)!important;transition:background .2s!important}
 .nav-cta:hover{background:rgba(139,92,246,.18)!important}
 
-/* ─── TICKER ─── */
+/* âââ TICKER âââ */
 .ticker{position:relative;z-index:2;height:36px;overflow:hidden;display:flex;align-items:center;
   margin-top:68px;background:linear-gradient(90deg,var(--neon),var(--neon2))}
 .ticker-inner{display:flex;white-space:nowrap;animation:tick 32s linear infinite}
@@ -54,7 +54,7 @@ nav.scrolled{border-color:var(--bord2)}
   color:var(--ink);padding:0 40px;border-right:1px solid rgba(4,0,14,.2)}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ─── BUTTONS ─── */
+/* âââ BUTTONS âââ */
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Orbitron',monospace;
   font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 32px;
   cursor:pointer;border:none;transition:opacity .2s,transform .15s;
@@ -68,7 +68,7 @@ nav.scrolled{border-color:var(--bord2)}
 .btn-white{background:var(--W);color:var(--ink);font-size:12px;padding:18px 44px}
 .btn-ghost-white{background:transparent;color:var(--W);border:1px solid rgba(255,255,255,.35);padding:14px 30px}
 
-/* ─── LAYOUT ─── */
+/* âââ LAYOUT âââ */
 .wrap{max-width:1200px;margin:0 auto;padding:0 48px}
 .pad{padding:100px 0}
 .pad-lg{padding:120px 0}
@@ -80,7 +80,7 @@ section{position:relative;z-index:2}
 .s-neon{background:linear-gradient(135deg,var(--ink3) 0%,#200050 100%)}
 .s-white{background:var(--slate)}
 
-/* ─── TYPE ─── */
+/* âââ TYPE âââ */
 .tag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--cyan);display:block;margin-bottom:10px}
 .tag-dark{color:var(--neon)}
 .h2{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(28px,4vw,48px);line-height:1.08;color:var(--W);margin-bottom:16px}
@@ -89,14 +89,14 @@ section{position:relative;z-index:2}
 .lead{font-size:18px;line-height:1.7;color:var(--lt)}
 .lead-dark{font-size:18px;line-height:1.7;color:#4B3B70}
 
-/* ─── REVEAL ─── */
+/* âââ REVEAL âââ */
 .rv{opacity:0;transform:translateY(32px);transition:opacity .65s,transform .65s}
 .rv.on{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
-/* ══════════════════════════════
+/* ââââââââââââââââââââââââââââââ
    HERO
-══════════════════════════════ */
+ââââââââââââââââââââââââââââââ */
 #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;padding:120px 48px 80px;overflow:hidden;position:relative;z-index:2}
 .hero-glow{position:absolute;left:50%;top:40%;width:900px;height:600px;
@@ -125,10 +125,10 @@ section{position:relative;z-index:2}
 .hp-l{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mt)}
 @keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 
-/* ══════════════════════════════
+/* ââââââââââââââââââââââââââââââ
    SECTION PREVIEW CARDS
    (teaser + learn more button)
-══════════════════════════════ */
+ââââââââââââââââââââââââââââââ */
 .preview-section{border-top:1px solid var(--bord)}
 
 /* Section header with nav */
@@ -136,7 +136,7 @@ section{position:relative;z-index:2}
 .section-nav-left{}
 .section-nav-right{flex-shrink:0}
 
-/* Preview grid — 3-col by default */
+/* Preview grid â 3-col by default */
 .preview-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px}
 .preview-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:32px}
 .preview-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
@@ -216,9 +216,9 @@ section{position:relative;z-index:2}
 .dc-txt{font-size:15px;color:var(--lt)}
 .dc-txt strong{color:var(--W)}
 
-/* ══════════════════════════════
+/* ââââââââââââââââââââââââââââââ
    FINAL CTA
-══════════════════════════════ */
+ââââââââââââââââââââââââââââââ */
 #cta{text-align:center;border-top:3px solid var(--neon);overflow:hidden;position:relative}
 .cta-blob{position:absolute;left:50%;top:50%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(200,64,255,.1) 0%,transparent 65%);transform:translate(-50%,-50%);pointer-events:none}
 .cta-inner{position:relative;z-index:2;max-width:740px;margin:0 auto}
@@ -228,9 +228,9 @@ section{position:relative;z-index:2}
 .cta-btns{display:flex;gap:14px;justify-content:center;margin-bottom:24px}
 .cta-note{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt)}
 
-/* ══════════════════════════════
+/* ââââââââââââââââââââââââââââââ
    FOOTER
-══════════════════════════════ */
+ââââââââââââââââââââââââââââââ */
 footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28px;position:relative;z-index:2}
 .fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px}
 .fl-name{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:4px;display:block;margin-bottom:10px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -243,7 +243,7 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
 .fbar p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt)}
 .fagent{display:flex;align-items:center;gap:7px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mint)}
 
-/* ─── RESPONSIVE ─── */
+/* âââ RESPONSIVE âââ */
 @media(max-width:1024px){
   .wrap,.nav-w{padding:0 32px}
   .preview-3,.preview-4{grid-template-columns:1fr 1fr}
@@ -272,7 +272,7 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
   font-size:10px!important;letter-spacing:1px!important}
 .nav-login:hover{background:rgba(0,255,159,.15)!important}
 
-/* ─── MOBILE HAMBURGER ─── */
+/* âââ MOBILE HAMBURGER âââ */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;
   width:36px;height:36px;cursor:pointer;background:none;border:1px solid var(--bord);
   padding:7px;flex-shrink:0;transition:border-color .2s}
@@ -357,28 +357,28 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
   <a href="vs-competitors.html">VS COMPETITORS</a>
   <a href="contact.html">CONTACT</a>
   <a href="indigo_portal.html" class="mm-login">CLIENT LOGIN</a>
-  <a href="#pricing" class="mm-cta">GET STARTED →</a>
+  <a href="#pricing" class="mm-cta">GET STARTED â</a>
 </div>
 
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span>● AGENT ACTIVE</span><span>12.22% CTR — 3× INDUSTRY AVG</span><span>$94 AVG CPA — GOOGLE VERIFIED</span><span>122 CONVERSIONS THIS MONTH</span><span>LIVE IN 24 HOURS</span><span>FLAT $299/MO — NO % OF SPEND</span><span>BUILDS EVERY CAMPAIGN FROM SCRATCH</span><span>WRITES ALL YOUR AD COPY</span>
-    <span>● AGENT ACTIVE</span><span>12.22% CTR — 3× INDUSTRY AVG</span><span>$94 AVG CPA — GOOGLE VERIFIED</span><span>122 CONVERSIONS THIS MONTH</span><span>LIVE IN 24 HOURS</span><span>FLAT $299/MO — NO % OF SPEND</span><span>BUILDS EVERY CAMPAIGN FROM SCRATCH</span><span>WRITES ALL YOUR AD COPY</span>
+    <span>â AGENT ACTIVE</span><span>12.22% CTR â 3Ã INDUSTRY AVG</span><span>$94 AVG CPA â GOOGLE VERIFIED</span><span>122 CONVERSIONS THIS MONTH</span><span>LIVE IN 24 HOURS</span><span>FLAT $299/MO â NO % OF SPEND</span><span>BUILDS EVERY CAMPAIGN FROM SCRATCH</span><span>WRITES ALL YOUR AD COPY</span>
+    <span>â AGENT ACTIVE</span><span>12.22% CTR â 3Ã INDUSTRY AVG</span><span>$94 AVG CPA â GOOGLE VERIFIED</span><span>122 CONVERSIONS THIS MONTH</span><span>LIVE IN 24 HOURS</span><span>FLAT $299/MO â NO % OF SPEND</span><span>BUILDS EVERY CAMPAIGN FROM SCRATCH</span><span>WRITES ALL YOUR AD COPY</span>
   </div>
 </div>
 
 <!-- HERO -->
 <section id="hero" class="s-dark">
   <div class="hero-glow"></div><div class="hero-glow2"></div>
-  <div class="hero-live"><span class="pip"></span>AI AGENT RUNNING — 5 CAMPAIGNS LIVE</div>
+  <div class="hero-live"><span class="pip"></span>AI AGENT RUNNING â 5 CAMPAIGNS LIVE</div>
   <h1 class="hero-h">
     <span class="l1">Other tools optimize your ads.</span>
     <span class="l2">Indigo builds them.</span>
   </h1>
-  <p class="hero-sub">AdTurbo, Madgicx, and Optmyzr all require you to set up campaigns first. Indigo starts from nothing — researching your market, writing every word of copy, and launching in under 24 hours.</p>
+  <p class="hero-sub">AdTurbo, Madgicx, and Optmyzr all require you to set up campaigns first. Indigo starts from nothing â researching your market, writing every word of copy, and launching in under 24 hours.</p>
   <div class="hero-btns">
-    <a href="#pricing" class="btn btn-solid">START FOR $299/MO →</a>
+    <a href="#pricing" class="btn btn-solid">START FOR $299/MO â</a>
     <a href="results.html" class="btn btn-out">SEE VERIFIED RESULTS</a>
   </div>
   <div class="hero-proof">
@@ -389,31 +389,31 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
   </div>
 </section>
 
-<!-- ══ HOW IT WORKS PREVIEW ══ -->
+<!-- ââ HOW IT WORKS PREVIEW ââ -->
 <section class="s-lift pad-sm preview-section">
   <div class="wrap">
     <div class="section-nav rv">
       <div>
         <span class="tag">// HOW IT WORKS</span>
         <h2 class="h2" style="margin-bottom:6px">From zero to live <em>in 24 hours</em></h2>
-        <p class="lead" style="font-size:16px">No setup. No brief. Tell Indigo your market — the agent handles everything else.</p>
+        <p class="lead" style="font-size:16px">No setup. No brief. Tell Indigo your market â the agent handles everything else.</p>
       </div>
-      <a href="how-it-works.html" class="btn btn-ghost">FULL BREAKDOWN →</a>
+      <a href="how-it-works.html" class="btn btn-ghost">FULL BREAKDOWN â</a>
     </div>
     <div class="step-pv rv d1">
       <div class="spv spv1"><span class="spv-n">01</span><div class="spv-title">You name the market</div><p class="spv-body">Service type + target city. That's your only input.</p></div>
-      <div class="spv spv2"><span class="spv-n">02</span><div class="spv-title">Indigo builds everything</div><p class="spv-body">Keywords, copy, ad groups, bidding — fully autonomous.</p></div>
+      <div class="spv spv2"><span class="spv-n">02</span><div class="spv-title">Indigo builds everything</div><p class="spv-body">Keywords, copy, ad groups, bidding â fully autonomous.</p></div>
       <div class="spv spv3"><span class="spv-n">03</span><div class="spv-title">Live in 24 hours</div><p class="spv-body">Campaigns launch. Agent monitors CPA 24/7, auto-optimizing.</p></div>
       <div class="spv spv4"><span class="spv-n">04</span><div class="spv-title">Leads flow. You scale.</div><p class="spv-body">New market? Another 24-hour autonomous build.</p></div>
     </div>
     <div class="divider-cta rv d2">
-      <span class="dc-txt">See the full process — <strong>campaign build, live dashboard, and agent actions explained</strong></span>
-      <a href="how-it-works.html" class="btn btn-ghost">SEE FULL PROCESS →</a>
+      <span class="dc-txt">See the full process â <strong>campaign build, live dashboard, and agent actions explained</strong></span>
+      <a href="how-it-works.html" class="btn btn-ghost">SEE FULL PROCESS â</a>
     </div>
   </div>
 </section>
 
-<!-- ══ SKILLS PREVIEW ══ -->
+<!-- ââ SKILLS PREVIEW ââ -->
 <section class="s-dark2 pad-sm preview-section">
   <div class="wrap">
     <div class="section-nav rv">
@@ -422,33 +422,33 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
         <h2 class="h2" style="margin-bottom:6px">The agent doesn't guess. It <em>knows your industry.</em></h2>
         <p class="lead" style="font-size:16px">Six deep skill domains powering every campaign Indigo builds.</p>
       </div>
-      <a href="skills.html" class="btn btn-ghost">ALL 6 SKILLS →</a>
+      <a href="skills.html" class="btn btn-ghost">ALL 6 SKILLS â</a>
     </div>
     <div class="preview-3 rv d1">
       <div class="pv-card pvc-1">
         <span class="pv-num">01</span>
         <div class="pv-title">Keyword Intelligence</div>
-        <p class="pv-body">Maps high-intent queries by service type, geo, urgency, and commercial intent — with negatives from day one.</p>
+        <p class="pv-body">Maps high-intent queries by service type, geo, urgency, and commercial intent â with negatives from day one.</p>
       </div>
       <div class="pv-card pvc-2">
         <span class="pv-num">02</span>
         <div class="pv-title">AI Copywriting</div>
-        <p class="pv-body">Writes all RSA headlines, descriptions, sitelinks, and callouts — original copy for your exact market.</p>
+        <p class="pv-body">Writes all RSA headlines, descriptions, sitelinks, and callouts â original copy for your exact market.</p>
       </div>
       <div class="pv-card pvc-3">
         <span class="pv-num">03</span>
         <div class="pv-title">Bid Strategy</div>
-        <p class="pv-body">Selects and configures the right bidding model for each campaign stage — auto-adjusting as data builds.</p>
+        <p class="pv-body">Selects and configures the right bidding model for each campaign stage â auto-adjusting as data builds.</p>
       </div>
     </div>
     <div class="divider-cta rv d2">
       <span class="dc-txt">Plus <strong>Campaign Architecture, Competitive Analysis, and Performance Optimization</strong></span>
-      <a href="skills.html" class="btn btn-ghost">VIEW ALL SKILLS →</a>
+      <a href="skills.html" class="btn btn-ghost">VIEW ALL SKILLS â</a>
     </div>
   </div>
 </section>
 
-<!-- ══ PEER REVIEW PREVIEW ══ -->
+<!-- ââ PEER REVIEW PREVIEW ââ -->
 <section class="s-lift pad-sm preview-section">
   <div class="wrap">
     <div class="section-nav rv">
@@ -457,7 +457,7 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
         <h2 class="h2" style="margin-bottom:6px">Every campaign reviewed before it <em>spends a dollar.</em></h2>
         <p class="lead" style="font-size:16px">A second agent audits every campaign against 40+ benchmarks before launch.</p>
       </div>
-      <a href="peer-review.html" class="btn btn-ghost">SEE THE PROCESS →</a>
+      <a href="peer-review.html" class="btn btn-ghost">SEE THE PROCESS â</a>
     </div>
     <div class="preview-3 rv d1">
       <div class="pv-card pvc-1">
@@ -468,7 +468,7 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
       <div class="pv-card pvc-2">
         <span class="pv-num">9.1 / 10</span>
         <div class="pv-title">Structure Score</div>
-        <p class="pv-body">Ad group hygiene, keyword overlap, match type distribution, and negative keyword coverage — all verified.</p>
+        <p class="pv-body">Ad group hygiene, keyword overlap, match type distribution, and negative keyword coverage â all verified.</p>
       </div>
       <div class="pv-card pvc-3">
         <span class="pv-num">8.7 / 10</span>
@@ -478,21 +478,21 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
     </div>
     <div class="divider-cta rv d2">
       <span class="dc-txt">See the full <strong>5-step review process and live review terminal output</strong></span>
-      <a href="peer-review.html" class="btn btn-ghost">SEE FULL REVIEW →</a>
+      <a href="peer-review.html" class="btn btn-ghost">SEE FULL REVIEW â</a>
     </div>
   </div>
 </section>
 
-<!-- ══ RESULTS PREVIEW ══ -->
+<!-- ââ RESULTS PREVIEW ââ -->
 <section class="s-white pad-sm preview-section" style="border-top:3px solid var(--neon)">
   <div class="wrap">
     <div class="section-nav rv">
       <div>
         <span class="tag tag-dark">// VERIFIED RESULTS</span>
         <h2 class="h2-dark" style="margin-bottom:6px">Real campaigns. <em>Real numbers.</em></h2>
-        <p class="lead-dark" style="font-size:16px">Google-verified data from live Indigo campaigns — not projections.</p>
+        <p class="lead-dark" style="font-size:16px">Google-verified data from live Indigo campaigns â not projections.</p>
       </div>
-      <a href="results.html" class="btn btn-solid">FULL RESULTS →</a>
+      <a href="results.html" class="btn btn-solid">FULL RESULTS â</a>
     </div>
     <div class="proof-preview rv d1">
       <div class="pp-stat pps1"><span class="pp-v">12.22%</span><span class="pp-l">CLICK-THROUGH RATE</span></div>
@@ -501,17 +501,17 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
       <div class="pp-stat pps4"><span class="pp-v">$65K</span><span class="pp-l">REVENUE COLLECTED</span></div>
     </div>
     <div class="gq-mini rv d2">
-      <p class="gqm-text">"This campaign is showing <em>incredible intent</em> — 13.12% conversion rate with a very low cost per conversion. We're flagging this account for immediate scaling."</p>
-      <span class="gqm-src">— GOOGLE POINT OF CONTACT · VERIFIED ACCOUNT REVIEW · MARCH 2026</span>
-      <div><span class="gqm-badge">✓ GOOGLE VERIFIED</span></div>
+      <p class="gqm-text">"This campaign is showing <em>incredible intent</em> â 13.12% conversion rate with a very low cost per conversion. We're flagging this account for immediate scaling."</p>
+      <span class="gqm-src">â GOOGLE POINT OF CONTACT Â· VERIFIED ACCOUNT REVIEW Â· MARCH 2026</span>
+      <div><span class="gqm-badge">â GOOGLE VERIFIED</span></div>
     </div>
     <div style="text-align:right;margin-top:16px" class="rv d3">
-      <a href="results.html" class="btn btn-solid">SEE ALL RESULTS →</a>
+      <a href="results.html" class="btn btn-solid">SEE ALL RESULTS â</a>
     </div>
   </div>
 </section>
 
-<!-- ══ VS COMPETITORS PREVIEW ══ -->
+<!-- ââ VS COMPETITORS PREVIEW ââ -->
 <section class="s-dark2 pad-sm preview-section">
   <div class="wrap">
     <div class="section-nav rv">
@@ -520,7 +520,7 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
         <h2 class="h2" style="margin-bottom:6px">We've studied every competitor. <em>Here's the truth.</em></h2>
         <p class="lead" style="font-size:16px">The key differences between Indigo and every major AI ad platform.</p>
       </div>
-      <a href="vs-competitors.html" class="btn btn-ghost">FULL COMPARISON →</a>
+      <a href="vs-competitors.html" class="btn btn-ghost">FULL COMPARISON â</a>
     </div>
     <table class="mini-table rv d1">
       <thead>
@@ -530,28 +530,28 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
         </tr>
       </thead>
       <tbody>
-        <tr><td class="rl">Builds campaigns from scratch</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
-        <tr><td class="rl">Writes all ad copy</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
-        <tr><td class="rl">Live in under 24 hours</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td></tr>
-        <tr><td class="rl">Flat fee — no % of spend</td><td class="ci"><span class="ic">✓</span></td><td><span class="xc">✗</span></td><td><span class="xc">✗</span></td><td><span class="ic">✓</span></td></tr>
+        <tr><td class="rl">Builds campaigns from scratch</td><td class="ci"><span class="ic">â</span></td><td><span class="xc">â</span></td><td><span class="xc">â</span></td><td><span class="xc">â</span></td></tr>
+        <tr><td class="rl">Writes all ad copy</td><td class="ci"><span class="ic">â</span></td><td><span class="xc">â</span></td><td><span class="xc">â</span></td><td><span class="xc">â</span></td></tr>
+        <tr><td class="rl">Live in under 24 hours</td><td class="ci"><span class="ic">â</span></td><td><span class="xc">â</span></td><td><span class="xc">â</span></td><td><span class="xc">â</span></td></tr>
+        <tr><td class="rl">Flat fee â no % of spend</td><td class="ci"><span class="ic">â</span></td><td><span class="xc">â</span></td><td><span class="xc">â</span></td><td><span class="ic">â</span></td></tr>
       </tbody>
     </table>
     <div class="divider-cta rv d2">
-      <span class="dc-txt">Full 10-row comparison + AdTurbo, Madgicx, Optmyzr, and agencies — <strong>plus the pricing math</strong></span>
-      <a href="vs-competitors.html" class="btn btn-ghost">SEE FULL COMPARISON →</a>
+      <span class="dc-txt">Full 10-row comparison + AdTurbo, Madgicx, Optmyzr, and agencies â <strong>plus the pricing math</strong></span>
+      <a href="vs-competitors.html" class="btn btn-ghost">SEE FULL COMPARISON â</a>
     </div>
   </div>
 </section>
 
-<!-- ══ PRICING ══ -->
+<!-- ââ PRICING ââ -->
 <section id="pricing" class="s-neon pad-lg">
   <div class="wrap">
     <div style="text-align:center;margin-bottom:48px" class="rv">
-      <span class="tag">// FLAT MONTHLY PRICING — NO % OF SPEND</span>
+      <span class="tag">// FLAT MONTHLY PRICING â NO % OF SPEND</span>
       <h2 class="h2">Simple pricing. <em>No surprises.</em></h2>
-      <p class="lead" style="max-width:500px;margin:0 auto 20px">No setup fees. No contracts. The AI does everything — pick a tier.</p>
+      <p class="lead" style="max-width:500px;margin:0 auto 20px">No setup fees. No contracts. The AI does everything â pick a tier.</p>
       <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.28);padding:9px 20px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--org)">
-        <strong style="color:var(--W)">At $10K/mo ad spend:</strong> competitors charge $500–$2,000 in fees. Indigo: flat $299–$499.
+        <strong style="color:var(--W)">At $10K/mo ad spend:</strong> competitors charge $500â$2,000 in fees. Indigo: flat $299â$499.
       </div>
     </div>
     <div class="price-preview rv d1">
@@ -560,26 +560,26 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
         <div class="pp-name">Starter</div>
         <div class="pp-scope">1 CAMPAIGN</div>
         <div class="pp-price ppp-a">$299</div>
-        <div class="pp-term">/month · cancel anytime</div>
+        <div class="pp-term">/month Â· cancel anytime</div>
       </div>
       <div class="pp-card hot">
         <div class="pp-stripe pps-b"></div>
         <span class="pop-tag">MOST POPULAR</span>
         <div class="pp-name">Growth</div>
-        <div class="pp-scope">2–3 CAMPAIGNS</div>
+        <div class="pp-scope">2â3 CAMPAIGNS</div>
         <div class="pp-price ppp-b">$399</div>
-        <div class="pp-term">/month · cancel anytime</div>
+        <div class="pp-term">/month Â· cancel anytime</div>
       </div>
       <div class="pp-card">
         <div class="pp-stripe pps-c"></div>
         <div class="pp-name">Scale</div>
-        <div class="pp-scope">4–5 CAMPAIGNS</div>
+        <div class="pp-scope">4â5 CAMPAIGNS</div>
         <div class="pp-price ppp-c">$499</div>
-        <div class="pp-term">/month · cancel anytime</div>
+        <div class="pp-term">/month Â· cancel anytime</div>
       </div>
     </div>
     <div style="display:flex;gap:14px;justify-content:center" class="rv d2">
-      <a href="contact.html" class="btn btn-white">GET STARTED →</a>
+      <a href="contact.html" class="btn btn-white">GET STARTED â</a>
       <a href="contact.html" class="btn btn-ghost-white">TALK TO US FIRST</a>
     </div>
   </div>
@@ -591,12 +591,12 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
   <div class="wrap">
     <div class="cta-inner rv">
       <h2 class="cta-h">Stop managing ads.<br>Let <em>Indigo</em> manage them.</h2>
-      <p class="cta-sub">Your competitors are still logging into dashboards, tweaking bids, and writing copy manually. Indigo runs your entire Google Ads operation — for less per month than a single hour with an agency.</p>
+      <p class="cta-sub">Your competitors are still logging into dashboards, tweaking bids, and writing copy manually. Indigo runs your entire Google Ads operation â for less per month than a single hour with an agency.</p>
       <div class="cta-btns">
-        <a href="#pricing" class="btn btn-white">START FOR $299/MO →</a>
+        <a href="#pricing" class="btn btn-white">START FOR $299/MO â</a>
         <a href="contact.html" class="btn btn-ghost-white">TALK TO US FIRST</a>
       </div>
-      <p class="cta-note">● NO SETUP FEES · NO CONTRACTS · CANCEL ANYTIME · LIVE IN 24 HOURS</p>
+      <p class="cta-note">â NO SETUP FEES Â· NO CONTRACTS Â· CANCEL ANYTIME Â· LIVE IN 24 HOURS</p>
     </div>
   </div>
 </section>
@@ -633,13 +633,13 @@ footer{background:var(--ink);border-top:1px solid var(--bord);padding:60px 0 28p
         <div class="fch">COMPANY</div>
         <div class="fcl">
           <a href="contact.html">Contact</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms/a>
         </div>
       </div>
     </div>
     <div class="fbar">
-      <p>© 2026 INDIGO · AI-POWERED GOOGLE ADS · go.indigo.ai</p>
+      <p>Â© 2026 INDIGO Â· AI-POWERED GOOGLE ADS Â· go.indigo.ai</p>
       <div class="fagent"><span style="width:6px;height:6px;border-radius:50%;background:var(--mint);display:inline-block;animation:blink 1.6s infinite"></span>AGENT ACTIVE</div>
     </div>
   </div>
