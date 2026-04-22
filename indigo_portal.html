@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indigo — Client Portal</title>
+<title>Indigo â Client Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -17,19 +17,19 @@
 html,body{height:100%;background:var(--bk);color:var(--dt);font-family:'Rajdhani',sans-serif;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 
-/* ── GRID BG ── */
+/* ââ GRID BG ââ */
 .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:linear-gradient(rgba(130,80,255,.03) 1px,transparent 1px),
   linear-gradient(90deg,rgba(130,80,255,.03) 1px,transparent 1px);
   background-size:60px 60px}
 
-/* ── PAGE CONTROLLER ── */
+/* ââ PAGE CONTROLLER ââ */
 .page{display:none;position:relative;z-index:1;min-height:100vh}
 .page.active{display:flex}
 
-/* ══════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââ
    LOGIN PAGE
-══════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââ */
 #page-login{align-items:center;justify-content:center;padding:40px 24px}
 
 .login-card{width:100%;max-width:440px;background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden}
@@ -70,9 +70,9 @@ a{text-decoration:none;color:inherit}
   font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mt);letter-spacing:1px;line-height:1.8}
 .login-hint strong{color:var(--cyan)}
 
-/* ══════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââ
    SHARED SHELL
-══════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââ */
 .shell{width:100%;display:flex;flex-direction:column}
 
 /* Top bar */
@@ -114,9 +114,9 @@ a{text-decoration:none;color:inherit}
 .content-tab{display:none}
 .content-tab.active{display:block}
 
-/* ══════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââ
    SHARED COMPONENTS
-══════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââ */
 .page-header{margin-bottom:32px}
 .page-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--cyan);display:block;margin-bottom:8px}
 .page-title{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--W)}
@@ -216,9 +216,9 @@ a{text-decoration:none;color:inherit}
 .form-input-sm:focus{border-color:var(--neon)}
 .form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2366558A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
 
-/* ══════════════════════════════════════════
-   ADMIN — CLIENTS TAB
-══════════════════════════════════════════ */
+/* ââââââââââââââââââââââââââââââââââââââââââ
+   ADMIN â CLIENTS TAB
+ââââââââââââââââââââââââââââââââââââââââââ */
 .client-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
 .client-card{background:var(--panel);border:1px solid var(--border);transition:border-color .2s}
 .client-card:hover{border-color:var(--bord2)}
@@ -244,9 +244,9 @@ a{text-decoration:none;color:inherit}
   background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);padding:3px 8px;cursor:pointer;transition:background .2s}
 .copy-btn:hover{background:rgba(0,229,255,.14)}
 
-/* ══════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââ
    CLIENT DASHBOARD
-══════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââ */
 .live-badge{display:inline-flex;align-items:center;gap:7px;
   background:rgba(0,255,159,.07);border:1px solid rgba(0,255,159,.22);
   padding:5px 14px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mint);margin-bottom:20px}
@@ -294,7 +294,7 @@ a{text-decoration:none;color:inherit}
   letter-spacing:1px;transform:translateX(120%);transition:transform .3s;pointer-events:none}
 .toast.show{transform:translateX(0)}
 
-/* ─── MOBILE HAMBURGER ─── */
+/* âââ MOBILE HAMBURGER âââ */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;
   width:36px;height:36px;cursor:pointer;background:none;border:1px solid var(--bord);
   padding:7px;flex-shrink:0;transition:border-color .2s}
@@ -332,6 +332,39 @@ a{text-decoration:none;color:inherit}
   .mobile-menu{display:flex}
   .nav-links{display:none!important}
 }
+
+/* ─── MOBILE PORTAL ─── */
+@media(max-width:768px){
+  .portal-layout{grid-template-columns:1fr!important;grid-template-rows:auto 1fr!important}
+  .portal-sidebar{width:100%!important;height:auto!important;position:relative!important;
+    flex-direction:row!important;flex-wrap:wrap!important;padding:8px 12px!important;
+    border-right:none!important;border-bottom:1px solid var(--bord)!important;
+    display:flex!important;align-items:center!important;gap:6px!important}
+  .sidebar-logo{display:none!important}
+  .sidebar-section-label{display:none!important}
+  .sidebar-nav{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;
+    gap:4px!important;padding:0!important;flex:1!important}
+  .sidebar-nav a,.nav-item,.sidebar-link{padding:6px 10px!important;font-size:9px!important;
+    border-radius:2px!important;white-space:nowrap!important}
+  .sidebar-user{margin-left:auto!important;font-size:9px!important}
+  .portal-main{padding:16px!important;overflow-x:hidden!important}
+  .portal-header{flex-direction:column!important;align-items:flex-start!important;gap:8px!important}
+  .stats-grid,.metrics-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+  .stat-card,.metric-card{padding:14px 12px!important}
+  .stat-val,.metric-val{font-size:28px!important}
+  .clients-grid{grid-template-columns:1fr!important}
+  .campaigns-table{font-size:11px!important;overflow-x:auto!important;display:block!important;width:100%!important}
+  .campaigns-table th,.campaigns-table td{padding:8px 6px!important;white-space:nowrap!important}
+  .chart-bars{gap:4px!important}
+  .chart-bar-wrap{width:28px!important}
+  .ring-row{flex-wrap:wrap!important;gap:12px!important}
+  .ctr-bars{gap:6px!important}
+  h1,h2{font-size:clamp(18px,4vw,28px)!important}
+  .page-title{font-size:clamp(20px,5vw,32px)!important}
+  .section-title{font-size:14px!important}
+  .alert-item{padding:10px 12px!important;font-size:12px!important}
+  .report-card{padding:16px!important}
+}
 </style>
 </head>
 <body>
@@ -340,9 +373,9 @@ a{text-decoration:none;color:inherit}
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ══════════════════════════════════════
+<!-- ââââââââââââââââââââââââââââââââââââââ
      PAGE: LOGIN
-══════════════════════════════════════ -->
+ââââââââââââââââââââââââââââââââââââââ -->
 <div class="page active" id="page-login">
   <div class="login-card">
     <div class="login-inner">
@@ -363,9 +396,9 @@ a{text-decoration:none;color:inherit}
         <span class="wm">INDIGO</span>
       </div>
       <div class="login-title">Client Portal</div>
-      <div class="login-sub">// SECURE ACCESS — AUTHORIZED USERS ONLY</div>
+      <div class="login-sub">// SECURE ACCESS â AUTHORIZED USERS ONLY</div>
 
-      <div class="login-error" id="login-error">INVALID CREDENTIALS — TRY AGAIN</div>
+      <div class="login-error" id="login-error">INVALID CREDENTIALS â TRY AGAIN</div>
 
       <div class="form-group">
         <label class="form-label">EMAIL ADDRESS</label>
@@ -373,10 +406,10 @@ a{text-decoration:none;color:inherit}
       </div>
       <div class="form-group">
         <label class="form-label">PASSWORD</label>
-        <input class="form-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password">
+        <input class="form-input" id="login-pass" type="password" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" autocomplete="current-password">
       </div>
 
-      <button class="btn-login" onclick="handleLogin()">ACCESS PORTAL →</button>
+      <button class="btn-login" onclick="handleLogin()">ACCESS PORTAL â</button>
 
       <div class="login-hint">
         <strong>ADMIN:</strong> admin@go.indigo.ai / admin2026<br>
@@ -387,9 +420,9 @@ a{text-decoration:none;color:inherit}
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
+<!-- ââââââââââââââââââââââââââââââââââââââ
      PAGE: ADMIN PORTAL
-══════════════════════════════════════ -->
+ââââââââââââââââââââââââââââââââââââââ -->
 <div class="page" id="page-admin">
   <div class="shell">
     <div class="topbar">
@@ -421,17 +454,17 @@ a{text-decoration:none;color:inherit}
       <div class="sidebar">
         <div class="sidebar-section">
           <div class="sidebar-section-label">MAIN</div>
-          <div class="nav-item active" onclick="adminTab('overview',this)"><span class="ni-icon">◈</span> Overview</div>
-          <div class="nav-item" onclick="adminTab('clients',this)"><span class="ni-icon">◈</span> Clients</div>
+          <div class="nav-item active" onclick="adminTab('overview',this)"><span class="ni-icon">â</span> Overview</div>
+          <div class="nav-item" onclick="adminTab('clients',this)"><span class="ni-icon">â</span> Clients</div>
         </div>
         <div class="sidebar-section">
           <div class="sidebar-section-label">REPORTS</div>
-          <div class="nav-item" onclick="adminTab('all-campaigns',this)"><span class="ni-icon">◈</span> All Campaigns</div>
-          <div class="nav-item" onclick="adminTab('alerts',this)"><span class="ni-icon">◈</span> Agent Alerts</div>
+          <div class="nav-item" onclick="adminTab('all-campaigns',this)"><span class="ni-icon">â</span> All Campaigns</div>
+          <div class="nav-item" onclick="adminTab('alerts',this)"><span class="ni-icon">â</span> Agent Alerts</div>
         </div>
         <div class="sidebar-section" style="margin-top:auto;padding-top:16px">
           <div class="sidebar-section-label">ACCESS</div>
-          <div class="nav-item" onclick="adminTab('access',this)"><span class="ni-icon">◈</span> Manage Logins</div>
+          <div class="nav-item" onclick="adminTab('access',this)"><span class="ni-icon">â</span> Manage Logins</div>
         </div>
       </div>
       <!-- Content -->
@@ -442,35 +475,35 @@ a{text-decoration:none;color:inherit}
           <div class="page-header">
             <span class="page-tag">// ADMIN OVERVIEW</span>
             <h1 class="page-title">Agency Dashboard</h1>
-            <p class="page-sub">All clients, campaigns, and performance — at a glance.</p>
+            <p class="page-sub">All clients, campaigns, and performance â at a glance.</p>
           </div>
           <div class="stat-grid">
             <div class="stat-card sc1">
               <span class="stat-val">4</span>
               <span class="stat-lbl">ACTIVE CLIENTS</span>
-              <div class="stat-delta up">↑ 1 this month</div>
+              <div class="stat-delta up">â 1 this month</div>
             </div>
             <div class="stat-card sc2">
               <span class="stat-val">11</span>
               <span class="stat-lbl">LIVE CAMPAIGNS</span>
-              <div class="stat-delta up">↑ 2 this month</div>
+              <div class="stat-delta up">â 2 this month</div>
             </div>
             <div class="stat-card sc3">
               <span class="stat-val">$94</span>
               <span class="stat-lbl">AVG CPA (PORTFOLIO)</span>
-              <div class="stat-delta up">↓ 12% vs last month</div>
+              <div class="stat-delta up">â 12% vs last month</div>
             </div>
             <div class="stat-card sc4">
               <span class="stat-val">12.2%</span>
               <span class="stat-lbl">AVG CTR</span>
-              <div class="stat-delta up">↑ 0.8% vs last month</div>
+              <div class="stat-delta up">â 0.8% vs last month</div>
             </div>
           </div>
 
           <div class="two-col">
             <div class="card">
               <div class="card-head">
-                <span class="card-title">SPEND BY CLIENT — THIS MONTH</span>
+                <span class="card-title">SPEND BY CLIENT â THIS MONTH</span>
               </div>
               <div class="card-body">
                 <div class="bar-chart">
@@ -487,10 +520,10 @@ a{text-decoration:none;color:inherit}
               </div>
               <div class="card-body">
                 <div class="alert-list">
-                  <div class="alert-item al-win">★ Apex NC Campaign — $32.50 CPA · Scale winner detected<div class="al-time">2 hours ago</div></div>
-                  <div class="alert-item al-warn">▲ BlueWave Market 2 — CPA $491, exceeds $150 target<div class="al-time">4 hours ago</div></div>
-                  <div class="alert-item al-info">◈ Summit Electric — New campaign launched in Phoenix AZ<div class="al-time">Yesterday</div></div>
-                  <div class="alert-item al-win">★ Peak Plumbing — CTR increased to 9.4% after copy test<div class="al-time">2 days ago</div></div>
+                  <div class="alert-item al-win">â Apex NC Campaign â $32.50 CPA Â· Scale winner detected<div class="al-time">2 hours ago</div></div>
+                  <div class="alert-item al-warn">â² BlueWave Market 2 â CPA $491, exceeds $150 target<div class="al-time">4 hours ago</div></div>
+                  <div class="alert-item al-info">â Summit Electric â New campaign launched in Phoenix AZ<div class="al-time">Yesterday</div></div>
+                  <div class="alert-item al-win">â Peak Plumbing â CTR increased to 9.4% after copy test<div class="al-time">2 days ago</div></div>
                 </div>
               </div>
             </div>
@@ -569,9 +602,9 @@ a{text-decoration:none;color:inherit}
   </div><!-- /shell -->
 </div><!-- /page-admin -->
 
-<!-- ══════════════════════════════════════
+<!-- ââââââââââââââââââââââââââââââââââââââ
      PAGE: CLIENT PORTAL
-══════════════════════════════════════ -->
+ââââââââââââââââââââââââââââââââââââââ -->
 <div class="page" id="page-client">
   <div class="shell">
     <div class="topbar">
@@ -599,20 +632,20 @@ a{text-decoration:none;color:inherit}
       <div class="sidebar">
         <div class="sidebar-section">
           <div class="sidebar-section-label">MY CAMPAIGNS</div>
-          <div class="nav-item active" onclick="clientTab('dashboard',this)"><span class="ni-icon">◈</span> Dashboard</div>
-          <div class="nav-item" onclick="clientTab('campaigns',this)"><span class="ni-icon">◈</span> Campaigns</div>
-          <div class="nav-item" onclick="clientTab('reports',this)"><span class="ni-icon">◈</span> Reports</div>
+          <div class="nav-item active" onclick="clientTab('dashboard',this)"><span class="ni-icon">â</span> Dashboard</div>
+          <div class="nav-item" onclick="clientTab('campaigns',this)"><span class="ni-icon">â</span> Campaigns</div>
+          <div class="nav-item" onclick="clientTab('reports',this)"><span class="ni-icon">â</span> Reports</div>
         </div>
         <div class="sidebar-section">
           <div class="sidebar-section-label">INSIGHTS</div>
-          <div class="nav-item" onclick="clientTab('alerts',this)"><span class="ni-icon">◈</span> Agent Activity</div>
+          <div class="nav-item" onclick="clientTab('alerts',this)"><span class="ni-icon">â</span> Agent Activity</div>
         </div>
       </div>
       <div class="content">
 
         <!-- CLIENT: DASHBOARD -->
         <div class="content-tab active" id="ctab-dashboard">
-          <div class="live-badge"><span class="live-dot"></span>AGENT ACTIVE — ALL CAMPAIGNS RUNNING</div>
+          <div class="live-badge"><span class="live-dot"></span>AGENT ACTIVE â ALL CAMPAIGNS RUNNING</div>
           <div class="page-header">
             <span class="page-tag">// PERFORMANCE OVERVIEW</span>
             <h1 class="page-title" id="client-dash-title">Your Dashboard</h1>
@@ -625,7 +658,7 @@ a{text-decoration:none;color:inherit}
           <div class="two-col">
             <!-- Monthly performance chart -->
             <div class="card">
-              <div class="card-head"><span class="card-title">CONVERSIONS — LAST 8 MONTHS</span></div>
+              <div class="card-head"><span class="card-title">CONVERSIONS â LAST 8 MONTHS</span></div>
               <div class="card-body">
                 <div class="month-chart">
                   <div class="mc-bars" id="client-month-bars"></div>
@@ -642,7 +675,7 @@ a{text-decoration:none;color:inherit}
 
           <!-- Campaign CTR chart -->
           <div class="card" style="margin-bottom:20px">
-            <div class="card-head"><span class="card-title">CLICK-THROUGH RATE — BY CAMPAIGN</span></div>
+            <div class="card-head"><span class="card-title">CLICK-THROUGH RATE â BY CAMPAIGN</span></div>
             <div class="card-body"><div class="bar-chart" id="client-ctr-chart"></div></div>
           </div>
         </div>
@@ -691,14 +724,14 @@ a{text-decoration:none;color:inherit}
   </div><!-- /shell -->
 </div><!-- /page-client -->
 
-<!-- ══════════════════════════════════════
+<!-- ââââââââââââââââââââââââââââââââââââââ
      MODAL: ADD / EDIT CLIENT
-══════════════════════════════════════ -->
+ââââââââââââââââââââââââââââââââââââââ -->
 <div class="modal-overlay" id="modal-client">
   <div class="modal">
     <div class="modal-head">
       <span class="modal-title" id="modal-client-title">ADD NEW CLIENT</span>
-      <button class="modal-close" onclick="closeModal('modal-client')">×</button>
+      <button class="modal-close" onclick="closeModal('modal-client')">Ã</button>
     </div>
     <div class="modal-body">
       <div class="form-row">
@@ -738,19 +771,19 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-client')">CANCEL</button>
-      <button class="btn btn-primary btn-sm" onclick="saveClient()">SAVE CLIENT →</button>
+      <button class="btn btn-primary btn-sm" onclick="saveClient()">SAVE CLIENT â</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
+<!-- ââââââââââââââââââââââââââââââââââââââ
      MODAL: RESET PASSWORD
-══════════════════════════════════════ -->
+ââââââââââââââââââââââââââââââââââââââ -->
 <div class="modal-overlay" id="modal-pass">
   <div class="modal">
     <div class="modal-head">
       <span class="modal-title">RESET PASSWORD</span>
-      <button class="modal-close" onclick="closeModal('modal-pass')">×</button>
+      <button class="modal-close" onclick="closeModal('modal-pass')">Ã</button>
     </div>
     <div class="modal-body">
       <p style="font-size:15px;color:var(--lt);margin-bottom:20px">Set a new password for <strong id="reset-client-name" style="color:var(--W)"></strong></p>
@@ -761,15 +794,15 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-pass')">CANCEL</button>
-      <button class="btn btn-primary btn-sm" onclick="saveResetPass()">UPDATE PASSWORD →</button>
+      <button class="btn btn-primary btn-sm" onclick="saveResetPass()">UPDATE PASSWORD â</button>
     </div>
   </div>
 </div>
 
 <script>
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 // DATA STORE
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 const DEFAULT_CLIENTS = [
   {
     id:'apex', name:'Apex Restoration', industry:'Restoration',
@@ -782,10 +815,10 @@ const DEFAULT_CLIENTS = [
     ],
     monthlyConversions:[28,34,41,52,68,88,102,122],
     alerts:[
-      {type:'win', text:'★ Raleigh Campaign — $32.50 CPA confirmed as scale winner → Budget +$50/day queued', time:'2 hours ago'},
-      {type:'warn',text:'▲ Charlotte Campaign market 2 — CPA $491, 227% over target → Agent reducing bids', time:'4 hours ago'},
-      {type:'info',text:'◈ Mold Remediation Gastonia — Build started, launch expected in 18 hours', time:'Yesterday'},
-      {type:'win', text:'★ Charlotte CTR increased to 12.22% after RSA variant test', time:'3 days ago'},
+      {type:'win', text:'â Raleigh Campaign â $32.50 CPA confirmed as scale winner â Budget +$50/day queued', time:'2 hours ago'},
+      {type:'warn',text:'â² Charlotte Campaign market 2 â CPA $491, 227% over target â Agent reducing bids', time:'4 hours ago'},
+      {type:'info',text:'â Mold Remediation Gastonia â Build started, launch expected in 18 hours', time:'Yesterday'},
+      {type:'win', text:'â Charlotte CTR increased to 12.22% after RSA variant test', time:'3 days ago'},
     ],
     reports:[
       {month:'March 2026',   conversions:122, spend:11481, cpa:94,   ctr:'12.22%', revenue:'$65,000'},
@@ -805,9 +838,9 @@ const DEFAULT_CLIENTS = [
     ],
     monthlyConversions:[12,18,22,28,31,36,38,43],
     alerts:[
-      {type:'warn',text:'▲ Heating Repair Concord — CPA $491, 309% over target → Agent pausing campaign', time:'4 hours ago'},
-      {type:'info',text:'◈ HVAC Installation — Paused due to sustained underperformance, rebuild queued', time:'2 days ago'},
-      {type:'win', text:'★ AC Repair Charlotte — CTR 8.14%, best in account history', time:'1 week ago'},
+      {type:'warn',text:'â² Heating Repair Concord â CPA $491, 309% over target â Agent pausing campaign', time:'4 hours ago'},
+      {type:'info',text:'â HVAC Installation â Paused due to sustained underperformance, rebuild queued', time:'2 days ago'},
+      {type:'win', text:'â AC Repair Charlotte â CTR 8.14%, best in account history', time:'1 week ago'},
     ],
     reports:[
       {month:'March 2026',   conversions:43, spend:3480, cpa:81, ctr:'8.14%', revenue:'$27,950'},
@@ -825,8 +858,8 @@ const DEFAULT_CLIENTS = [
     ],
     monthlyConversions:[8,12,15,20,22,24,26,28],
     alerts:[
-      {type:'info',text:'◈ Panel Upgrade Phoenix — Campaign build complete, launching in 4 hours',time:'Today'},
-      {type:'win', text:'★ Charlotte Electrical — CPA $88, 12% below target → Holding steady',time:'Yesterday'},
+      {type:'info',text:'â Panel Upgrade Phoenix â Campaign build complete, launching in 4 hours',time:'Today'},
+      {type:'win', text:'â Charlotte Electrical â CPA $88, 12% below target â Holding steady',time:'Yesterday'},
     ],
     reports:[
       {month:'March 2026',   conversions:28, spend:2464, cpa:88, ctr:'6.82%', revenue:'$14,000'},
@@ -842,7 +875,7 @@ const DEFAULT_CLIENTS = [
     ],
     monthlyConversions:[4,6,8,9,10,11,12,14],
     alerts:[
-      {type:'win', text:'★ CTR increased from 7.2% to 9.4% after AI rewrote 3 headline variants', time:'2 days ago'},
+      {type:'win', text:'â CTR increased from 7.2% to 9.4% after AI rewrote 3 headline variants', time:'2 days ago'},
     ],
     reports:[
       {month:'March 2026', conversions:14, spend:1540, cpa:110, ctr:'9.4%', revenue:'$8,400'},
@@ -861,9 +894,9 @@ function saveClients(clients){
   localStorage.setItem('indigo_clients', JSON.stringify(clients));
 }
 
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 // AUTH
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 let currentUser = null; // {type:'admin'} or {type:'client', id, email}
 
 function handleLogin(){
@@ -908,7 +941,7 @@ function showPage(type, clientData){
     document.getElementById('client-name-bar').textContent = clientData.name.toUpperCase();
     document.getElementById('client-user-label').textContent = clientData.email;
     document.getElementById('client-dash-title').textContent = clientData.name;
-    document.getElementById('client-dash-sub').textContent = `Powered by Indigo AI — ${clientData.campaigns.filter(c=>c.status==='live').length} campaigns live right now.`;
+    document.getElementById('client-dash-sub').textContent = `Powered by Indigo AI â ${clientData.campaigns.filter(c=>c.status==='live').length} campaigns live right now.`;
     renderClientDashboard(clientData);
     renderClientCampaigns(clientData);
     renderClientReports(clientData);
@@ -925,11 +958,11 @@ function signOut(){
   document.getElementById('login-error').classList.remove('show');
 }
 
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 // ADMIN RENDERS
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderAdminOverview(){
-  // Stats already hardcoded in HTML — could be dynamic here
+  // Stats already hardcoded in HTML â could be dynamic here
 }
 
 function renderClientGrid(){
@@ -976,11 +1009,11 @@ function renderAllCampaigns(){
         <td><strong style="color:var(--W)">${c.name}</strong></td>
         <td>${camp.name}</td>
         <td><span class="status-badge badge-${camp.status}">${camp.status.toUpperCase()}</span></td>
-        <td style="color:var(--yel)">${camp.ctr>0?camp.ctr.toFixed(2)+'%':'—'}</td>
-        <td class="${cpaClass}">${camp.cpa>0?'$'+camp.cpa:'—'}</td>
+        <td style="color:var(--yel)">${camp.ctr>0?camp.ctr.toFixed(2)+'%':'â'}</td>
+        <td class="${cpaClass}">${camp.cpa>0?'$'+camp.cpa:'â'}</td>
         <td style="color:var(--mt)">$${camp.target}</td>
-        <td style="color:var(--neon)">${camp.conversions||'—'}</td>
-        <td style="color:var(--lt)">${camp.spend>0?'$'+camp.spend.toLocaleString():'—'}</td>
+        <td style="color:var(--neon)">${camp.conversions||'â'}</td>
+        <td style="color:var(--lt)">${camp.spend>0?'$'+camp.spend.toLocaleString():'â'}</td>
       </tr>`;
     });
   });
@@ -996,7 +1029,7 @@ function renderAllAlerts(){
   });
   list.innerHTML = all.map(a=>`
     <div class="alert-item al-${a.type==='win'?'win':a.type==='warn'?'warn':'info'}">
-      <strong style="color:var(--lt)">${a.client}</strong> — ${a.text}
+      <strong style="color:var(--lt)">${a.client}</strong> â ${a.text}
       <div class="al-time">${a.time}</div>
     </div>`).join('');
 }
@@ -1020,9 +1053,9 @@ function renderAccessTable(){
     </tr>`).join('');
 }
 
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 // CLIENT RENDERS
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderClientDashboard(client){
   const live = client.campaigns.filter(c=>c.status==='live');
   const totalConv = live.reduce((a,c)=>a+c.conversions,0);
@@ -1032,9 +1065,9 @@ function renderClientDashboard(client){
 
   // Stats
   document.getElementById('client-stat-grid').innerHTML = `
-    <div class="stat-card sc1"><span class="stat-val">${totalConv}</span><span class="stat-lbl">CONVERSIONS</span><div class="stat-delta up">↑ ${Math.round(totalConv*.12)} vs last month</div></div>
-    <div class="stat-card sc2"><span class="stat-val">$${avgCPA}</span><span class="stat-lbl">AVG COST/LEAD</span><div class="stat-delta up">↓ vs $${client.cpaTarget} target</div></div>
-    <div class="stat-card sc3"><span class="stat-val">${avgCTR}%</span><span class="stat-lbl">CLICK-THROUGH RATE</span><div class="stat-delta up">↑ 3× industry avg</div></div>
+    <div class="stat-card sc1"><span class="stat-val">${totalConv}</span><span class="stat-lbl">CONVERSIONS</span><div class="stat-delta up">â ${Math.round(totalConv*.12)} vs last month</div></div>
+    <div class="stat-card sc2"><span class="stat-val">$${avgCPA}</span><span class="stat-lbl">AVG COST/LEAD</span><div class="stat-delta up">â vs $${client.cpaTarget} target</div></div>
+    <div class="stat-card sc3"><span class="stat-val">${avgCTR}%</span><span class="stat-lbl">CLICK-THROUGH RATE</span><div class="stat-delta up">â 3Ã industry avg</div></div>
     <div class="stat-card sc4"><span class="stat-val">${live.length}</span><span class="stat-lbl">LIVE CAMPAIGNS</span><div class="stat-delta neutral">${client.campaigns.length} total incl. building</div></div>
   `;
 
@@ -1061,11 +1094,11 @@ function renderClientDashboard(client){
           <circle cx="36" cy="36" r="${r}" fill="none" stroke="${color}" stroke-width="6"
             stroke-dasharray="${circ}" stroke-dashoffset="${circ*(1-pct)}" stroke-linecap="round"/>
         </svg>
-        <div class="cpa-ring-val" style="color:${color}">$${camp.cpa||'–'}</div>
+        <div class="cpa-ring-val" style="color:${color}">$${camp.cpa||'â'}</div>
       </div>
       <div class="cpa-info">
         <div class="cpa-name">${camp.name.split(' ').slice(0,2).join(' ')}</div>
-        <div class="cpa-sub">TARGET: $${camp.target} &nbsp;·&nbsp; ${camp.cpa<=camp.target?'ON TARGET':'ABOVE TARGET'}</div>
+        <div class="cpa-sub">TARGET: $${camp.target} &nbsp;Â·&nbsp; ${camp.cpa<=camp.target?'ON TARGET':'ABOVE TARGET'}</div>
       </div>
     </div>`;
   }).join('');
@@ -1088,12 +1121,12 @@ function renderClientCampaigns(client){
     return `<tr>
       <td><strong style="color:var(--W)">${c.name}</strong></td>
       <td><span class="status-badge badge-${c.status}">${c.status.toUpperCase()}</span></td>
-      <td style="color:var(--yel)">${c.ctr>0?c.ctr.toFixed(2)+'%':'—'}</td>
-      <td class="${cpaClass}">${c.cpa>0?'$'+c.cpa:'—'}</td>
+      <td style="color:var(--yel)">${c.ctr>0?c.ctr.toFixed(2)+'%':'â'}</td>
+      <td class="${cpaClass}">${c.cpa>0?'$'+c.cpa:'â'}</td>
       <td style="color:var(--mt)">$${c.target}</td>
-      <td style="color:var(--neon)">${c.conversions||'—'}</td>
-      <td style="color:var(--lt)">${c.impressions>0?c.impressions.toLocaleString():'—'}</td>
-      <td style="color:var(--lt)">${c.spend>0?'$'+c.spend.toLocaleString():'—'}</td>
+      <td style="color:var(--neon)">${c.conversions||'â'}</td>
+      <td style="color:var(--lt)">${c.impressions>0?c.impressions.toLocaleString():'â'}</td>
+      <td style="color:var(--lt)">${c.spend>0?'$'+c.spend.toLocaleString():'â'}</td>
     </tr>`;
   }).join('');
 }
@@ -1103,7 +1136,7 @@ function renderClientReports(client){
   list.innerHTML = client.reports.map(r=>`
     <div class="report-card">
       <div class="rc-head">
-        <span class="rc-title">${r.month} — Performance Report</span>
+        <span class="rc-title">${r.month} â Performance Report</span>
         <span class="rc-date">AUTO-GENERATED BY INDIGO AI</span>
       </div>
       <div class="rc-body">
@@ -1127,9 +1160,9 @@ function renderClientAlerts(client){
     </div>`).join('');
 }
 
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 // TAB NAVIGATION
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 function adminTab(name, el){
   document.querySelectorAll('#page-admin .nav-item').forEach(n=>n.classList.remove('active'));
   el.classList.add('active');
@@ -1147,9 +1180,9 @@ function clientTab(name, el){
   document.getElementById('ctab-'+name).classList.add('active');
 }
 
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 // CLIENT CRUD
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 let editingClientId = null;
 
 function openAddClient(){
@@ -1202,14 +1235,14 @@ function saveClient(){
     const id = name.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'')+'_'+Date.now();
     clients.push({id,name,email,password:pass,budget,cpaTarget:cpaT,industry,
       campaigns:camps,monthlyConversions:[0,0,0,0,0,0,0,0],
-      alerts:[{type:'info',text:'◈ Account created — campaigns queuing for build',time:'Just now'}],
+      alerts:[{type:'info',text:'â Account created â campaigns queuing for build',time:'Just now'}],
       reports:[],lastLogin:'Never'});
   }
   saveClients(clients);
   closeModal('modal-client');
   renderClientGrid();
   renderAccessTable();
-  showToast(editingClientId?'Client updated.':'Client added — login credentials ready.');
+  showToast(editingClientId?'Client updated.':'Client added â login credentials ready.');
 }
 
 function deleteClient(id){
@@ -1221,9 +1254,9 @@ function deleteClient(id){
   showToast('Client removed.');
 }
 
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 // PASSWORD RESET
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 let resetTargetId = null;
 function openResetPass(id, name){
   resetTargetId = id;
@@ -1244,9 +1277,9 @@ function saveResetPass(){
   showToast('Password updated.');
 }
 
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 // UTILITIES
-// ════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââ
 function openModal(id){document.getElementById(id).classList.add('open')}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
 
