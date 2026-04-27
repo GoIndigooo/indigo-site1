@@ -8,3 +8,220 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#04000E;--ink2:#0A0020;--lift:#1C0040;--neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;--bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden;line-height:1.7}
+a{text-decoration:none;color:var(--cyan)}a:hover{text-decoration:underline}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(139,92,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);background-size:64px 64px}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;background:rgba(4,0,14,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--bord)}
+.nav-w{width:100%;max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px}
+.logo svg{width:30px;height:38px}
+.logo-txt{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:5px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mt);transition:all .2s;padding:7px 14px;border:1px solid transparent}
+.nav-links a:hover{color:var(--lt);border-color:var(--bord);text-decoration:none}
+.nav-login{color:#00FF9F!important;border-color:rgba(0,255,159,.4)!important;background:rgba(0,255,159,.07)!important}
+.nav-cta{color:var(--neon)!important;border-color:rgba(139,92,246,.45)!important;background:rgba(139,92,246,.08)!important}
+.wrap{max-width:860px;margin:0 auto;padding:0 48px}
+section{position:relative;z-index:2;padding:100px 0 60px}
+
+/* Legal doc styles */
+.page-hero{padding:140px 48px 60px;text-align:center;border-bottom:1px solid var(--bord);position:relative;z-index:2}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt);margin-bottom:28px;transition:color .2s}
+.back-link:hover{color:var(--cyan);text-decoration:none}
+.page-hero h1{font-family:'Orbitron',monospace;font-size:clamp(28px,5vw,52px);font-weight:900;color:var(--W);margin-bottom:12px}
+.page-hero .meta{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--mt)}
+
+.legal-body{position:relative;z-index:2;padding:60px 0 100px}
+.legal-body h2{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--W);margin:40px 0 12px;padding-top:20px;border-top:1px solid var(--bord)}
+.legal-body h2:first-child{border-top:none;margin-top:0}
+.legal-body h3{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--lt);margin:24px 0 8px}
+.legal-body p{font-size:16px;color:#BBA8DD;line-height:1.8;margin-bottom:14px}
+.legal-body ul,.legal-body ol{margin:0 0 14px 24px}
+.legal-body li{font-size:16px;color:#BBA8DD;line-height:1.8;margin-bottom:6px}
+.legal-body strong{color:var(--W)}
+.legal-box{background:var(--ink2);border:1px solid var(--bord);border-left:4px solid var(--neon);padding:20px 24px;margin:20px 0}
+.legal-box p{margin-bottom:0}
+
+footer{background:var(--ink);border-top:1px solid var(--bord);padding:40px 0 24px;position:relative;z-index:2}
+.fbar{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.fbar p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt)}
+.fbar-links{display:flex;gap:24px}
+.fbar-links a{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--mt);transition:color .2s}
+.fbar-links a:hover{color:var(--lt)}
+@media(max-width:768px){.wrap,.nav-w,.page-hero,.fbar{padding-left:24px;padding-right:24px}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<nav>
+  <div class="nav-w">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 40 50" fill="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient></defs><rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/><rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/><polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/></svg>
+      <span class="logo-txt">INDIGO</span>
+    </a>
+    <div class="nav-links">
+      <a href="how-it-works.html">HOW IT WORKS</a>
+      <a href="skills.html">SKILLS</a>
+      <a href="results.html">RESULTS</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="https://create-repl-danielt51.replit.app/login" class="nav-login">CLIENT LOGIN</a>
+      <a href="index.html#pricing" class="nav-cta">GET STARTED</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <a href="index.html" class="back-link">← BACK TO HOME</a>
+  <h1>Privacy Policy</h1>
+  <p class="meta">// LAST UPDATED: APRIL 22, 2026 &nbsp;·&nbsp; EFFECTIVE DATE: APRIL 22, 2026</p>
+</div>
+
+<div class="legal-body">
+  <div class="wrap">
+
+    <div class="legal-box">
+      <p>This Privacy Policy explains how Indigo ("we," "us," or "our") collects, uses, and protects information you provide when using our website and services. By using our website or services, you agree to the practices described in this policy. If you do not agree, please do not use our website or services.</p>
+    </div>
+
+    <h2>1. Who We Are</h2>
+    <p>Indigo is an AI-powered Google Ads management service. We operate at <strong>goindigooo.github.io/indigo-site1</strong> and can be contacted at <strong>danieltrull90@gmail.com</strong>. References to "Indigo," "we," "us," or "our" refer to the Indigo service and its operator.</p>
+
+    <h2>2. Information We Collect</h2>
+    <h3>Information You Provide Directly</h3>
+    <p>When you submit our contact form, we collect the following information:</p>
+    <ul>
+      <li>First and last name</li>
+      <li>Email address</li>
+      <li>Phone number (optional)</li>
+      <li>Business name</li>
+      <li>Service type and target market</li>
+      <li>Monthly advertising budget range</li>
+      <li>Current advertising situation</li>
+      <li>Any additional information you voluntarily provide in the message field</li>
+    </ul>
+    <p>When you use the Client Portal, we collect your login credentials (email and password) which are stored locally in your browser using localStorage. We do not transmit or store portal login data on any external server.</p>
+
+    <h3>Information Collected Automatically</h3>
+    <p>Our website is hosted on GitHub Pages and does not use tracking cookies, advertising pixels, or behavioral analytics tools. We do not use Google Analytics, Facebook Pixel, or any third-party tracking technologies on this site.</p>
+    <p>GitHub Pages may collect basic server-side access logs (such as IP address, browser type, and pages visited) as part of their infrastructure. This data is governed by <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">GitHub's Privacy Statement</a>.</p>
+
+    <h2>3. How We Use Your Information</h2>
+    <p>We use the information you provide solely to:</p>
+    <ul>
+      <li>Respond to your inquiry or service request</li>
+      <li>Assess whether our services are a fit for your business</li>
+      <li>Communicate with you about your campaigns and account</li>
+      <li>Send service-related updates and performance reports</li>
+    </ul>
+    <p><strong>We do not use your information for any other purpose without your explicit consent.</strong></p>
+
+    <h2>4. How We Share Your Information</h2>
+    <p>We do not sell, rent, trade, or otherwise share your personal information with third parties for their marketing purposes.</p>
+    <p>We use the following third-party service to process contact form submissions:</p>
+    <ul>
+      <li><strong>Formspree (formspree.io)</strong> — processes form submissions and routes them to our email inbox. Formspree may store your submission data in accordance with their <a href="https://formspree.io/legal/privacy-policy/" target="_blank">Privacy Policy</a>. By submitting our contact form, you agree to Formspree's data processing terms.</li>
+    </ul>
+    <p>We may disclose your information if required to do so by law, regulation, court order, or government authority, or if we believe disclosure is necessary to protect our rights, your safety, or the safety of others.</p>
+
+    <h2>5. Data Storage and Security</h2>
+    <p>Contact form data is transmitted via Formspree's secure infrastructure and delivered to our email inbox. We do not operate our own database or server for storing contact submissions.</p>
+    <p>Client portal data is stored exclusively in your browser's localStorage. This data never leaves your device and is not accessible to us or any third party.</p>
+    <p>While we take reasonable precautions to protect your information, no method of transmission over the Internet is 100% secure. We cannot guarantee the absolute security of any data you submit.</p>
+
+    <h2>6. Data Retention</h2>
+    <p>Contact form submissions are retained in our email inbox for as long as necessary to respond to your inquiry and manage any resulting business relationship. You may request deletion of your data at any time by contacting us.</p>
+    <p>Portal data stored in localStorage is retained until you clear your browser data or until it is manually removed.</p>
+
+    <h2>7. Your Rights</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+    <ul>
+      <li><strong>Right to Access:</strong> Request a copy of the personal information we hold about you</li>
+      <li><strong>Right to Correction:</strong> Request that we correct inaccurate or incomplete information</li>
+      <li><strong>Right to Deletion:</strong> Request that we delete your personal information</li>
+      <li><strong>Right to Object:</strong> Object to how we process your information</li>
+      <li><strong>Right to Withdraw Consent:</strong> Withdraw consent to processing at any time</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <strong>danieltrull90@gmail.com</strong>. We will respond within 30 days.</p>
+
+    <h2>8. Children's Privacy</h2>
+    <p>Our services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children. If we become aware that we have collected information from a child under 18, we will delete it promptly.</p>
+
+    <h2>9. Third-Party Links</h2>
+    <p>Our website may contain links to third-party websites (such as Google, GitHub, Formspree). We are not responsible for the privacy practices of those websites and encourage you to review their privacy policies independently.</p>
+
+    <h2>10. California Privacy Rights (CCPA)</h2>
+    <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA), including the right to know what personal information we collect, the right to delete personal information, and the right to opt out of the sale of personal information. We do not sell personal information. To exercise your CCPA rights, contact us at danieltrull90@gmail.com.</p>
+
+    <h2>11. GDPR — European Users</h2>
+    <p>If you are located in the European Economic Area (EEA), our legal basis for processing your personal data is your consent (provided when you submit our contact form) and our legitimate interest in responding to business inquiries. You have rights under the General Data Protection Regulation (GDPR) as described in Section 7. You also have the right to lodge a complaint with your local data protection authority.</p>
+
+    <h2>11a. Google API Services — User Data Policy</h2>
+    <p>Indigo's use of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+
+    <h3>What Google Data We Access</h3>
+    <p>When a client connects their Google Ads account to Indigo, we request access to the following Google API data:</p>
+    <ul>
+      <li><strong>Google Ads API:</strong> Campaign performance data, keyword data, bid settings, budget information, ad copy, conversion data, and impression share data. We use this data solely to manage and optimize the client's Google Ads campaigns on their behalf.</li>
+      <li><strong>Google Analytics (GA4) API:</strong> Website session data, conversion events, bounce rate, and traffic source data. We use this data to provide performance context alongside campaign data.</li>
+      <li><strong>Google Search Console API:</strong> Organic search impressions, clicks, and keyword ranking data. We use this to provide organic vs. paid performance comparisons.</li>
+    </ul>
+
+    <h3>How We Use Google Data</h3>
+    <p>Data obtained through Google APIs is used exclusively to:</p>
+    <ul>
+      <li>Display campaign performance dashboards to authorized clients</li>
+      <li>Enable the Indigo AI agent to analyze and recommend optimizations</li>
+      <li>Execute approved changes (bid adjustments, budget changes, negative keywords) on the client's behalf</li>
+      <li>Generate performance reports for the account holder</li>
+    </ul>
+
+    <h3>Restrictions on Google Data Use</h3>
+    <p>We strictly limit our use of Google API data as follows:</p>
+    <ul>
+      <li><strong>No data selling:</strong> We do not sell, rent, or share Google API data with any third party for advertising, marketing, or any commercial purpose</li>
+      <li><strong>No use for other accounts:</strong> Data from one client's Google account is never used to inform decisions for another client's account</li>
+      <li><strong>No AI training:</strong> Google user data is not used to train general AI models or improve any service other than the specific client's own account management</li>
+      <li><strong>Read and write access:</strong> Our application requests both read and write access to Google Ads. Write access is used exclusively to execute changes that have been explicitly approved by the account holder. No changes are made without client approval.</li>
+      <li><strong>Minimum necessary access:</strong> We request only the permissions necessary to perform the services described above</li>
+    </ul>
+
+    <h3>Client Authorization and Revocation</h3>
+    <p>Clients authorize Indigo to access their Google account data via Google's OAuth 2.0 protocol. Clients may revoke this authorization at any time by:</p>
+    <ul>
+      <li>Visiting <a href="https://myaccount.google.com/permissions" target="_blank">Google Account Permissions</a> and removing Indigo's access</li>
+      <li>Contacting us directly to request disconnection of their account</li>
+      <li>Cancelling their Indigo subscription, which triggers removal of access within 5 business days</li>
+    </ul>
+    <p>Upon revocation, we will delete all stored OAuth tokens associated with the client's account within 30 days.</p>
+
+    <h3>Data Security for Google API Data</h3>
+    <p>OAuth refresh tokens used to maintain access to client Google accounts are stored using industry-standard encryption. Access tokens are short-lived and refreshed only as needed to perform authorized services. We do not log or store raw Google API responses beyond what is necessary to display dashboards and generate reports.</p>
+
+    <h2>12. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Your continued use of the website after changes are posted constitutes your acceptance of the updated policy.</p>
+
+    <h2>13. Contact Us</h2>
+    <p>If you have questions, concerns, or requests related to this Privacy Policy, please contact us:</p>
+    <div class="legal-box">
+      <p><strong>Indigo</strong><br>
+      Email: danieltrull90@gmail.com<br>
+      Website: <a href="contact.html">Contact Form</a></p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="fbar">
+    <p>© 2026 INDIGO · AI-POWERED GOOGLE ADS</p>
+    <div class="fbar-links">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

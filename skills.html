@@ -1,361 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agent Skills — Indigo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Skills &mdash; Indigo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <style>
-:root{--ink:#04000E;--ink2:#0A0020;--ink3:#120030;--lift:#1C0040;--neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--pink:#FF2D9B;--yel:#FFD600;--mint:#00FF9F;--org:#FF6B35;--W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;--bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden}
+
+:root{--ink:#04000E;--ink2:#0A0020;--ink3:#0D0028;--lift:#1C0040;--neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--pink:#FF2D9B;--yel:#FFD600;--mint:#00FF9F;--org:#FF6B35;--W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;--bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5);--nav-h:68px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none}
 a{text-decoration:none;color:inherit}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(139,92,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);background-size:64px 64px}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;background:rgba(4,0,14,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--bord)}
-.nav-w{width:100%;max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:11px}
-.logo svg{width:30px;height:38px}
-.logo-txt{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:5px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-links a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mt);transition:all .2s;padding:7px 14px;border:1px solid transparent}
-.nav-links a:hover,.nav-links a.active{color:var(--cyan);border-color:rgba(0,229,255,.3);background:rgba(0,229,255,.05)}
-.nav-cta{color:var(--neon)!important;border-color:rgba(139,92,246,.45)!important;background:rgba(139,92,246,.08)!important}
+#cursor{position:fixed;width:12px;height:12px;background:var(--neon2);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .15s,height .15s}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(200,64,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+body:has(a:hover) #cursor{width:20px;height:20px;background:var(--cyan)}
+body:has(a:hover) #cursor-ring{width:52px;height:52px}
+#nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;display:flex;align-items:center;padding:0 40px;background:rgba(10,0,30,.96);border-bottom:1px solid rgba(200,64,255,.3);box-shadow:0 2px 40px rgba(139,92,246,.15);backdrop-filter:blur(20px)}
+.nav-logo{display:flex;align-items:center;gap:12px;margin-right:auto}
+.nav-logo svg{width:28px;height:35px}
+.logo-text{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;letter-spacing:5px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--lt);padding:6px 11px;text-transform:uppercase;background:rgba(139,92,246,.1);border-radius:4px;border:1px solid transparent;transition:all .2s}
+.nav-link:hover{color:var(--W);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.4)}
+.nav-btns{display:flex;gap:8px;margin-left:16px;padding-left:16px;border-left:1px solid var(--bord)}
+.btn-login{font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 16px;background:var(--mint);color:var(--ink);border-radius:4px;text-transform:uppercase;transition:all .2s;border:none;display:inline-block}
+.btn-login:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,255,159,.35)}
+.btn-start{font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 16px;background:linear-gradient(135deg,var(--neon),var(--neon2));color:var(--W);border-radius:4px;text-transform:uppercase;transition:all .2s;border:none;display:inline-block}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(139,92,246,.45)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;margin-left:auto}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--lt);transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(10,0,30,.98);border-bottom:1px solid var(--bord2);padding:20px;z-index:199;flex-direction:column;gap:4px}
+.mobile-menu.open{display:flex}
+.mm-link{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--lt);padding:12px 16px;text-transform:uppercase;border-bottom:1px solid rgba(139,92,246,.08);transition:color .2s}
+.mm-link:hover{color:var(--cyan)}
+.mm-login{display:block;font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;padding:12px 16px;background:var(--mint);color:var(--ink);border-radius:4px;text-align:center;text-transform:uppercase;margin-top:8px}
+.ticker-wrap{position:relative;top:var(--nav-h);height:36px;background:linear-gradient(90deg,var(--neon),var(--neon2));overflow:hidden;display:flex;align-items:center;z-index:10}
+.ticker-track{display:flex;gap:0;animation:tickerScroll 32s linear infinite;white-space:nowrap}
+.ticker-item{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--ink);font-weight:700;padding:0 32px;display:flex;align-items:center;gap:12px}
+.ticker-dot{width:5px;height:5px;background:var(--ink);border-radius:50%;opacity:.5}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .wrap{max-width:1200px;margin:0 auto;padding:0 48px}
-.pad{padding:100px 0}.s-dark{background:var(--ink)}.s-dark2{background:var(--ink2)}.s-lift{background:var(--lift)}
-.tag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--cyan);display:block;margin-bottom:12px}
-.h2{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.08;color:var(--W);margin-bottom:18px}
-.h2 em{font-style:normal;background:linear-gradient(90deg,var(--pink),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.lead{font-size:19px;line-height:1.7;color:var(--lt)}
-.rv{opacity:0;transform:translateY(32px);transition:opacity .65s,transform .65s}
-.rv.on{opacity:1;transform:none}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
-.btn{display:inline-flex;align-items:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 32px;cursor:pointer;border:none;transition:opacity .2s,transform .15s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
-.btn:hover{opacity:.88;transform:translateY(-2px)}
-.btn-solid{background:linear-gradient(135deg,var(--neon),var(--neon2));color:var(--W)}
-.btn-ghost{background:rgba(139,92,246,.1);border:1px solid var(--bord);color:var(--lt);font-size:10px;padding:10px 22px}
-.btn-ghost:hover{border-color:var(--bord2);color:var(--W)}
-/* Page hero */
-.page-hero{padding:140px 48px 80px;text-align:center;position:relative;z-index:2;border-bottom:1px solid var(--bord)}
-.back-link{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt);margin-bottom:28px;transition:color .2s}
+.section{position:relative;padding:100px 0;overflow:hidden}
+.s-dark{background:var(--ink)}
+.s-dark2{background:var(--ink2)}
+.s-lift{background:linear-gradient(135deg,#120030 0%,#1C0040 100%)}
+.s-white{background:#F0EEFF}
+.sec-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:12px}
+.sec-h2{font-family:'Orbitron',monospace;font-size:clamp(28px,4vw,52px);font-weight:900;color:var(--W);line-height:1.05;margin-bottom:12px}
+.sec-h2-dark{color:var(--ink)}
+.sec-sub{font-size:18px;color:rgba(196,181,253,.7);line-height:1.7;max-width:660px;margin-bottom:40px}
+.sec-sub-dark{color:rgba(4,0,14,.6)}
+.rv{opacity:0;transform:translateY(40px)}
+.sec-link{display:inline-flex;align-items:center;gap:10px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-top:36px;border-bottom:1px solid rgba(0,229,255,.3);padding-bottom:4px;transition:gap .2s}
+.sec-link:hover{gap:16px}
+.page-hero{padding:calc(var(--nav-h) + 36px + 60px) 0 80px;position:relative;overflow:hidden}
+.page-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#04000E 0%,#0D0028 50%,#04000E 100%);z-index:0}
+.page-hero-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(139,92,246,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.08) 1px,transparent 1px);background-size:48px 48px}
+.page-hero-bg::after{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+.page-hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 48px}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt);text-transform:uppercase;margin-bottom:32px;transition:color .2s}
 .back-link:hover{color:var(--cyan)}
-.page-hero h1{font-family:'Orbitron',monospace;font-size:clamp(36px,6vw,72px);font-weight:900;line-height:1.0;color:var(--W);margin-bottom:20px}
-.page-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--yel),var(--pink),var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.page-hero p{font-size:20px;color:var(--lt);max-width:620px;margin:0 auto;line-height:1.65}
-/* Skill full */
-.skill-full{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:60px 0;border-bottom:1px solid var(--bord);align-items:start}
-.skill-full:last-child{border-bottom:none}
-.sf-left{}
-.sf-number{font-family:'Orbitron',monospace;font-size:56px;font-weight:900;line-height:1;margin-bottom:16px}
-.sf-title{font-family:'Orbitron',monospace;font-size:24px;font-weight:700;color:var(--W);margin-bottom:12px}
-.sf-body{font-size:17px;color:var(--lt);line-height:1.7;margin-bottom:20px}
-.sf-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.sf-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;border:1px solid var(--bord);color:var(--lt);background:rgba(139,92,246,.06)}
-.sf-depth{margin-top:4px}
-.sd-label{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mt);margin-bottom:8px}
-.sd-track{background:rgba(139,92,246,.1);height:6px;border-radius:3px;overflow:hidden}
-.sd-fill{height:100%;border-radius:3px;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
-/* Details list */
-.sf-right{}
-.detail-list{display:flex;flex-direction:column;gap:14px}
-.detail-item{padding:16px 18px;background:var(--ink2);border:1px solid var(--bord);border-left:3px solid}
-.detail-item-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--W);margin-bottom:6px}
-.detail-item-body{font-size:14px;color:var(--mt);line-height:1.6}
-/* footer */
-footer{background:var(--ink);border-top:1px solid var(--bord);padding:40px 0 24px;position:relative;z-index:2}
-.fbar{display:flex;justify-content:space-between;align-items:center}
-.fbar p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt)}
-.fbar-links{display:flex;gap:24px}
-.fbar-links a{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--mt);transition:color .2s}
-.fbar-links a:hover{color:var(--lt)}
-@media(max-width:1024px){.skill-full{grid-template-columns:1fr;gap:32px}}
-@media(max-width:768px){.wrap,.nav-w,.page-hero{padding-left:24px;padding-right:24px}.sf-number{font-size:40px}.nav-links{display:none}}
+.page-h1{font-family:'Orbitron',monospace;font-size:clamp(32px,5vw,64px);font-weight:900;color:var(--W);line-height:1.0;margin-bottom:16px}
+.page-sub{font-size:clamp(15px,1.8vw,20px);color:rgba(196,181,253,.7);line-height:1.7;max-width:680px}
+footer{background:var(--ink);border-top:1px solid var(--bord);padding:48px 0 28px}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo-text{font-size:14px;letter-spacing:4px}
+.footer-brand p{font-size:13px;color:var(--mt);line-height:1.7;margin-top:12px;max-width:280px}
+.footer-col h4{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--mt);text-transform:uppercase;margin-bottom:16px}
+.footer-col a{display:block;font-size:13px;color:rgba(196,181,253,.6);margin-bottom:8px;transition:color .2s}
+.footer-col a:hover{color:var(--lt)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding:20px 48px 0;border-top:1px solid var(--bord);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt);text-transform:uppercase}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt);text-transform:uppercase;transition:color .2s}
+.footer-legal a:hover{color:var(--lt)}
+@media(max-width:768px){.nav-links,.nav-btns{display:none}.nav-toggle{display:flex}.wrap,.page-hero-inner{padding:0 20px}.section{padding:72px 0}.footer-inner{grid-template-columns:1fr}.footer-bottom{flex-direction:column;text-align:center}#cursor,#cursor-ring{display:none}body{cursor:auto}}
 
-.nav-login{color:var(--mint)!important;border-color:rgba(0,255,159,.4)!important;
-  background:rgba(0,255,159,.07)!important;font-family:'Share Tech Mono',monospace!important;
-  font-size:10px!important;letter-spacing:1px!important}
-.nav-login:hover{background:rgba(0,255,159,.15)!important}
-
-/* ─── MOBILE HAMBURGER ─── */
-.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;
-  width:36px;height:36px;cursor:pointer;background:none;border:1px solid var(--bord);
-  padding:7px;flex-shrink:0;transition:border-color .2s}
-.hamburger:hover{border-color:var(--bord2)}
-.hamburger span{display:block;height:2px;background:var(--lt);border-radius:1px;
-  transition:transform .25s,opacity .25s,width .25s}
-.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.hamburger.open span:nth-child(2){opacity:0;width:0}
-.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-/* Mobile slide-down menu */
-.mobile-menu{
-  display:none;position:fixed;top:68px;left:0;right:0;z-index:199;
-  background:rgba(4,0,14,.97);backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--bord2);
-  flex-direction:column;padding:8px 0 16px;
-  transform:translateY(-8px);opacity:0;
-  transition:transform .25s ease,opacity .25s ease}
-.mobile-menu.open{transform:translateY(0);opacity:1}
-.mobile-menu a{
-  font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;
-  color:var(--mt);padding:14px 28px;display:block;
-  border-bottom:1px solid rgba(139,92,246,.08);transition:color .2s,background .2s}
-.mobile-menu a:last-child{border-bottom:none}
-.mobile-menu a:hover{color:var(--W);background:rgba(139,92,246,.08)}
-.mobile-menu a.active{color:var(--cyan)}
-.mobile-menu .mm-login{color:var(--mint)!important}
-.mobile-menu .mm-cta{
-  color:var(--W)!important;background:linear-gradient(135deg,var(--neon),var(--neon2))!important;
-  margin:10px 24px 0;text-align:center;font-weight:700;border:none!important}
-.mobile-menu .mm-cta:hover{opacity:.88!important}
-
-@media(max-width:768px){
-  .hamburger{display:flex}
-  .mobile-menu{display:flex}
-  .nav-links{display:none!important}
-}
 </style>
 </head>
 <body>
-<div class="bg-grid"></div>
-<nav>
-  <div class="nav-w">
-    <a href="index.html" class="logo">
-      <svg viewBox="0 0 40 50" fill="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient></defs><rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/><rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/><polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/></svg>
-      <span class="logo-txt">INDIGO</span>
-    </a>
-    <div class="nav-links">
-      <a href="how-it-works.html">HOW IT WORKS</a>
-      <a href="skills.html" class="active">SKILLS</a>
-      <a href="peer-review.html">PEER REVIEW</a>
-      <a href="results.html">RESULTS</a>
-      <a href="vs-competitors.html">VS COMPETITORS</a>
-      <a href="contact.html">CONTACT</a>
-      <a href="https://create-repl-danielt51.replit.app/login" class="nav-login">CLIENT LOGIN</a>
-      <a href="index.html#pricing" class="nav-cta">GET STARTED</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 40 50" fill="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient></defs><rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/><rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/><polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/></svg>
+    <span class="logo-text">INDIGO</span>
+  </a>
+  <div class="nav-links">
+    <a href="how-it-works.html" class="nav-link">How It Works</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="peer-review.html" class="nav-link">Peer Review</a>
+    <a href="results.html" class="nav-link">Results</a>
+    <a href="vs-competitors.html" class="nav-link">VS Competitors</a>
+    <a href="contact.html" class="nav-link">Contact</a>
   </div>
+  <div class="nav-btns">
+    <a href="https://create-repl-danielt51.replit.app/login" class="btn-login">Client Login</a>
+    <a href="contact.html" class="btn-start">Get Started</a>
+  </div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
 </nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="how-it-works.html">HOW IT WORKS</a>
-  <a href="skills.html" class="active">SKILLS</a>
-  <a href="peer-review.html">PEER REVIEW</a>
-  <a href="results.html">RESULTS</a>
-  <a href="vs-competitors.html">VS COMPETITORS</a>
-  <a href="contact.html">CONTACT</a>
-  <a href="https://create-repl-danielt51.replit.app/login" class="mm-login">CLIENT LOGIN</a>
-  <a href="index.html#pricing" class="mm-cta">GET STARTED →</a>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="how-it-works.html" class="mm-link">How It Works</a>
+  <a href="skills.html" class="mm-link">Skills</a>
+  <a href="peer-review.html" class="mm-link">Peer Review</a>
+  <a href="results.html" class="mm-link">Results</a>
+  <a href="vs-competitors.html" class="mm-link">VS Competitors</a>
+  <a href="contact.html" class="mm-link">Contact</a>
+  <a href="https://create-repl-danielt51.replit.app/login" class="mm-login">Client Login</a>
+</div>
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-dot"></span>AGENT ACTIVE</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>12.22% CTR &mdash; 3&times; INDUSTRY AVG</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>$94 AVG CPA &mdash; GOOGLE VERIFIED</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>LIVE IN 24 HOURS</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>FLAT $299/MO &mdash; NO % OF SPEND</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>BUILDS EVERY CAMPAIGN FROM SCRATCH</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>AGENT ACTIVE</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>12.22% CTR &mdash; 3&times; INDUSTRY AVG</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>$94 AVG CPA &mdash; GOOGLE VERIFIED</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>LIVE IN 24 HOURS</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>FLAT $299/MO &mdash; NO % OF SPEND</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>BUILDS EVERY CAMPAIGN FROM SCRATCH</div>
+  </div>
+</div>
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-inner">
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+    <span class="sec-tag">// CAMPAIGN INTELLIGENCE</span>
+    <h1 class="page-h1">The agent doesn't guess.<br>It knows your industry.</h1>
+    <p class="page-sub">Six deep skill domains &mdash; each trained on real campaign data across hundreds of markets. Every campaign Indigo builds draws on the full stack.</p>
+  </div>
 </div>
 
-<section class="s-dark2">
-  <div class="page-hero">
-    <a href="index.html" class="back-link">← BACK TO HOME</a>
-    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--cyan);display:block;margin-bottom:16px">// CAMPAIGN INTELLIGENCE</span>
-    <h1>The agent doesn't guess.<br>It <em>knows your industry.</em></h1>
-    <p>Six deep skill domains — each trained on real campaign data across hundreds of markets. Every campaign Indigo builds draws on the full stack.</p>
-  </div>
-</section>
-
-<section class="s-dark pad">
+<section class="section s-dark2">
   <div class="wrap">
-
-    <div class="skill-full rv">
-      <div class="sf-left">
-        <div class="sf-number" style="color:var(--neon)">01</div>
-        <div class="sf-title">Keyword Intelligence</div>
-        <p class="sf-body">Maps high-intent search queries by service type, geo modifier, urgency signal, and commercial intent — then layers in negative keywords from day one to protect your spend.</p>
-        <div class="sf-tags">
-          <span class="sf-tag">Intent Mapping</span><span class="sf-tag">Geo Modifiers</span><span class="sf-tag">Negative KWs</span><span class="sf-tag">Match Types</span><span class="sf-tag">Long-tail</span><span class="sf-tag">Commercial Intent</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:24px" class="rv">
+      <div>
+        <span class="sec-tag">// Skill 01</span>
+        <h2 class="sec-h2" style="font-size:clamp(22px,3vw,36px)">Keyword Intelligence</h2>
+        <p style="font-size:15px;color:rgba(196,181,253,.7);line-height:1.7">Maps high-intent search queries by service type, geo modifier, urgency signal, and commercial intent — then layers in negative keywords from day one.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:16px">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(139,92,246,.08);border:1px solid var(--bord);padding:3px 8px">Intent Mapping</span>
+          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(139,92,246,.08);border:1px solid var(--bord);padding:3px 8px">Geo Modifiers</span>
+          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(139,92,246,.08);border:1px solid var(--bord);padding:3px 8px">Negative KWs</span>
+          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(139,92,246,.08);border:1px solid var(--bord);padding:3px 8px">Match Types</span>
         </div>
-        <div class="sf-depth">
-          <div class="sd-label" style="color:var(--neon)">DEPTH SCORE — 96/100</div>
-          <div class="sd-track"><div class="sd-fill" style="width:96%;background:var(--neon)"></div></div>
-        </div>
+        <div style="margin-top:20px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--neon)">DEPTH SCORE — 96/100</div>
       </div>
-      <div class="sf-right">
-        <div class="detail-list">
-          <div class="detail-item" style="border-left-color:var(--neon)"><div class="detail-item-title">High-Intent Query Mapping</div><div class="detail-item-body">Identifies the exact phrases a customer types when they need your service urgently — "emergency plumber near me" vs "plumber" are very different commercial signals.</div></div>
-          <div class="detail-item" style="border-left-color:var(--neon)"><div class="detail-item-title">Geo Modifier Architecture</div><div class="detail-item-body">Builds keyword variants for city, neighbourhood, and county-level targeting — ensuring your ads appear for local searches and not just broad geographic queries.</div></div>
-          <div class="detail-item" style="border-left-color:var(--neon)"><div class="detail-item-title">Pre-loaded Negative Keywords</div><div class="detail-item-body">Industry-specific negative keyword lists pre-populated at launch — blocking irrelevant queries like "DIY," "free," "job," and competitor brand terms that waste budget.</div></div>
-          <div class="detail-item" style="border-left-color:var(--neon)"><div class="detail-item-title">Match Type Strategy</div><div class="detail-item-body">Distributes keywords across exact, phrase, and broad match types in a structured model — maximising coverage while maintaining control over query relevance and CPA.</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="skill-full rv">
-      <div class="sf-left">
-        <div class="sf-number" style="color:var(--cyan)">02</div>
-        <div class="sf-title">AI Copywriting</div>
-        <p class="sf-body">Writes RSA headlines, description lines, sitelinks, callouts, and call extensions — original copy researched and written specifically for your service and local market. No templates, no placeholder text.</p>
-        <div class="sf-tags">
-          <span class="sf-tag">RSA Headlines</span><span class="sf-tag">Descriptions</span><span class="sf-tag">Sitelinks</span><span class="sf-tag">Callouts</span><span class="sf-tag">CTA Testing</span><span class="sf-tag">Ad Strength</span>
-        </div>
-        <div class="sf-depth">
-          <div class="sd-label" style="color:var(--cyan)">DEPTH SCORE — 94/100</div>
-          <div class="sd-track"><div class="sd-fill" style="width:94%;background:var(--cyan)"></div></div>
-        </div>
-      </div>
-      <div class="sf-right">
-        <div class="detail-list">
-          <div class="detail-item" style="border-left-color:var(--cyan)"><div class="detail-item-title">15 Unique RSA Headlines Per Ad Group</div><div class="detail-item-body">Writes the full complement of responsive search ad headlines — non-redundant, keyword-pinned where appropriate, with varied CTAs and value propositions per ad group theme.</div></div>
-          <div class="detail-item" style="border-left-color:var(--cyan)"><div class="detail-item-title">Market-Specific Language</div><div class="detail-item-body">Copy isn't generic — it reflects the specific terminology, concerns, and buying triggers of customers in that service category and geography. Restoration copy sounds different to HVAC copy.</div></div>
-          <div class="detail-item" style="border-left-color:var(--cyan)"><div class="detail-item-title">Sitelink & Extension Suite</div><div class="detail-item-body">Builds 4–6 sitelinks, 4–6 callout extensions, and configures call extensions — every touchpoint written to reinforce the primary ad message and capture intent across ad formats.</div></div>
-          <div class="detail-item" style="border-left-color:var(--cyan)"><div class="detail-item-title">Continuous Copy Testing</div><div class="detail-item-body">Underperforming ad variants are flagged and replaced with new AI-written copy — the agent monitors headline impression share and CTR, rewriting weak variants automatically.</div></div>
+      <div style="background:var(--ink);border:1px solid var(--bord);border-top:3px solid var(--neon);padding:24px">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mt);margin-bottom:16px">// KEYWORD SAMPLE — WATER DAMAGE CHARLOTTE NC</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;line-height:2.2">
+          <div><span style="color:var(--cyan)">[exact]</span> <span style="color:var(--lt)">water damage restoration charlotte</span></div>
+          <div><span style="color:var(--neon)">[phrase]</span> <span style="color:var(--lt)">"emergency water damage charlotte"</span></div>
+          <div><span style="color:var(--mint)">[broad]</span> <span style="color:var(--lt)">flood damage repair NC</span></div>
+          <div><span style="color:var(--pink)">[neg]</span> <span style="color:var(--mt)">-DIY -free -job -training</span></div>
         </div>
       </div>
     </div>
 
-    <div class="skill-full rv">
-      <div class="sf-left">
-        <div class="sf-number" style="color:var(--mint)">03</div>
-        <div class="sf-title">Bid Strategy</div>
-        <p class="sf-body">Selects and configures the right bidding model for each campaign stage — from tCPA at launch to maximize conversions at scale, auto-adjusting as data accumulates and campaign maturity increases.</p>
-        <div class="sf-tags">
-          <span class="sf-tag">tCPA</span><span class="sf-tag">Max Conversions</span><span class="sf-tag">ROAS Targets</span><span class="sf-tag">Bid Adjustments</span><span class="sf-tag">Budget Pacing</span>
-        </div>
-        <div class="sf-depth">
-          <div class="sd-label" style="color:var(--mint)">DEPTH SCORE — 91/100</div>
-          <div class="sd-track"><div class="sd-fill" style="width:91%;background:var(--mint)"></div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:60px" class="rv">
+      <div style="background:var(--ink);border:1px solid var(--bord);border-top:3px solid var(--cyan);padding:24px">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mt);margin-bottom:16px">// RSA COPY SAMPLE</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;line-height:2.2">
+          <div style="color:var(--cyan)">H1: Emergency Water Damage Charlotte NC</div>
+          <div style="color:var(--lt)">H2: 24/7 Restoration — We Respond Fast</div>
+          <div style="color:var(--lt)">H3: Free Estimate — Call Now</div>
+          <div style="color:var(--mt);margin-top:8px">D1: Professional water & flood damage restoration serving Charlotte. Insurance approved. Fast response guaranteed.</div>
         </div>
       </div>
-      <div class="sf-right">
-        <div class="detail-list">
-          <div class="detail-item" style="border-left-color:var(--mint)"><div class="detail-item-title">Launch Phase Bid Model</div><div class="detail-item-body">New campaigns launch with tCPA bidding calibrated to your target — giving Google's algorithm a defined objective from day one rather than collecting data blindly at maximum CPC.</div></div>
-          <div class="detail-item" style="border-left-color:var(--mint)"><div class="detail-item-title">Scale Phase Transition</div><div class="detail-item-body">As campaigns accumulate conversion data, the agent transitions bidding strategy to maximize conversions or target ROAS — unlocking more aggressive, data-informed scaling.</div></div>
-          <div class="detail-item" style="border-left-color:var(--mint)"><div class="detail-item-title">Real-Time CPA Defence</div><div class="detail-item-body">If CPA drifts above target, the agent reduces bids automatically — protecting your budget before the problem compounds, not after you log in and notice the damage.</div></div>
+      <div>
+        <span class="sec-tag">// Skill 02</span>
+        <h2 class="sec-h2" style="font-size:clamp(22px,3vw,36px)">AI Copywriting</h2>
+        <p style="font-size:15px;color:rgba(196,181,253,.7);line-height:1.7">Writes RSA headlines, description lines, sitelinks, callouts, and call extensions — original copy researched for your service and local market.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:16px">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:3px 8px">RSA Headlines</span>
+          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:3px 8px">Descriptions</span>
+          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:3px 8px">Sitelinks</span>
+          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:3px 8px">Ad Strength</span>
         </div>
-      </div>
-    </div>
-
-    <div class="skill-full rv">
-      <div class="sf-left">
-        <div class="sf-number" style="color:var(--yel)">04</div>
-        <div class="sf-title">Campaign Architecture</div>
-        <p class="sf-body">Structures campaigns by service line and audience intent — clean ad group hierarchy that gives Google's algorithm the strongest possible quality signal and maximises relevance scores across the account.</p>
-        <div class="sf-tags">
-          <span class="sf-tag">Ad Group Structure</span><span class="sf-tag">Service Lines</span><span class="sf-tag">Quality Score</span><span class="sf-tag">Account Hygiene</span>
-        </div>
-        <div class="sf-depth">
-          <div class="sd-label" style="color:var(--yel)">DEPTH SCORE — 93/100</div>
-          <div class="sd-track"><div class="sd-fill" style="width:93%;background:var(--yel)"></div></div>
-        </div>
-      </div>
-      <div class="sf-right">
-        <div class="detail-list">
-          <div class="detail-item" style="border-left-color:var(--yel)"><div class="detail-item-title">Service-Line Ad Group Separation</div><div class="detail-item-body">Each service gets its own ad group with tightly themed keywords and matching copy — preventing keyword cannibalisation and ensuring ads are always hyper-relevant to the search query.</div></div>
-          <div class="detail-item" style="border-left-color:var(--yel)"><div class="detail-item-title">Quality Score Optimisation</div><div class="detail-item-body">Ad group structure, keyword grouping, and copy are all aligned to maximise Expected CTR, Ad Relevance, and Landing Page Experience — reducing CPCs without changing bids.</div></div>
-          <div class="detail-item" style="border-left-color:var(--yel)"><div class="detail-item-title">Zero Keyword Overlap</div><div class="detail-item-body">Ad groups are structured to prevent the same keyword from appearing in multiple groups — eliminating internal competition and ensuring Google always serves the most relevant ad.</div></div>
-        </div>
+        <div style="margin-top:20px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan)">DEPTH SCORE — 94/100</div>
       </div>
     </div>
 
-    <div class="skill-full rv">
-      <div class="sf-left">
-        <div class="sf-number" style="color:var(--pink)">05</div>
-        <div class="sf-title">Competitive Analysis</div>
-        <p class="sf-body">Audits competitor ads in your market before launch — identifying keyword gaps, pricing angles, and messaging weaknesses to position your campaigns to win auction share from day one.</p>
-        <div class="sf-tags">
-          <span class="sf-tag">Auction Insights</span><span class="sf-tag">Ad Copy Audit</span><span class="sf-tag">Impression Share</span><span class="sf-tag">Gap Analysis</span><span class="sf-tag">Positioning</span>
-        </div>
-        <div class="sf-depth">
-          <div class="sd-label" style="color:var(--pink)">DEPTH SCORE — 88/100</div>
-          <div class="sd-track"><div class="sd-fill" style="width:88%;background:var(--pink)"></div></div>
-        </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px">
+      <div class="rv" style="background:rgba(139,92,246,.06);border:1px solid var(--bord);border-top:3px solid var(--mint);padding:24px">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mint);display:block;margin-bottom:10px">03</span>
+        <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:8px">Bid Intelligence</div>
+        <p style="font-size:13px;color:rgba(196,181,253,.6);line-height:1.6">Sets tCPA bidding, monitors hourly, auto-adjusts bids to hit your CPA target.</p>
       </div>
-      <div class="sf-right">
-        <div class="detail-list">
-          <div class="detail-item" style="border-left-color:var(--pink)"><div class="detail-item-title">Pre-Launch Competitor Audit</div><div class="detail-item-body">Before building campaigns, Indigo analyses competitor ads in your market — identifying their keyword themes, messaging, and gaps that your campaigns can exploit from day one.</div></div>
-          <div class="detail-item" style="border-left-color:var(--pink)"><div class="detail-item-title">Ongoing Impression Share Tracking</div><div class="detail-item-body">Monitors your auction impression share vs. competitors continuously — alerting when you're losing share and recommending bid or budget adjustments to recapture position.</div></div>
-        </div>
+      <div class="rv" style="background:rgba(255,214,0,.04);border:1px solid rgba(255,214,0,.15);border-top:3px solid var(--yel);padding:24px">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--yel);display:block;margin-bottom:10px">04</span>
+        <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:8px">Budget Realloc</div>
+        <p style="font-size:13px;color:rgba(196,181,253,.6);line-height:1.6">Shifts spend from underperformers to winners in real time.</p>
       </div>
-    </div>
-
-    <div class="skill-full rv">
-      <div class="sf-left">
-        <div class="sf-number" style="color:var(--org)">06</div>
-        <div class="sf-title">Performance Optimization</div>
-        <p class="sf-body">Continuously monitors CTR, CPA, conversion rate, and impression share — pausing underperformers, scaling winners, and rewriting copy that underdelivers. The highest-depth skill in the agent's stack.</p>
-        <div class="sf-tags">
-          <span class="sf-tag">CPA Monitoring</span><span class="sf-tag">CTR Analysis</span><span class="sf-tag">Budget Pacing</span><span class="sf-tag">Auto-scaling</span><span class="sf-tag">Anomaly Detection</span>
-        </div>
-        <div class="sf-depth">
-          <div class="sd-label" style="color:var(--org)">DEPTH SCORE — 97/100</div>
-          <div class="sd-track"><div class="sd-fill" style="width:97%;background:var(--org)"></div></div>
-        </div>
+      <div class="rv" style="background:rgba(255,45,155,.04);border:1px solid rgba(255,45,155,.15);border-top:3px solid var(--pink);padding:24px">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--pink);display:block;margin-bottom:10px">05</span>
+        <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:8px">Competitor Intel</div>
+        <p style="font-size:13px;color:rgba(196,181,253,.6);line-height:1.6">Monitors auction insights, impression share, competitor ad angles.</p>
       </div>
-      <div class="sf-right">
-        <div class="detail-list">
-          <div class="detail-item" style="border-left-color:var(--org)"><div class="detail-item-title">24/7 CPA Anomaly Detection</div><div class="detail-item-body">The agent never stops watching. Any campaign that breaches its CPA target triggers an automatic action — bid reduction, negative keyword expansion, or spend pause — with a logged alert to you.</div></div>
-          <div class="detail-item" style="border-left-color:var(--org)"><div class="detail-item-title">Winner Scaling Protocol</div><div class="detail-item-body">Campaigns that sustain CPA significantly below target are flagged as scale winners — the agent queues budget increases and optionally deploys the model into adjacent markets.</div></div>
-          <div class="detail-item" style="border-left-color:var(--org)"><div class="detail-item-title">Continuous Copy Refresh</div><div class="detail-item-body">Ad copy isn't set and forgotten. The agent monitors headline-level performance, identifies low-CTR variants, and rewrites them — keeping the creative fresh and improving quality score over time.</div></div>
-        </div>
+      <div class="rv" style="background:rgba(255,107,53,.04);border:1px solid rgba(255,107,53,.15);border-top:3px solid var(--org);padding:24px">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--org);display:block;margin-bottom:10px">06</span>
+        <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:8px">GA4 + Search Console</div>
+        <p style="font-size:13px;color:rgba(196,181,253,.6);line-height:1.6">Cross-references paid + organic for the full traffic picture.</p>
       </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="s-lift" style="padding:60px 0;border-top:1px solid var(--bord)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
-    <div>
-      <div style="font-family:'Orbitron',monospace;font-size:18px;font-weight:700;color:var(--W);margin-bottom:6px">See how these skills get reviewed before launch</div>
-      <div style="font-size:16px;color:var(--mt)">Every campaign is scored against 40+ benchmarks before a single dollar is spent.</div>
-    </div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <a href="peer-review.html" class="btn btn-solid">SEE PEER REVIEW →</a>
-      <a href="index.html#pricing" class="btn btn-ghost">GET STARTED →</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    <div class="fbar">
-      <p>© 2026 INDIGO · go.indigo.ai</p>
-      <div class="fbar-links">
-        <a href="index.html">Home</a><a href="how-it-works.html">How It Works</a>
-        <a href="peer-review.html">Peer Review</a><a href="results.html">Results</a>
-        <a href="vs-competitors.html">Vs. Competitors</a>
-          <a href="privacy.html">Privacy</a>
-          <a href="terms.html">Terms</a>
-      </div>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">INDIGO</span>
+      <p>AI-powered Google Ads management. Campaigns built from scratch, monitored 24/7, optimized autonomously.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="skills.html">Skills</a>
+      <a href="peer-review.html">Peer Review</a>
+      <a href="results.html">Results</a>
+      <a href="vs-competitors.html">VS Competitors</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Indigo &middot; AI-Powered Google Ads</p>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="contact.html">Contact</a>
     </div>
   </div>
 </footer>
 <script>
-const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.08});
-document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
-</script>
-<script>
-/* Hamburger menu */
-(function(){
-  var btn = document.getElementById('hamburger');
-  var menu = document.getElementById('mobile-menu');
-  if(!btn || !menu) return;
-  btn.addEventListener('click', function(){
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
-    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+gsap.registerPlugin(ScrollTrigger);
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+if(cursor && ring) {
+  document.addEventListener('mousemove', e => {
+    gsap.to(cursor, {x:e.clientX, y:e.clientY, duration:0.1});
+    gsap.to(ring, {x:e.clientX, y:e.clientY, duration:0.35});
   });
-  // Close on link click
-  menu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      btn.classList.remove('open');
-      menu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+}
+// Page hero entrance
+gsap.from('.page-hero-inner > *', {opacity:0, y:40, stagger:0.15, duration:0.9, ease:'power3.out', delay:0.2});
+// Scroll reveals
+gsap.utils.toArray('.rv').forEach((el,i) => {
+  ScrollTrigger.create({
+    trigger: el, start: 'top 88%',
+    onEnter: () => gsap.to(el, {opacity:1, y:0, duration:0.75, ease:'power3.out', delay:(i%4)*0.07})
   });
-  // Close on outside click
-  document.addEventListener('click', function(e){
-    if(!btn.contains(e.target) && !menu.contains(e.target)){
-      btn.classList.remove('open');
-      menu.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
-})();
+});
+// Nav hide/show on scroll
+ScrollTrigger.create({
+  start: 'top -80',
+  onUpdate: self => {
+    const nav = document.getElementById('nav');
+    gsap.to(nav, {y: self.direction===1 ? -80 : 0, duration:0.3});
+  }
+});
+// Mobile menu
+document.getElementById('navToggle')?.addEventListener('click', () => {
+  document.getElementById('mobileMenu')?.classList.toggle('open');
+});
 </script>
 </body>
 </html>
