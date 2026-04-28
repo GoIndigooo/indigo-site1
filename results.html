@@ -1,297 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-open="false">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verified Results &mdash; Indigo</title>
+<title>Verified Results -- GoIndigo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<style>
-
-:root{--ink:#04000E;--ink2:#0A0020;--ink3:#0D0028;--lift:#1C0040;--neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--pink:#FF2D9B;--yel:#FFD600;--mint:#00FF9F;--org:#FF6B35;--W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;--bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5);--nav-h:68px}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none}
-a{text-decoration:none;color:inherit}
-#cursor{position:fixed;width:12px;height:12px;background:var(--neon2);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .15s,height .15s}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(200,64,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
-body:has(a:hover) #cursor{width:20px;height:20px;background:var(--cyan)}
-body:has(a:hover) #cursor-ring{width:52px;height:52px}
-#nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;display:flex;align-items:center;padding:0 40px;background:rgba(10,0,30,.96);border-bottom:1px solid rgba(200,64,255,.3);box-shadow:0 2px 40px rgba(139,92,246,.15);backdrop-filter:blur(20px)}
-.nav-logo{display:flex;align-items:center;gap:12px;margin-right:auto}
-.nav-logo svg{width:28px;height:35px}
-.logo-text{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;letter-spacing:5px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--lt);padding:6px 11px;text-transform:uppercase;background:rgba(139,92,246,.1);border-radius:4px;border:1px solid transparent;transition:all .2s}
-.nav-link:hover{color:var(--W);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.4)}
-.nav-btns{display:flex;gap:8px;margin-left:16px;padding-left:16px;border-left:1px solid var(--bord)}
-.btn-login{font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 16px;background:var(--mint);color:var(--ink);border-radius:4px;text-transform:uppercase;transition:all .2s;border:none;display:inline-block}
-.btn-login:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,255,159,.35)}
-.btn-start{font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 16px;background:linear-gradient(135deg,var(--neon),var(--neon2));color:var(--W);border-radius:4px;text-transform:uppercase;transition:all .2s;border:none;display:inline-block}
-.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(139,92,246,.45)}
-.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;margin-left:auto}
-.nav-toggle span{display:block;width:24px;height:2px;background:var(--lt);transition:all .3s}
-.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(10,0,30,.98);border-bottom:1px solid var(--bord2);padding:20px;z-index:199;flex-direction:column;gap:4px}
-.mobile-menu.open{display:flex}
-.mm-link{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--lt);padding:12px 16px;text-transform:uppercase;border-bottom:1px solid rgba(139,92,246,.08);transition:color .2s}
-.mm-link:hover{color:var(--cyan)}
-.mm-login{display:block;font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;padding:12px 16px;background:var(--mint);color:var(--ink);border-radius:4px;text-align:center;text-transform:uppercase;margin-top:8px}
-.ticker-wrap{position:relative;top:var(--nav-h);height:36px;background:linear-gradient(90deg,var(--neon),var(--neon2));overflow:hidden;display:flex;align-items:center;z-index:10}
-.ticker-track{display:flex;gap:0;animation:tickerScroll 32s linear infinite;white-space:nowrap}
-.ticker-item{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--ink);font-weight:700;padding:0 32px;display:flex;align-items:center;gap:12px}
-.ticker-dot{width:5px;height:5px;background:var(--ink);border-radius:50%;opacity:.5}
-@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.wrap{max-width:1200px;margin:0 auto;padding:0 48px}
-.section{position:relative;padding:100px 0;overflow:hidden}
-.s-dark{background:var(--ink)}
-.s-dark2{background:var(--ink2)}
-.s-lift{background:linear-gradient(135deg,#120030 0%,#1C0040 100%)}
-.s-white{background:#F0EEFF}
-.sec-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:12px}
-.sec-h2{font-family:'Orbitron',monospace;font-size:clamp(28px,4vw,52px);font-weight:900;color:var(--W);line-height:1.05;margin-bottom:12px}
-.sec-h2-dark{color:var(--ink)}
-.sec-sub{font-size:18px;color:rgba(196,181,253,.7);line-height:1.7;max-width:660px;margin-bottom:40px}
-.sec-sub-dark{color:rgba(4,0,14,.6)}
-.rv{opacity:0;transform:translateY(40px)}
-.sec-link{display:inline-flex;align-items:center;gap:10px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-top:36px;border-bottom:1px solid rgba(0,229,255,.3);padding-bottom:4px;transition:gap .2s}
-.sec-link:hover{gap:16px}
-.page-hero{padding:calc(var(--nav-h) + 36px + 60px) 0 80px;position:relative;overflow:hidden}
-.page-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#04000E 0%,#0D0028 50%,#04000E 100%);z-index:0}
-.page-hero-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(139,92,246,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.08) 1px,transparent 1px);background-size:48px 48px}
-.page-hero-bg::after{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
-.page-hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 48px}
-.back-link{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt);text-transform:uppercase;margin-bottom:32px;transition:color .2s}
-.back-link:hover{color:var(--cyan)}
-.page-h1{font-family:'Orbitron',monospace;font-size:clamp(32px,5vw,64px);font-weight:900;color:var(--W);line-height:1.0;margin-bottom:16px}
-.page-sub{font-size:clamp(15px,1.8vw,20px);color:rgba(196,181,253,.7);line-height:1.7;max-width:680px}
-footer{background:var(--ink);border-top:1px solid var(--bord);padding:48px 0 28px}
-.footer-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-brand .logo-text{font-size:14px;letter-spacing:4px}
-.footer-brand p{font-size:13px;color:var(--mt);line-height:1.7;margin-top:12px;max-width:280px}
-.footer-col h4{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--mt);text-transform:uppercase;margin-bottom:16px}
-.footer-col a{display:block;font-size:13px;color:rgba(196,181,253,.6);margin-bottom:8px;transition:color .2s}
-.footer-col a:hover{color:var(--lt)}
-.footer-bottom{max-width:1200px;margin:0 auto;padding:20px 48px 0;border-top:1px solid var(--bord);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-bottom p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt);text-transform:uppercase}
-.footer-legal{display:flex;gap:24px}
-.footer-legal a{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt);text-transform:uppercase;transition:color .2s}
-.footer-legal a:hover{color:var(--lt)}
-@media(max-width:768px){.nav-links,.nav-btns{display:none}.nav-toggle{display:flex}.wrap,.page-hero-inner{padding:0 20px}.section{padding:72px 0}.footer-inner{grid-template-columns:1fr}.footer-bottom{flex-direction:column;text-align:center}#cursor,#cursor-ring{display:none}body{cursor:auto}}
-
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/trip.css">
 </head>
 <body>
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<nav id="nav">
-  <a href="index.html" class="nav-logo">
-    <svg viewBox="0 0 40 50" fill="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient></defs><rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/><rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/><polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/></svg>
-    <span class="logo-text">INDIGO</span>
-  </a>
-  <div class="nav-links">
-    <a href="how-it-works.html" class="nav-link">How It Works</a>
-    <a href="skills.html" class="nav-link">Skills</a>
-    <a href="peer-review.html" class="nav-link">Peer Review</a>
-    <a href="results.html" class="nav-link">Results</a>
-    <a href="vs-competitors.html" class="nav-link">VS Competitors</a>
-    <a href="contact.html" class="nav-link">Contact</a>
-  </div>
-  <div class="nav-btns">
-    <a href="https://create-repl-danielt51.replit.app/login" class="btn-login">Client Login</a>
-    <a href="contact.html" class="btn-start">Get Started</a>
-  </div>
-  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="how-it-works.html" class="mm-link">How It Works</a>
-  <a href="skills.html" class="mm-link">Skills</a>
-  <a href="peer-review.html" class="mm-link">Peer Review</a>
-  <a href="results.html" class="mm-link">Results</a>
-  <a href="vs-competitors.html" class="mm-link">VS Competitors</a>
-  <a href="contact.html" class="mm-link">Contact</a>
-  <a href="https://create-repl-danielt51.replit.app/login" class="mm-login">Client Login</a>
-</div>
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <div class="ticker-item"><span class="ticker-dot"></span>AGENT ACTIVE</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>12.22% CTR &mdash; 3&times; INDUSTRY AVG</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>$94 AVG CPA &mdash; GOOGLE VERIFIED</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>LIVE IN 24 HOURS</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>FLAT $299/MO &mdash; NO % OF SPEND</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>BUILDS EVERY CAMPAIGN FROM SCRATCH</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>AGENT ACTIVE</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>12.22% CTR &mdash; 3&times; INDUSTRY AVG</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>$94 AVG CPA &mdash; GOOGLE VERIFIED</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>LIVE IN 24 HOURS</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>FLAT $299/MO &mdash; NO % OF SPEND</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>BUILDS EVERY CAMPAIGN FROM SCRATCH</div>
-  </div>
-</div>
+<div id="meta-strip" class="meta-strip"></div>
+<nav id="site-nav"></nav>
 <div class="page-hero">
-  <div class="page-hero-bg"></div>
-  <div class="page-hero-inner">
-    <a href="index.html" class="back-link">&larr; Back to Home</a>
-    <span class="sec-tag">// GOOGLE-VERIFIED RESULTS</span>
-    <h1 class="page-h1">Real campaigns.<br>Real numbers.</h1>
-    <p class="page-sub">Every figure is from a live Indigo campaign &mdash; independently reviewed and verified by Google's own account team. Not projections. Actual data.</p>
+  <div class="hero-word" aria-hidden="true">goindigo</div>
+  <div class="wrap page-hero__inner">
+    <a href="index.html" class="page-hero__back">&larr; Back to Home</a>
+    <span class="page-hero__tag">04 / Verified -- Google</span>
+    <h1><span class="italic-serif accent">Real</span> campaigns.<br>Real numbers.</h1>
+    <p class="page-hero__sub">Every figure on this page is from a live GoIndigo campaign -- independently reviewed and verified by Google's own account team. Not projections. Actual data.</p>
   </div>
 </div>
 
-<section class="section s-white">
-  <div class="wrap">
-    <div class="rv" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px">
-      <div style="background:var(--W);border:2px solid #D4C8FF;padding:28px 20px;text-align:center;position:relative">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--mint)"></div>
-        <span style="font-family:'Orbitron',monospace;font-size:clamp(28px,3.5vw,44px);font-weight:900;color:var(--neon);line-height:1;display:block;margin-bottom:8px">12.22%</span>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:#7C6B9E;text-transform:uppercase">CTR — 3&times; Industry Avg</span>
-      </div>
-      <div style="background:var(--W);border:2px solid #D4C8FF;padding:28px 20px;text-align:center;position:relative">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--cyan)"></div>
-        <span style="font-family:'Orbitron',monospace;font-size:clamp(28px,3.5vw,44px);font-weight:900;color:#0A0020;line-height:1;display:block;margin-bottom:8px">$94</span>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:#7C6B9E;text-transform:uppercase">Avg Cost Per Lead</span>
-      </div>
-      <div style="background:var(--W);border:2px solid #D4C8FF;padding:28px 20px;text-align:center;position:relative">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--neon)"></div>
-        <span style="font-family:'Orbitron',monospace;font-size:clamp(28px,3.5vw,44px);font-weight:900;color:var(--neon2);line-height:1;display:block;margin-bottom:8px">122</span>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:#7C6B9E;text-transform:uppercase">Conversions This Month</span>
-      </div>
-      <div style="background:var(--W);border:2px solid #D4C8FF;padding:28px 20px;text-align:center;position:relative">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--yel)"></div>
-        <span style="font-family:'Orbitron',monospace;font-size:clamp(28px,3.5vw,44px);font-weight:900;color:#0A0020;line-height:1;display:block;margin-bottom:8px">$65K</span>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:#7C6B9E;text-transform:uppercase">Revenue From $18.1K Spend</span>
-      </div>
+<section class="section wrap">
+  <div class="bignums rv">
+    <div class="bignum"><span class="bignum__k">CTR</span><span class="bignum__v">12.22%</span><span class="bignum__d">3x industry average</span></div>
+    <div class="bignum"><span class="bignum__k">Avg CPA</span><span class="bignum__v">$94</span><span class="bignum__d">Google account verified</span></div>
+    <div class="bignum"><span class="bignum__k">Conversions/Mo</span><span class="bignum__v">122</span><span class="bignum__d">Tracked conversions</span></div>
+    <div class="bignum"><span class="bignum__k">Revenue</span><span class="bignum__v">$65K</span><span class="bignum__d">From $18.1K spend</span></div>
+  </div>
+  <div class="rv" style="border:1px solid var(--ink-line);border-radius:var(--radius);padding:32px;background:var(--ink-2);border-left:3px solid var(--indigo);margin-top:24px;">
+    <p style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-xl);color:var(--fg-1);line-height:1.55;margin-bottom:16px;">"This campaign is showing incredible intent -- 13.12% conversion rate with a very low cost per conversion. We are flagging this account for immediate scaling."</p>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span style="font-size:var(--t-xs);color:var(--fg-3);letter-spacing:0.10em;text-transform:uppercase;">-- Google Point of Contact</span>
+      <span style="color:var(--fg-4);">|</span>
+      <span style="font-size:var(--t-xs);color:var(--fg-3);letter-spacing:0.10em;text-transform:uppercase;">Verified Account Review</span>
+      <span style="color:var(--fg-4);">|</span>
+      <span style="font-size:var(--t-xs);color:var(--fg-3);letter-spacing:0.10em;text-transform:uppercase;">March 2026</span>
+      <span class="pill pill--green" style="height:18px;font-size:9px;">Google Verified</span>
     </div>
-
-    <div class="rv" style="background:linear-gradient(135deg,#F8F5FF,#EEEAFF);border:1px solid #D4C8FF;border-left:4px solid var(--neon);padding:28px 32px;margin-bottom:40px">
-      <p style="font-family:'Rajdhani',sans-serif;font-size:18px;font-style:italic;color:#2D1A5A;line-height:1.6;margin-bottom:12px">"This campaign is showing incredible intent — 13.12% conversion rate with a very low cost per conversion. We're flagging this account for immediate scaling."</p>
-      <span style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#7C6B9E;text-transform:uppercase">&mdash; Google Point of Contact &middot; Verified Account Review &middot; March 2026 &nbsp; &#10003; GOOGLE VERIFIED</span>
-    </div>
-
-    <div class="rv">
-      <span class="sec-tag" style="color:var(--neon)">// Campaign-Level Breakdown</span>
-      <h2 class="sec-h2 sec-h2-dark">Results by campaign</h2>
-    </div>
-    <div style="overflow-x:auto;margin-top:24px" class="rv">
-      <table style="width:100%;border-collapse:collapse;border:1px solid #D4C8FF">
-        <thead>
-          <tr style="background:#0A0020">
-            <th style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:#7C6B9E;padding:12px 16px;text-align:left;border:1px solid rgba(139,92,246,.2)">Campaign</th>
-            <th style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:#7C6B9E;padding:12px 16px;border:1px solid rgba(139,92,246,.2)">CTR</th>
-            <th style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:#7C6B9E;padding:12px 16px;border:1px solid rgba(139,92,246,.2)">CPA</th>
-            <th style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:#7C6B9E;padding:12px 16px;border:1px solid rgba(139,92,246,.2)">Target</th>
-            <th style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:#7C6B9E;padding:12px 16px;border:1px solid rgba(139,92,246,.2)">Conv</th>
-            <th style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:#7C6B9E;padding:12px 16px;border:1px solid rgba(139,92,246,.2)">Spend</th>
-            <th style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:#7C6B9E;padding:12px 16px;border:1px solid rgba(139,92,246,.2)">VS Target</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:#F8F5FF">
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;border:1px solid #E0D8FF">Flood Damage Charlotte NC</td>
-            <td style="padding:12px 16px;font-size:13px;color:var(--neon);font-family:'Orbitron',monospace;text-align:center;border:1px solid #E0D8FF">12.22%</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;font-family:'Orbitron',monospace;text-align:center;border:1px solid #E0D8FF">$94</td>
-            <td style="padding:12px 16px;font-size:13px;color:#7C6B9E;text-align:center;border:1px solid #E0D8FF">$150</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;font-weight:700;text-align:center;border:1px solid #E0D8FF">122</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;text-align:center;border:1px solid #E0D8FF">$11,481</td>
-            <td style="padding:12px 16px;font-size:12px;color:green;font-family:'Share Tech Mono',monospace;text-align:center;border:1px solid #E0D8FF">37% below &darr;</td>
-          </tr>
-          <tr style="background:white">
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;border:1px solid #E0D8FF">Water Damage Raleigh NC</td>
-            <td style="padding:12px 16px;font-size:13px;color:var(--neon);font-family:'Orbitron',monospace;text-align:center;border:1px solid #E0D8FF">9.81%</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;font-family:'Orbitron',monospace;text-align:center;border:1px solid #E0D8FF">$32</td>
-            <td style="padding:12px 16px;font-size:13px;color:#7C6B9E;text-align:center;border:1px solid #E0D8FF">$150</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;font-weight:700;text-align:center;border:1px solid #E0D8FF">44</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;text-align:center;border:1px solid #E0D8FF">$1,408</td>
-            <td style="padding:12px 16px;font-size:12px;color:green;font-family:'Share Tech Mono',monospace;text-align:center;border:1px solid #E0D8FF">79% below &darr;</td>
-          </tr>
-          <tr style="background:#F8F5FF">
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;border:1px solid #E0D8FF">Fire Damage Concord NC</td>
-            <td style="padding:12px 16px;font-size:13px;color:var(--neon);font-family:'Orbitron',monospace;text-align:center;border:1px solid #E0D8FF">7.44%</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;font-family:'Orbitron',monospace;text-align:center;border:1px solid #E0D8FF">$128</td>
-            <td style="padding:12px 16px;font-size:13px;color:#7C6B9E;text-align:center;border:1px solid #E0D8FF">$150</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;font-weight:700;text-align:center;border:1px solid #E0D8FF">18</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;text-align:center;border:1px solid #E0D8FF">$2,304</td>
-            <td style="padding:12px 16px;font-size:12px;color:green;font-family:'Share Tech Mono',monospace;text-align:center;border:1px solid #E0D8FF">15% below &darr;</td>
-          </tr>
-          <tr style="background:white">
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;border:1px solid #E0D8FF">Mold Remediation Gastonia</td>
-            <td style="padding:12px 16px;font-size:13px;color:var(--neon);font-family:'Orbitron',monospace;text-align:center;border:1px solid #E0D8FF">4.12%</td>
-            <td style="padding:12px 16px;font-size:13px;color:red;font-family:'Orbitron',monospace;text-align:center;border:1px solid #E0D8FF">$491</td>
-            <td style="padding:12px 16px;font-size:13px;color:#7C6B9E;text-align:center;border:1px solid #E0D8FF">$150</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;font-weight:700;text-align:center;border:1px solid #E0D8FF">3</td>
-            <td style="padding:12px 16px;font-size:13px;color:#2D1A5A;text-align:center;border:1px solid #E0D8FF">$1,473</td>
-            <td style="padding:12px 16px;font-size:12px;color:red;font-family:'Share Tech Mono',monospace;text-align:center;border:1px solid #E0D8FF">227% above &uarr; (agent acting)</td>
-          </tr>
-        </tbody>
-      </table>
+    <div style="margin-top:16px;padding:12px 16px;background:var(--ink-0);border-radius:var(--radius);font-size:var(--t-xs);color:var(--fg-3);line-height:1.6;">
+      Disclaimer: GoIndigo is not affiliated with or endorsed by Google LLC. Google Ads is a trademark of Google LLC. "Google Verified" refers to a review conducted by a Google Ads account representative. Individual results may vary.
     </div>
   </div>
 </section>
+<section class="section" style="background:var(--ink-1);border-top:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);">
+  <div class="wrap">
+    <div class="s-head rv"><div class="s-head__num"><span class="label-upper">Orlando Case File</span><span class="big serif italic-serif">/case</span></div><div class="s-head__title"><h2>AllDry USA -- live campaigns</h2><p>5 active campaigns. $30,995 total spend. 307 tracked conversions.</p></div></div>
+    <div style="overflow-x:auto;" class="rv">
+      <table class="vs-table">
+        <thead><tr><th>Campaign</th><th>CTR</th><th>CPA</th><th>Conv</th><th>Spend</th><th>VS Target</th></tr></thead>
+        <tbody>
+          <tr><td>AllDry South Florida -- Multi Service</td><td>4.7%</td><td style="color:var(--red);">$285.98</td><td>38</td><td>$10,867</td><td style="color:var(--red);">91% above</td></tr>
+          <tr><td>Boynton Dan Test Location</td><td>3.3%</td><td style="color:var(--red);">$197.87</td><td>48</td><td>$9,498</td><td style="color:var(--red);">32% above</td></tr>
+          <tr><td style="color:var(--green);">AllDry Charlotte NC -- Multi Service</td><td style="color:var(--green);">12.6%</td><td style="color:var(--green);">$27.74</td><td style="color:var(--green);">203</td><td>$5,632</td><td style="color:var(--green);">82% below</td></tr>
+          <tr><td>Dan Fort Myers PPC WTR</td><td>3.1%</td><td style="color:var(--red);">$277.69</td><td>18</td><td>$4,998</td><td style="color:var(--red);">85% above</td></tr>
+          <tr><td>Local Services Campaign</td><td>--</td><td>--</td><td>0</td><td>$0</td><td style="color:var(--fg-3);">Building</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:var(--t-xs);color:var(--fg-3);margin-top:12px;">Agent actively working to bring all campaigns to target. Charlotte NC is the benchmark -- replicating its strategy across other markets.</div>
+  </div>
+</section>
+<div class="cta-strip"><div class="cta-strip__inner wrap rv"><h2>These are <span class="italic-serif accent">real numbers</span>.<br>Yours could be next.</h2><p>GoIndigo starts from scratch and optimizes to your CPA target.</p><div class="cta-strip__btns"><a href="contact.html" class="btn btn-primary"><span>Start for $299/mo</span></a><a href="vs-competitors.html" class="btn btn-ghost"><span>VS Competitors</span></a></div></div></div>
+<footer id="site-footer"></footer>
+<script src="assets/shell.js"></script>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <span class="logo-text">INDIGO</span>
-      <p>AI-powered Google Ads management. Campaigns built from scratch, monitored 24/7, optimized autonomously.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Product</h4>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="skills.html">Skills</a>
-      <a href="peer-review.html">Peer Review</a>
-      <a href="results.html">Results</a>
-      <a href="vs-competitors.html">VS Competitors</a>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="contact.html">Contact</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 Indigo &middot; AI-Powered Google Ads</p>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-<script>
-gsap.registerPlugin(ScrollTrigger);
-// Cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-if(cursor && ring) {
-  document.addEventListener('mousemove', e => {
-    gsap.to(cursor, {x:e.clientX, y:e.clientY, duration:0.1});
-    gsap.to(ring, {x:e.clientX, y:e.clientY, duration:0.35});
-  });
-}
-// Page hero entrance
-gsap.from('.page-hero-inner > *', {opacity:0, y:40, stagger:0.15, duration:0.9, ease:'power3.out', delay:0.2});
-// Scroll reveals
-gsap.utils.toArray('.rv').forEach((el,i) => {
-  ScrollTrigger.create({
-    trigger: el, start: 'top 88%',
-    onEnter: () => gsap.to(el, {opacity:1, y:0, duration:0.75, ease:'power3.out', delay:(i%4)*0.07})
-  });
-});
-// Nav hide/show on scroll
-ScrollTrigger.create({
-  start: 'top -80',
-  onUpdate: self => {
-    const nav = document.getElementById('nav');
-    gsap.to(nav, {y: self.direction===1 ? -80 : 0, duration:0.3});
-  }
-});
-// Mobile menu
-document.getElementById('navToggle')?.addEventListener('click', () => {
-  document.getElementById('mobileMenu')?.classList.toggle('open');
-});
-</script>
 </body>
 </html>

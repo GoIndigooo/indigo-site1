@@ -1,280 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-open="false">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Service — Indigo</title>
+<title>Terms of Service -- GoIndigo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#04000E;--ink2:#0A0020;--lift:#1C0040;--neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;--bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden;line-height:1.7}
-a{text-decoration:none;color:var(--cyan)}a:hover{text-decoration:underline}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(139,92,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);background-size:64px 64px}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;background:rgba(4,0,14,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--bord)}
-.nav-w{width:100%;max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:11px}
-.logo svg{width:30px;height:38px}
-.logo-txt{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:5px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-links a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mt);transition:all .2s;padding:7px 14px;border:1px solid transparent}
-.nav-links a:hover{color:var(--lt);border-color:var(--bord);text-decoration:none}
-.nav-login{color:#00FF9F!important;border-color:rgba(0,255,159,.4)!important;background:rgba(0,255,159,.07)!important}
-.nav-cta{color:var(--neon)!important;border-color:rgba(139,92,246,.45)!important;background:rgba(139,92,246,.08)!important}
-.wrap{max-width:860px;margin:0 auto;padding:0 48px}
-.page-hero{padding:140px 48px 60px;text-align:center;border-bottom:1px solid var(--bord);position:relative;z-index:2}
-.back-link{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt);margin-bottom:28px;transition:color .2s}
-.back-link:hover{color:var(--cyan);text-decoration:none}
-.page-hero h1{font-family:'Orbitron',monospace;font-size:clamp(28px,5vw,52px);font-weight:900;color:var(--W);margin-bottom:12px}
-.page-hero .meta{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--mt)}
-.legal-body{position:relative;z-index:2;padding:60px 0 100px}
-.legal-body h2{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--W);margin:40px 0 12px;padding-top:20px;border-top:1px solid var(--bord)}
-.legal-body h2:first-child{border-top:none;margin-top:0}
-.legal-body h3{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--lt);margin:24px 0 8px}
-.legal-body p{font-size:16px;color:#BBA8DD;line-height:1.8;margin-bottom:14px}
-.legal-body ul,.legal-body ol{margin:0 0 14px 24px}
-.legal-body li{font-size:16px;color:#BBA8DD;line-height:1.8;margin-bottom:6px}
-.legal-body strong{color:var(--W)}
-.legal-box{background:var(--ink2);border:1px solid var(--bord);border-left:4px solid var(--neon);padding:20px 24px;margin:20px 0}
-.legal-box p{margin-bottom:0}
-.legal-box-warn{background:rgba(255,45,155,.05);border:1px solid rgba(255,45,155,.25);border-left:4px solid #FF2D9B;padding:20px 24px;margin:20px 0}
-.legal-box-warn p{color:#FFB0D0;margin-bottom:0}
-footer{background:var(--ink);border-top:1px solid var(--bord);padding:40px 0 24px;position:relative;z-index:2}
-.fbar{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.fbar p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt)}
-.fbar-links{display:flex;gap:24px}
-.fbar-links a{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--mt);transition:color .2s}
-.fbar-links a:hover{color:var(--lt)}
-@media(max-width:768px){.wrap,.nav-w,.page-hero,.fbar{padding-left:24px;padding-right:24px}.nav-links{display:none}}
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/trip.css">
 </head>
 <body>
-<div class="bg-grid"></div>
-<nav>
-  <div class="nav-w">
-    <a href="index.html" class="logo">
-      <svg viewBox="0 0 40 50" fill="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient></defs><rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/><rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/><polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/></svg>
-      <span class="logo-txt">INDIGO</span>
-    </a>
-    <div class="nav-links">
-      <a href="how-it-works.html">HOW IT WORKS</a>
-      <a href="skills.html">SKILLS</a>
-      <a href="results.html">RESULTS</a>
-      <a href="contact.html">CONTACT</a>
-      <a href="https://create-repl-danielt51.replit.app/login" class="nav-login">CLIENT LOGIN</a>
-      <a href="index.html#pricing" class="nav-cta">GET STARTED</a>
-    </div>
-  </div>
-</nav>
-
+<div id="meta-strip" class="meta-strip"></div>
+<nav id="site-nav"></nav>
 <div class="page-hero">
-  <a href="index.html" class="back-link">← BACK TO HOME</a>
-  <h1>Terms of Service</h1>
-  <p class="meta">// LAST UPDATED: APRIL 22, 2026 &nbsp;·&nbsp; EFFECTIVE DATE: APRIL 22, 2026</p>
-</div>
-
-<div class="legal-body">
-  <div class="wrap">
-
-    <div class="legal-box">
-      <p>Please read these Terms of Service carefully before using Indigo's website or services. By accessing our website, submitting a contact form, or engaging our services, you agree to be bound by these Terms. If you do not agree to these Terms, do not use our website or services.</p>
-    </div>
-
-    <h2>1. Acceptance of Terms</h2>
-    <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("Client," "you," or "your") and Indigo ("Indigo," "we," "us," or "our"). These Terms govern your use of our website and any services we provide to you. These Terms apply to all visitors, clients, and others who access or use our services.</p>
-
-    <h2>2. Description of Services</h2>
-    <p>Indigo provides AI-powered Google Ads campaign management services, including but not limited to:</p>
-    <ul>
-      <li>Building Google Ads campaigns from scratch</li>
-      <li>Writing ad copy, headlines, descriptions, and extensions</li>
-      <li>Keyword research and campaign architecture</li>
-      <li>Bid strategy configuration and management</li>
-      <li>Ongoing campaign monitoring and optimization</li>
-      <li>Performance reporting and client portal access</li>
-    </ul>
-    <p>Indigo operates as a managed service. You retain ownership of your Google Ads account at all times. Indigo accesses your account solely to build, manage, and optimize campaigns on your behalf.</p>
-
-    <h2>3. No Guarantee of Results</h2>
-    <div class="legal-box-warn">
-      <p><strong>IMPORTANT:</strong> Indigo does not guarantee specific advertising results, including but not limited to: specific numbers of leads, conversions, clicks, impressions, cost-per-lead figures, return on ad spend, revenue, or campaign performance metrics. All performance figures referenced on our website (including CTR, CPA, and conversion data) represent historical results from specific campaigns and are not projections, guarantees, or representations of future performance for your campaigns.</p>
-    </div>
-    <p>Digital advertising results are influenced by many factors outside our control, including but not limited to: your industry, geographic market, competition, ad budget, economic conditions, Google Ads algorithm changes, landing page quality, and product/service pricing. Past performance does not guarantee future results.</p>
-    <p>By engaging Indigo's services, you acknowledge and agree that you are paying for campaign management services — not guaranteed outcomes.</p>
-
-    <h2>4. Client Responsibilities</h2>
-    <p>As a client of Indigo, you agree to:</p>
-    <ul>
-      <li>Provide accurate and complete information about your business, services, and target market</li>
-      <li>Grant Indigo necessary access to your Google Ads account to perform services</li>
-      <li>Ensure your Google Ads account is funded with sufficient advertising budget</li>
-      <li>Comply with all applicable Google Ads policies and terms of service</li>
-      <li>Notify Indigo promptly of any changes to your business, services, or target market</li>
-      <li>Not make unauthorized changes to campaigns managed by Indigo without prior notice</li>
-      <li>Ensure your landing pages, website, and business practices comply with applicable laws</li>
-    </ul>
-    <p>You are solely responsible for the legality and accuracy of your products, services, pricing, and any content linked from your ads. Indigo is not liable for any issues arising from your products, services, business practices, or landing pages.</p>
-
-    <h2>5. Fees and Payment</h2>
-    <h3>Service Fees</h3>
-    <p>Indigo charges a flat monthly management fee based on the number of campaigns managed, as described on our pricing page. Fees are charged separately from and in addition to your Google Ads advertising spend. Your advertising budget is paid directly to Google — Indigo does not handle, hold, or manage your ad spend.</p>
-    <h3>Payment Terms</h3>
-    <p>Payment terms, billing cycles, and accepted payment methods will be agreed upon prior to service commencement. All fees are due as specified in your service agreement. Failure to pay fees may result in suspension or termination of services.</p>
-    <h3>No Refunds</h3>
-    <p>Monthly management fees are non-refundable once a billing period has commenced. If you cancel your service mid-month, you will not receive a refund for the remainder of that month. We do not offer refunds based on campaign performance.</p>
-    <h3>Fee Changes</h3>
-    <p>Indigo reserves the right to modify service fees with 30 days' written notice. Continued use of services after the notice period constitutes acceptance of the updated fees.</p>
-
-    <h2>6. Cancellation</h2>
-    <p>You may cancel your Indigo service at any time by providing written notice via email. Cancellation takes effect at the end of your current billing period unless otherwise agreed. Upon cancellation:</p>
-    <ul>
-      <li>Indigo will cease managing your campaigns</li>
-      <li>You retain full ownership and access to your Google Ads account and all campaigns built by Indigo</li>
-      <li>No refund will be issued for the current billing period</li>
-      <li>Indigo will remove its access to your Google Ads account within 5 business days of cancellation</li>
-    </ul>
-
-    <h2>7. Intellectual Property</h2>
-    <p>All ad copy, headlines, descriptions, keyword lists, campaign structures, and other creative materials produced by Indigo for your campaigns become your property upon payment of applicable fees. Indigo retains the right to use anonymized, aggregated performance data for internal research and service improvement purposes.</p>
-    <p>The Indigo name, logo, website content, and proprietary systems remain the intellectual property of Indigo and may not be copied, reproduced, or used without our express written permission.</p>
-
-    <h2>8. Confidentiality</h2>
-    <p>Indigo agrees to keep your business information, campaign data, and account credentials confidential and will not disclose such information to third parties except as required by law or as necessary to perform our services (such as accessing Google Ads on your behalf).</p>
-    <p>You agree to keep any proprietary information, systems, or methodologies shared by Indigo confidential and not to share such information with competitors or third parties.</p>
-
-    <h2>8a. Limited Power of Attorney — Google Ads Management</h2>
-    <div class="legal-box">
-      <p><strong>By connecting your Google Ads account to Indigo and engaging our services, you grant Indigo a limited, revocable power of attorney to act as your authorized agent for the purpose of managing your Google Ads account.</strong></p>
-    </div>
-
-    <h3>Scope of Authority</h3>
-    <p>This Limited Power of Attorney ("LPOA") authorizes Indigo to perform the following actions within your Google Ads account on your behalf:</p>
-    <ul>
-      <li>Adjust keyword bids and bidding strategies</li>
-      <li>Pause, enable, or modify campaign and ad group settings</li>
-      <li>Adjust daily and campaign-level budgets within agreed parameters</li>
-      <li>Add and manage negative keywords and exclusion lists</li>
-      <li>Create, edit, and upload ad copy including headlines, descriptions, and extensions</li>
-      <li>Build new campaigns, ad groups, and keyword lists from scratch</li>
-      <li>Access campaign performance data, analytics, and reporting</li>
-      <li>Execute any optimization action you explicitly approve through the Indigo platform</li>
-    </ul>
-
-    <h3>Approval Requirement</h3>
-    <p>Indigo operates on an <strong>approve-before-execute</strong> model. The AI agent will analyze your account and recommend specific actions, but <strong>no changes will be executed without your explicit approval</strong> through the Indigo dashboard. You retain full control and may reject any recommended action at any time.</p>
-    <p>In the event of a critical campaign issue (such as a campaign exceeding its CPA target by more than 200%), the agent may pause a campaign to prevent budget waste and will notify you immediately. This is the only circumstance under which an action may be taken without prior approval.</p>
-
-    <h3>Limitations</h3>
-    <p>This LPOA does not authorize Indigo to:</p>
-    <ul>
-      <li>Make payments or financial transactions on your behalf</li>
-      <li>Add billing information or change payment methods</li>
-      <li>Transfer ownership of your Google Ads account</li>
-      <li>Grant access to your account to any third parties</li>
-      <li>Take any action outside the scope of Google Ads campaign management</li>
-    </ul>
-
-    <h3>Duration and Revocation</h3>
-    <p>This LPOA remains in effect for the duration of your Indigo subscription. You may revoke this authority at any time by:</p>
-    <ul>
-      <li>Cancelling your Indigo subscription</li>
-      <li>Removing Indigo's access via your Google Account permissions at <a href="https://myaccount.google.com/permissions" target="_blank">myaccount.google.com/permissions</a></li>
-      <li>Contacting us directly to request immediate access removal</li>
-    </ul>
-    <p>Upon revocation, Indigo will immediately cease all actions within your account and remove its access within 5 business days.</p>
-
-    <h3>Liability for Authorized Actions</h3>
-    <p>You acknowledge that actions taken by Indigo under this LPOA are taken at your direction and with your approval. Indigo is not liable for outcomes resulting from changes you have explicitly approved. For unapproved emergency actions (CPA protection pauses), Indigo's liability is limited as described in Section 9.</p>
-
-    <h2>8b. Google API Services — Terms of Use Compliance</h2>
-    <p>Indigo's services involve access to Google APIs including the Google Ads API, Google Analytics API, and Google Search Console API. By using Indigo's services, you agree that:</p>
-    <ul>
-      <li>You are the authorized owner or administrator of the Google Ads account you connect to Indigo</li>
-      <li>You have the legal authority to grant Indigo access to your Google account data</li>
-      <li>Your use of Indigo's services complies with <a href="https://ads.google.com/intl/en_us/home/tools/manager-accounts/" target="_blank">Google Ads Terms and Conditions</a></li>
-      <li>You will not use Indigo to violate Google's advertising policies</li>
-      <li>Indigo's access to your Google data is governed by our Privacy Policy, including the Google API Services User Data Policy section</li>
-    </ul>
-    <p>You understand that Google may suspend or terminate access to Google Ads APIs if either party violates Google's terms. Indigo is not liable for service interruptions caused by Google policy changes, API outages, or account suspensions resulting from your business practices.</p>
-
-    <h2>9. Limitation of Liability</h2>
-    <div class="legal-box-warn">
-      <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, INDIGO SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO: LOSS OF PROFITS, LOSS OF REVENUE, LOSS OF BUSINESS, LOSS OF DATA, OR LOSS OF GOODWILL, ARISING FROM OR RELATED TO YOUR USE OF OUR SERVICES, EVEN IF INDIGO HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</strong></p>
-    </div>
-    <p>In no event shall Indigo's total liability to you for all claims arising from or related to these Terms or our services exceed the total amount of fees paid by you to Indigo in the three (3) months immediately preceding the claim.</p>
-    <p>Indigo is not liable for:</p>
-    <ul>
-      <li>Changes to Google Ads policies, algorithms, or auction dynamics that affect campaign performance</li>
-      <li>Google account suspensions or disapprovals resulting from your business practices or content</li>
-      <li>Interruptions to Google Ads services or platform outages</li>
-      <li>Performance changes resulting from market conditions, competitor activity, or economic factors</li>
-      <li>Losses arising from unauthorized access to your Google Ads account by third parties</li>
-      <li>Any actions taken by you or your team within your Google Ads account without Indigo's knowledge</li>
-    </ul>
-
-    <h2>10. Disclaimer of Warranties</h2>
-    <p>OUR SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. INDIGO EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO: IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT OUR SERVICES WILL MEET YOUR SPECIFIC REQUIREMENTS OR THAT ANY PARTICULAR RESULTS WILL BE ACHIEVED.</p>
-
-    <h2>11. Indemnification</h2>
-    <p>You agree to indemnify, defend, and hold harmless Indigo and its officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising from or related to:</p>
-    <ul>
-      <li>Your violation of these Terms</li>
-      <li>Your violation of any applicable law or regulation</li>
-      <li>Your violation of Google Ads policies or terms of service</li>
-      <li>Your products, services, or business practices</li>
-      <li>Content on your website or landing pages linked from your ads</li>
-      <li>Any claim by a third party arising from your advertising</li>
-    </ul>
-
-    <h2>12. Termination</h2>
-    <p>Either party may terminate services at any time with written notice. Indigo reserves the right to immediately suspend or terminate services, without refund, if you:</p>
-    <ul>
-      <li>Violate these Terms or any applicable law</li>
-      <li>Fail to pay fees when due</li>
-      <li>Engage in fraudulent, deceptive, or illegal advertising practices</li>
-      <li>Violate Google Ads policies in a way that puts your account or Indigo's access at risk</li>
-      <li>Provide false or misleading information about your business or services</li>
-    </ul>
-
-    <h2>13. Governing Law and Dispute Resolution</h2>
-    <p>These Terms shall be governed by and construed in accordance with the laws of the State of North Carolina, United States, without regard to its conflict of law provisions.</p>
-    <p>Any dispute arising from or related to these Terms or our services shall first be attempted to be resolved through good faith negotiation between the parties. If negotiation fails, disputes shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association, conducted in North Carolina. You waive any right to a jury trial or to participate in a class action lawsuit.</p>
-    <p>Notwithstanding the foregoing, either party may seek injunctive or other equitable relief in any court of competent jurisdiction.</p>
-
-    <h2>14. Entire Agreement</h2>
-    <p>These Terms, together with our Privacy Policy and any written service agreement between the parties, constitute the entire agreement between you and Indigo with respect to our services and supersede all prior agreements, representations, and understandings.</p>
-
-    <h2>15. Severability</h2>
-    <p>If any provision of these Terms is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary, and the remaining provisions will continue in full force and effect.</p>
-
-    <h2>16. Waiver</h2>
-    <p>Indigo's failure to enforce any right or provision of these Terms shall not be deemed a waiver of such right or provision.</p>
-
-    <h2>17. Changes to These Terms</h2>
-    <p>Indigo reserves the right to modify these Terms at any time. We will notify existing clients of material changes via email or through the client portal. Continued use of our services after changes are posted constitutes acceptance of the updated Terms.</p>
-
-    <h2>18. Contact</h2>
-    <p>For questions about these Terms of Service, please contact us:</p>
-    <div class="legal-box">
-      <p><strong>Indigo</strong><br>
-      Email: danieltrull90@gmail.com<br>
-      Website: <a href="contact.html">Contact Form</a></p>
-    </div>
-
+  <div class="hero-word" aria-hidden="true">goindigo</div>
+  <div class="wrap page-hero__inner">
+    <a href="index.html" class="page-hero__back">&larr; Back to Home</a>
+    <span class="page-hero__tag">Legal / Terms</span>
+    <h1>Terms of Service</h1>
+    <p class="page-hero__sub">Last updated April 2026. Plain language.</p>
   </div>
 </div>
 
-<footer>
-  <div class="fbar">
-    <p>© 2026 INDIGO · AI-POWERED GOOGLE ADS</p>
-    <div class="fbar-links">
-      <a href="index.html">Home</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
+<section class="section wrap"><div class="legal-body">
+  <h2>Acceptance</h2>
+  <p>By using GoIndigo you agree to these terms. If you do not agree, do not use the service.</p>
+  <h2>Description of Services</h2>
+  <p>GoIndigo is an autonomous Google Ads management service. We connect to your Google Ads account and manage campaigns on a flat monthly fee basis.</p>
+  <h2>No Guarantee of Results</h2>
+  <p>Advertising results depend on market conditions, competition, ad spend, and many other factors outside our control. We do not guarantee specific CPA targets, conversion rates, or revenue outcomes.</p>
+  <h2>Client Responsibilities</h2>
+  <p>You must be the authorized owner or administrator of the Google Ads account you connect. You are responsible for your ad spend budget and for reviewing and approving agent recommendations.</p>
+  <h2>Fees and Payment</h2>
+  <p>Fees are charged monthly in advance. We do not charge a percentage of your ad spend. Fees are non-refundable except as required by law.</p>
+  <h2>Cancellation</h2>
+  <p>You may cancel at any time. Cancellation takes effect at the end of your current billing period. We will remove access to your Google account within 5 business days of cancellation.</p>
+  <h2>Intellectual Property</h2>
+  <p>All ad copy, headlines, descriptions, keyword lists, and campaign structures produced by GoIndigo for your campaigns become your property upon payment. GoIndigo retains the right to use anonymized performance data for internal research.</p>
+  <h2>Limited Power of Attorney -- Google Ads Management</h2>
+  <div class="legal-box"><p><strong>By connecting your Google Ads account to GoIndigo and engaging our services, you grant GoIndigo a limited, revocable power of attorney to act as your authorized agent for the purpose of managing your Google Ads account.</strong></p></div>
+  <h3>Scope</h3>
+  <ul>
+    <li>Adjust keyword bids and bidding strategies</li>
+    <li>Pause, enable, or modify campaign and ad group settings</li>
+    <li>Adjust daily and campaign-level budgets within agreed parameters</li>
+    <li>Add and manage negative keywords and exclusion lists</li>
+    <li>Create, edit, and upload ad copy including headlines, descriptions, and extensions</li>
+    <li>Build new campaigns, ad groups, and keyword lists from scratch</li>
+    <li>Execute any optimization action you explicitly approve</li>
+  </ul>
+  <h3>Approve-Before-Execute</h3>
+  <p>GoIndigo operates on an approve-before-execute model. No changes will be executed without your explicit approval through the GoIndigo dashboard. The sole exception is an emergency CPA protection pause when a campaign exceeds its target by more than 200% -- in which case you are notified immediately.</p>
+  <h3>Limitations</h3>
+  <p>This LPOA does not authorize GoIndigo to make payments, change billing information, transfer account ownership, or grant access to third parties.</p>
+  <h3>Revocation</h3>
+  <p>You may revoke this authority at any time by cancelling your subscription or removing access at <a href="https://myaccount.google.com/permissions" target="_blank">myaccount.google.com/permissions</a>.</p>
+  <h2>Google API Compliance</h2>
+  <p>By using GoIndigo you confirm that you are the authorized owner or administrator of the connected Google Ads account and that your use of GoIndigo complies with Google Ads Terms and Conditions.</p>
+  <h2>Limitation of Liability</h2>
+  <p>GoIndigo's total liability for any claim arising from these terms shall not exceed the fees paid in the three months preceding the claim. GoIndigo is not liable for indirect, incidental, or consequential damages.</p>
+  <h2>Governing Law</h2>
+  <p>These terms are governed by the laws of the State of North Carolina. Disputes shall be resolved through binding arbitration in North Carolina.</p>
+  <h2>Contact</h2>
+  <p>Daniel Trull -- danieltrull90@gmail.com</p>
+  <p style="color:var(--fg-3);">GoIndigo is not affiliated with or endorsed by Google LLC. Google Ads is a trademark of Google LLC.</p>
+</div></section>
+<footer id="site-footer"></footer>
+<script src="assets/shell.js"></script>
+
 </body>
 </html>

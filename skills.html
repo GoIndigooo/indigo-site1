@@ -1,282 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-open="false">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agent Skills &mdash; Indigo</title>
+<title>Agent Skills -- GoIndigo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<style>
-
-:root{--ink:#04000E;--ink2:#0A0020;--ink3:#0D0028;--lift:#1C0040;--neon:#8B5CF6;--neon2:#C840FF;--cyan:#00E5FF;--pink:#FF2D9B;--yel:#FFD600;--mint:#00FF9F;--org:#FF6B35;--W:#FFFFFF;--lt:#C4B5FD;--mt:#7C6B9E;--bord:rgba(139,92,246,.2);--bord2:rgba(139,92,246,.5);--nav-h:68px}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--ink);color:#DDD0FF;font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none}
-a{text-decoration:none;color:inherit}
-#cursor{position:fixed;width:12px;height:12px;background:var(--neon2);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .15s,height .15s}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(200,64,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
-body:has(a:hover) #cursor{width:20px;height:20px;background:var(--cyan)}
-body:has(a:hover) #cursor-ring{width:52px;height:52px}
-#nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;display:flex;align-items:center;padding:0 40px;background:rgba(10,0,30,.96);border-bottom:1px solid rgba(200,64,255,.3);box-shadow:0 2px 40px rgba(139,92,246,.15);backdrop-filter:blur(20px)}
-.nav-logo{display:flex;align-items:center;gap:12px;margin-right:auto}
-.nav-logo svg{width:28px;height:35px}
-.logo-text{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;letter-spacing:5px;background:linear-gradient(90deg,var(--neon2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--lt);padding:6px 11px;text-transform:uppercase;background:rgba(139,92,246,.1);border-radius:4px;border:1px solid transparent;transition:all .2s}
-.nav-link:hover{color:var(--W);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.4)}
-.nav-btns{display:flex;gap:8px;margin-left:16px;padding-left:16px;border-left:1px solid var(--bord)}
-.btn-login{font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 16px;background:var(--mint);color:var(--ink);border-radius:4px;text-transform:uppercase;transition:all .2s;border:none;display:inline-block}
-.btn-login:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,255,159,.35)}
-.btn-start{font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 16px;background:linear-gradient(135deg,var(--neon),var(--neon2));color:var(--W);border-radius:4px;text-transform:uppercase;transition:all .2s;border:none;display:inline-block}
-.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(139,92,246,.45)}
-.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;margin-left:auto}
-.nav-toggle span{display:block;width:24px;height:2px;background:var(--lt);transition:all .3s}
-.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(10,0,30,.98);border-bottom:1px solid var(--bord2);padding:20px;z-index:199;flex-direction:column;gap:4px}
-.mobile-menu.open{display:flex}
-.mm-link{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--lt);padding:12px 16px;text-transform:uppercase;border-bottom:1px solid rgba(139,92,246,.08);transition:color .2s}
-.mm-link:hover{color:var(--cyan)}
-.mm-login{display:block;font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;padding:12px 16px;background:var(--mint);color:var(--ink);border-radius:4px;text-align:center;text-transform:uppercase;margin-top:8px}
-.ticker-wrap{position:relative;top:var(--nav-h);height:36px;background:linear-gradient(90deg,var(--neon),var(--neon2));overflow:hidden;display:flex;align-items:center;z-index:10}
-.ticker-track{display:flex;gap:0;animation:tickerScroll 32s linear infinite;white-space:nowrap}
-.ticker-item{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--ink);font-weight:700;padding:0 32px;display:flex;align-items:center;gap:12px}
-.ticker-dot{width:5px;height:5px;background:var(--ink);border-radius:50%;opacity:.5}
-@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.wrap{max-width:1200px;margin:0 auto;padding:0 48px}
-.section{position:relative;padding:100px 0;overflow:hidden}
-.s-dark{background:var(--ink)}
-.s-dark2{background:var(--ink2)}
-.s-lift{background:linear-gradient(135deg,#120030 0%,#1C0040 100%)}
-.s-white{background:#F0EEFF}
-.sec-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:12px}
-.sec-h2{font-family:'Orbitron',monospace;font-size:clamp(28px,4vw,52px);font-weight:900;color:var(--W);line-height:1.05;margin-bottom:12px}
-.sec-h2-dark{color:var(--ink)}
-.sec-sub{font-size:18px;color:rgba(196,181,253,.7);line-height:1.7;max-width:660px;margin-bottom:40px}
-.sec-sub-dark{color:rgba(4,0,14,.6)}
-.rv{opacity:0;transform:translateY(40px)}
-.sec-link{display:inline-flex;align-items:center;gap:10px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-top:36px;border-bottom:1px solid rgba(0,229,255,.3);padding-bottom:4px;transition:gap .2s}
-.sec-link:hover{gap:16px}
-.page-hero{padding:calc(var(--nav-h) + 36px + 60px) 0 80px;position:relative;overflow:hidden}
-.page-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#04000E 0%,#0D0028 50%,#04000E 100%);z-index:0}
-.page-hero-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(139,92,246,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.08) 1px,transparent 1px);background-size:48px 48px}
-.page-hero-bg::after{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
-.page-hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 48px}
-.back-link{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mt);text-transform:uppercase;margin-bottom:32px;transition:color .2s}
-.back-link:hover{color:var(--cyan)}
-.page-h1{font-family:'Orbitron',monospace;font-size:clamp(32px,5vw,64px);font-weight:900;color:var(--W);line-height:1.0;margin-bottom:16px}
-.page-sub{font-size:clamp(15px,1.8vw,20px);color:rgba(196,181,253,.7);line-height:1.7;max-width:680px}
-footer{background:var(--ink);border-top:1px solid var(--bord);padding:48px 0 28px}
-.footer-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-brand .logo-text{font-size:14px;letter-spacing:4px}
-.footer-brand p{font-size:13px;color:var(--mt);line-height:1.7;margin-top:12px;max-width:280px}
-.footer-col h4{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--mt);text-transform:uppercase;margin-bottom:16px}
-.footer-col a{display:block;font-size:13px;color:rgba(196,181,253,.6);margin-bottom:8px;transition:color .2s}
-.footer-col a:hover{color:var(--lt)}
-.footer-bottom{max-width:1200px;margin:0 auto;padding:20px 48px 0;border-top:1px solid var(--bord);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-bottom p{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt);text-transform:uppercase}
-.footer-legal{display:flex;gap:24px}
-.footer-legal a{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--mt);text-transform:uppercase;transition:color .2s}
-.footer-legal a:hover{color:var(--lt)}
-@media(max-width:768px){.nav-links,.nav-btns{display:none}.nav-toggle{display:flex}.wrap,.page-hero-inner{padding:0 20px}.section{padding:72px 0}.footer-inner{grid-template-columns:1fr}.footer-bottom{flex-direction:column;text-align:center}#cursor,#cursor-ring{display:none}body{cursor:auto}}
-
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/trip.css">
 </head>
 <body>
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<nav id="nav">
-  <a href="index.html" class="nav-logo">
-    <svg viewBox="0 0 40 50" fill="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient></defs><rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/><rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/><rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/><polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/></svg>
-    <span class="logo-text">INDIGO</span>
-  </a>
-  <div class="nav-links">
-    <a href="how-it-works.html" class="nav-link">How It Works</a>
-    <a href="skills.html" class="nav-link">Skills</a>
-    <a href="peer-review.html" class="nav-link">Peer Review</a>
-    <a href="results.html" class="nav-link">Results</a>
-    <a href="vs-competitors.html" class="nav-link">VS Competitors</a>
-    <a href="contact.html" class="nav-link">Contact</a>
-  </div>
-  <div class="nav-btns">
-    <a href="https://create-repl-danielt51.replit.app/login" class="btn-login">Client Login</a>
-    <a href="contact.html" class="btn-start">Get Started</a>
-  </div>
-  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="how-it-works.html" class="mm-link">How It Works</a>
-  <a href="skills.html" class="mm-link">Skills</a>
-  <a href="peer-review.html" class="mm-link">Peer Review</a>
-  <a href="results.html" class="mm-link">Results</a>
-  <a href="vs-competitors.html" class="mm-link">VS Competitors</a>
-  <a href="contact.html" class="mm-link">Contact</a>
-  <a href="https://create-repl-danielt51.replit.app/login" class="mm-login">Client Login</a>
-</div>
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <div class="ticker-item"><span class="ticker-dot"></span>AGENT ACTIVE</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>12.22% CTR &mdash; 3&times; INDUSTRY AVG</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>$94 AVG CPA &mdash; GOOGLE VERIFIED</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>LIVE IN 24 HOURS</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>FLAT $299/MO &mdash; NO % OF SPEND</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>BUILDS EVERY CAMPAIGN FROM SCRATCH</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>AGENT ACTIVE</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>12.22% CTR &mdash; 3&times; INDUSTRY AVG</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>$94 AVG CPA &mdash; GOOGLE VERIFIED</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>LIVE IN 24 HOURS</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>FLAT $299/MO &mdash; NO % OF SPEND</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>BUILDS EVERY CAMPAIGN FROM SCRATCH</div>
-  </div>
-</div>
+<div id="meta-strip" class="meta-strip"></div>
+<nav id="site-nav"></nav>
 <div class="page-hero">
-  <div class="page-hero-bg"></div>
-  <div class="page-hero-inner">
-    <a href="index.html" class="back-link">&larr; Back to Home</a>
-    <span class="sec-tag">// CAMPAIGN INTELLIGENCE</span>
-    <h1 class="page-h1">The agent doesn't guess.<br>It knows your industry.</h1>
-    <p class="page-sub">Six deep skill domains &mdash; each trained on real campaign data across hundreds of markets. Every campaign Indigo builds draws on the full stack.</p>
+  <div class="hero-word" aria-hidden="true">goindigo</div>
+  <div class="wrap page-hero__inner">
+    <a href="index.html" class="page-hero__back">&larr; Back to Home</a>
+    <span class="page-hero__tag">02 / Agent Capabilities</span>
+    <h1>The agent does not<br>guess. It <span class="italic-serif accent">knows</span><br>your industry.</h1>
+    <p class="page-hero__sub">Six deep skill domains powering every campaign GoIndigo builds. Each trained on real campaign data across hundreds of markets.</p>
   </div>
 </div>
 
-<section class="section s-dark2">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:24px" class="rv">
-      <div>
-        <span class="sec-tag">// Skill 01</span>
-        <h2 class="sec-h2" style="font-size:clamp(22px,3vw,36px)">Keyword Intelligence</h2>
-        <p style="font-size:15px;color:rgba(196,181,253,.7);line-height:1.7">Maps high-intent search queries by service type, geo modifier, urgency signal, and commercial intent — then layers in negative keywords from day one.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:16px">
-          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(139,92,246,.08);border:1px solid var(--bord);padding:3px 8px">Intent Mapping</span>
-          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(139,92,246,.08);border:1px solid var(--bord);padding:3px 8px">Geo Modifiers</span>
-          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(139,92,246,.08);border:1px solid var(--bord);padding:3px 8px">Negative KWs</span>
-          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(139,92,246,.08);border:1px solid var(--bord);padding:3px 8px">Match Types</span>
-        </div>
-        <div style="margin-top:20px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--neon)">DEPTH SCORE — 96/100</div>
-      </div>
-      <div style="background:var(--ink);border:1px solid var(--bord);border-top:3px solid var(--neon);padding:24px">
-        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mt);margin-bottom:16px">// KEYWORD SAMPLE — WATER DAMAGE CHARLOTTE NC</div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;line-height:2.2">
-          <div><span style="color:var(--cyan)">[exact]</span> <span style="color:var(--lt)">water damage restoration charlotte</span></div>
-          <div><span style="color:var(--neon)">[phrase]</span> <span style="color:var(--lt)">"emergency water damage charlotte"</span></div>
-          <div><span style="color:var(--mint)">[broad]</span> <span style="color:var(--lt)">flood damage repair NC</span></div>
-          <div><span style="color:var(--pink)">[neg]</span> <span style="color:var(--mt)">-DIY -free -job -training</span></div>
-        </div>
-      </div>
+<section class="section wrap">
+  <div class="grid-3">
+    <div class="skill-card rv">
+      <div class="skill-card__num">01 / Keyword Intelligence</div>
+      <div class="skill-card__name">Maps Intent</div>
+      <p class="skill-card__desc">High-intent search queries by service type, geo modifier, urgency signal, and commercial intent -- then layers in negative keywords from day one.</p>
+      <div class="skill-card__tags"><span class="skill-tag">Intent Mapping</span><span class="skill-tag">Geo Modifiers</span><span class="skill-tag">Negative KWs</span><span class="skill-tag">Match Types</span></div>
+      <div class="skill-card__score">96/100</div>
     </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:60px" class="rv">
-      <div style="background:var(--ink);border:1px solid var(--bord);border-top:3px solid var(--cyan);padding:24px">
-        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mt);margin-bottom:16px">// RSA COPY SAMPLE</div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;line-height:2.2">
-          <div style="color:var(--cyan)">H1: Emergency Water Damage Charlotte NC</div>
-          <div style="color:var(--lt)">H2: 24/7 Restoration — We Respond Fast</div>
-          <div style="color:var(--lt)">H3: Free Estimate — Call Now</div>
-          <div style="color:var(--mt);margin-top:8px">D1: Professional water & flood damage restoration serving Charlotte. Insurance approved. Fast response guaranteed.</div>
-        </div>
-      </div>
-      <div>
-        <span class="sec-tag">// Skill 02</span>
-        <h2 class="sec-h2" style="font-size:clamp(22px,3vw,36px)">AI Copywriting</h2>
-        <p style="font-size:15px;color:rgba(196,181,253,.7);line-height:1.7">Writes RSA headlines, description lines, sitelinks, callouts, and call extensions — original copy researched for your service and local market.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:16px">
-          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:3px 8px">RSA Headlines</span>
-          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:3px 8px">Descriptions</span>
-          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:3px 8px">Sitelinks</span>
-          <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--lt);background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:3px 8px">Ad Strength</span>
-        </div>
-        <div style="margin-top:20px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan)">DEPTH SCORE — 94/100</div>
-      </div>
+    <div class="skill-card rv" style="animation-delay:0.07s;">
+      <div class="skill-card__num">02 / AI Copywriting</div>
+      <div class="skill-card__name">Writes Everything</div>
+      <p class="skill-card__desc">RSA headlines, description lines, sitelinks, callouts, and call extensions -- original copy researched for your service and local market.</p>
+      <div class="skill-card__tags"><span class="skill-tag">RSA Headlines</span><span class="skill-tag">Descriptions</span><span class="skill-tag">Sitelinks</span><span class="skill-tag">Ad Strength</span></div>
+      <div class="skill-card__score">94/100</div>
     </div>
-
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px">
-      <div class="rv" style="background:rgba(139,92,246,.06);border:1px solid var(--bord);border-top:3px solid var(--mint);padding:24px">
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mint);display:block;margin-bottom:10px">03</span>
-        <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:8px">Bid Intelligence</div>
-        <p style="font-size:13px;color:rgba(196,181,253,.6);line-height:1.6">Sets tCPA bidding, monitors hourly, auto-adjusts bids to hit your CPA target.</p>
-      </div>
-      <div class="rv" style="background:rgba(255,214,0,.04);border:1px solid rgba(255,214,0,.15);border-top:3px solid var(--yel);padding:24px">
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--yel);display:block;margin-bottom:10px">04</span>
-        <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:8px">Budget Realloc</div>
-        <p style="font-size:13px;color:rgba(196,181,253,.6);line-height:1.6">Shifts spend from underperformers to winners in real time.</p>
-      </div>
-      <div class="rv" style="background:rgba(255,45,155,.04);border:1px solid rgba(255,45,155,.15);border-top:3px solid var(--pink);padding:24px">
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--pink);display:block;margin-bottom:10px">05</span>
-        <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:8px">Competitor Intel</div>
-        <p style="font-size:13px;color:rgba(196,181,253,.6);line-height:1.6">Monitors auction insights, impression share, competitor ad angles.</p>
-      </div>
-      <div class="rv" style="background:rgba(255,107,53,.04);border:1px solid rgba(255,107,53,.15);border-top:3px solid var(--org);padding:24px">
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--org);display:block;margin-bottom:10px">06</span>
-        <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--W);margin-bottom:8px">GA4 + Search Console</div>
-        <p style="font-size:13px;color:rgba(196,181,253,.6);line-height:1.6">Cross-references paid + organic for the full traffic picture.</p>
-      </div>
+    <div class="skill-card rv" style="animation-delay:0.14s;">
+      <div class="skill-card__num">03 / Bid Intelligence</div>
+      <div class="skill-card__name">Hits Your CPA</div>
+      <p class="skill-card__desc">Sets tCPA bidding, monitors hourly, auto-adjusts bids to hit your target cost per conversion. Emergency pauses when CPA exceeds 200% target.</p>
+      <div class="skill-card__tags"><span class="skill-tag">tCPA</span><span class="skill-tag">Bid Adjust</span><span class="skill-tag">CPA Guard</span><span class="skill-tag">Emergency Pause</span></div>
+      <div class="skill-card__score">91/100</div>
+    </div>
+    <div class="skill-card rv" style="animation-delay:0.07s;">
+      <div class="skill-card__num">04 / Budget Reallocation</div>
+      <div class="skill-card__name">Shifts to Winners</div>
+      <p class="skill-card__desc">Shifts spend from underperformers to winners in real time -- maximising return on every dollar across your campaign portfolio.</p>
+      <div class="skill-card__tags"><span class="skill-tag">Budget Shift</span><span class="skill-tag">ROI Max</span><span class="skill-tag">Scale Winners</span><span class="skill-tag">Pause Waste</span></div>
+      <div class="skill-card__score">89/100</div>
+    </div>
+    <div class="skill-card rv" style="animation-delay:0.14s;">
+      <div class="skill-card__num">05 / Competitor Intel</div>
+      <div class="skill-card__name">Watches the Field</div>
+      <p class="skill-card__desc">Monitors auction insights, impression share, and competitor ad angles -- adjusts your strategy accordingly without you lifting a finger.</p>
+      <div class="skill-card__tags"><span class="skill-tag">Auction Insights</span><span class="skill-tag">Ad Spy</span><span class="skill-tag">Impr Share</span><span class="skill-tag">Gap Analysis</span></div>
+      <div class="skill-card__score">87/100</div>
+    </div>
+    <div class="skill-card rv" style="animation-delay:0.21s;">
+      <div class="skill-card__num">06 / GA4 + Search Console</div>
+      <div class="skill-card__name">Full Picture</div>
+      <p class="skill-card__desc">Cross-references paid performance with organic data -- optimising campaigns using the complete traffic picture, not just what Google Ads shows.</p>
+      <div class="skill-card__tags"><span class="skill-tag">GA4</span><span class="skill-tag">Search Console</span><span class="skill-tag">Organic vs Paid</span><span class="skill-tag">Full Funnel</span></div>
+      <div class="skill-card__score">85/100</div>
     </div>
   </div>
 </section>
+<div class="cta-strip"><div class="cta-strip__inner wrap rv"><h2>Six skills. <span class="italic-serif accent">One flat fee.</span></h2><p>All six capabilities run on every campaign GoIndigo builds.</p><div class="cta-strip__btns"><a href="contact.html" class="btn btn-primary"><span>Start for $299/mo</span></a><a href="peer-review.html" class="btn btn-ghost"><span>See Quality Control</span></a></div></div></div>
+<footer id="site-footer"></footer>
+<script src="assets/shell.js"></script>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <span class="logo-text">INDIGO</span>
-      <p>AI-powered Google Ads management. Campaigns built from scratch, monitored 24/7, optimized autonomously.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Product</h4>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="skills.html">Skills</a>
-      <a href="peer-review.html">Peer Review</a>
-      <a href="results.html">Results</a>
-      <a href="vs-competitors.html">VS Competitors</a>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="contact.html">Contact</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 Indigo &middot; AI-Powered Google Ads</p>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-<script>
-gsap.registerPlugin(ScrollTrigger);
-// Cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-if(cursor && ring) {
-  document.addEventListener('mousemove', e => {
-    gsap.to(cursor, {x:e.clientX, y:e.clientY, duration:0.1});
-    gsap.to(ring, {x:e.clientX, y:e.clientY, duration:0.35});
-  });
-}
-// Page hero entrance
-gsap.from('.page-hero-inner > *', {opacity:0, y:40, stagger:0.15, duration:0.9, ease:'power3.out', delay:0.2});
-// Scroll reveals
-gsap.utils.toArray('.rv').forEach((el,i) => {
-  ScrollTrigger.create({
-    trigger: el, start: 'top 88%',
-    onEnter: () => gsap.to(el, {opacity:1, y:0, duration:0.75, ease:'power3.out', delay:(i%4)*0.07})
-  });
-});
-// Nav hide/show on scroll
-ScrollTrigger.create({
-  start: 'top -80',
-  onUpdate: self => {
-    const nav = document.getElementById('nav');
-    gsap.to(nav, {y: self.direction===1 ? -80 : 0, duration:0.3});
-  }
-});
-// Mobile menu
-document.getElementById('navToggle')?.addEventListener('click', () => {
-  document.getElementById('mobileMenu')?.classList.toggle('open');
-});
-</script>
 </body>
 </html>

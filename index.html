@@ -1,1612 +1,427 @@
 <!DOCTYPE html>
-<html lang="en" data-barba="wrapper">
+<html lang="en" data-open="false">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indigo ÃÂ¢ÃÂÃÂ AI That Builds, Launches & Runs Your Google Ads</title>
+<title>GoIndigo — Autonomous Google Ads Agent</title>
+<meta name="description" content="AI that builds campaigns from scratch, launches in 24 hours, and monitors CPA around the clock. Flat $299/mo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
-<!-- Libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/TextPlugin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
-<style>
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ RESET & TOKENS ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-:root {
-  --ink: #04000E;
-  --ink2: #0A0020;
-  --ink3: #0D0028;
-  --lift: #1C0040;
-  --neon: #8B5CF6;
-  --neon2: #C840FF;
-  --cyan: #00E5FF;
-  --pink: #FF2D9B;
-  --yel: #FFD600;
-  --mint: #00FF9F;
-  --org: #FF6B35;
-  --W: #FFFFFF;
-  --lt: #C4B5FD;
-  --mt: #7C6B9E;
-  --bord: rgba(139,92,246,.2);
-  --bord2: rgba(139,92,246,.5);
-  --nav-h: 68px;
-}
-*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: auto; }
-body {
-  background: var(--ink);
-  color: #DDD0FF;
-  font-family: 'Rajdhani', sans-serif;
-  overflow-x: hidden;
-  cursor: none;
-}
-a { text-decoration: none; color: inherit; }
-img { display: block; max-width: 100%; }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ CUSTOM CURSOR ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-#cursor {
-  position: fixed;
-  width: 12px; height: 12px;
-  background: var(--neon2);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: width .15s, height .15s, background .15s;
-  mix-blend-mode: screen;
-}
-#cursor-ring {
-  position: fixed;
-  width: 36px; height: 36px;
-  border: 1.5px solid rgba(200,64,255,.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: transform .08s linear, width .2s, height .2s;
-}
-body:has(a:hover) #cursor { width: 20px; height: 20px; background: var(--cyan); }
-body:has(a:hover) #cursor-ring { width: 52px; height: 52px; }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ LENIS SMOOTH SCROLL ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-html.lenis { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ NAV ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-#nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--nav-h);
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  padding: 0 40px;
-  background: rgba(10,0,30,.96);
-  border-bottom: 1px solid rgba(200,64,255,.3);
-  box-shadow: 0 2px 40px rgba(139,92,246,.15);
-  backdrop-filter: blur(20px);
-}
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-right: auto;
-}
-.nav-logo svg { width: 28px; height: 35px; }
-.logo-text {
-  font-family: 'Orbitron', monospace;
-  font-size: 15px;
-  font-weight: 900;
-  letter-spacing: 5px;
-  background: linear-gradient(90deg, var(--neon2), var(--cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.nav-link {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--lt);
-  padding: 6px 11px;
-  text-transform: uppercase;
-  background: rgba(139,92,246,.1);
-  border-radius: 4px;
-  border: 1px solid transparent;
-  transition: all .2s;
-}
-.nav-link:hover {
-  color: var(--W);
-  background: rgba(139,92,246,.2);
-  border-color: rgba(139,92,246,.4);
-}
-.nav-btns {
-  display: flex;
-  gap: 8px;
-  margin-left: 16px;
-  padding-left: 16px;
-  border-left: 1px solid var(--bord);
-}
-.btn-login {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 8px 16px;
-  background: var(--mint);
-  color: var(--ink);
-  border-radius: 4px;
-  text-transform: uppercase;
-  transition: all .2s;
-  border: none;
-}
-.btn-login:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,255,159,.35); }
-.btn-start {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 8px 16px;
-  background: linear-gradient(135deg, var(--neon), var(--neon2));
-  color: var(--W);
-  border-radius: 4px;
-  text-transform: uppercase;
-  transition: all .2s;
-  border: none;
-}
-.btn-start:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(139,92,246,.45); }
-
-/* Mobile nav */
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 4px;
-  margin-left: auto;
-}
-.nav-toggle span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--lt);
-  transition: all .3s;
-}
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: var(--nav-h);
-  left: 0; right: 0;
-  background: rgba(10,0,30,.98);
-  border-bottom: 1px solid var(--bord2);
-  padding: 20px;
-  z-index: 199;
-  flex-direction: column;
-  gap: 4px;
-}
-.mobile-menu.open { display: flex; }
-.mm-link {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: var(--lt);
-  padding: 12px 16px;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(139,92,246,.08);
-  transition: color .2s;
-}
-.mm-link:hover { color: var(--cyan); }
-.mm-login {
-  display: block;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 12px 16px;
-  background: var(--mint);
-  color: var(--ink);
-  border-radius: 4px;
-  text-align: center;
-  text-transform: uppercase;
-  margin-top: 8px;
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ TICKER ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.ticker-wrap {
-  position: relative;
-  top: var(--nav-h);
-  height: 36px;
-  background: linear-gradient(90deg, var(--neon), var(--neon2));
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  z-index: 10;
-}
-.ticker-track {
-  display: flex;
-  gap: 0;
-  animation: tickerScroll 32s linear infinite;
-  white-space: nowrap;
-}
-.ticker-item {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--ink);
-  font-weight: 700;
-  padding: 0 32px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.ticker-dot { width: 5px; height: 5px; background: var(--ink); border-radius: 50%; opacity: .5; }
-@keyframes tickerScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ THREE.JS CANVAS ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-#three-canvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ HERO ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-#hero {
-  position: relative;
-  isolation: isolate;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--ink);
-}
-.hero-content {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  padding: 120px 24px 80px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(139,92,246,.1);
-  border: 1px solid rgba(139,92,246,.3);
-  padding: 8px 20px;
-  border-radius: 100px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 3px;
-  color: var(--neon);
-  text-transform: uppercase;
-  margin-bottom: 32px;
-}
-.hero-badge-dot {
-  width: 7px; height: 7px;
-  background: var(--mint);
-  border-radius: 50%;
-  animation: pulse 1.6s infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity:1; transform:scale(1); }
-  50% { opacity:.3; transform:scale(.7); }
-}
-.hero-h1 {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(36px, 6vw, 80px);
-  font-weight: 900;
-  line-height: 1.0;
-  color: var(--W);
-  margin-bottom: 12px;
-  overflow: hidden;
-}
-.hero-h2 {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(36px, 6vw, 80px);
-  font-weight: 900;
-  line-height: 1.0;
-  margin-bottom: 28px;
-  background: linear-gradient(90deg, var(--yel), var(--pink), var(--neon2), var(--cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-sub {
-  font-size: clamp(16px, 2vw, 20px);
-  color: rgba(196,181,253,.7);
-  line-height: 1.7;
-  max-width: 640px;
-  margin: 0 auto 48px;
-}
-.hero-ctas {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.btn-hero-primary {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  padding: 16px 36px;
-  background: linear-gradient(135deg, var(--neon), var(--neon2));
-  color: var(--W);
-  border: none;
-  border-radius: 4px;
-  text-transform: uppercase;
-  cursor: pointer;
-  clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
-  transition: all .25s;
-  display: inline-block;
-}
-.btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(139,92,246,.5); }
-.btn-hero-outline {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  padding: 15px 36px;
-  background: transparent;
-  color: var(--cyan);
-  border: 1.5px solid var(--cyan);
-  border-radius: 4px;
-  text-transform: uppercase;
-  cursor: pointer;
-  clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
-  transition: all .25s;
-  display: inline-block;
-}
-.btn-hero-outline:hover { background: rgba(0,229,255,.08); transform: translateY(-3px); }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ HERO STATS ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  margin-top: 72px;
-  flex-wrap: wrap;
-}
-.hero-stat {
-  padding: 24px 40px;
-  border-left: 1px solid var(--bord);
-  text-align: center;
-}
-.hero-stat:first-child { border-left: none; }
-.stat-val {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 900;
-  line-height: 1;
-  display: block;
-  margin-bottom: 6px;
-}
-.stat-lbl {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--mt);
-  text-transform: uppercase;
-  display: block;
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ SPLINE SECTION ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.spline-section {
-  position: relative;
-  height: 600px;
-  background: var(--ink2);
-  overflow: hidden;
-  border-top: 1px solid var(--bord);
-  border-bottom: 1px solid var(--bord);
-}
-.spline-section spline-viewer {
-  width: 100%;
-  height: 100%;
-}
-.spline-overlay {
-  position: absolute;
-  left: 6%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  max-width: 400px;
-}
-.spline-tag {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: var(--cyan);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  display: block;
-}
-.spline-title {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(22px, 3vw, 36px);
-  font-weight: 900;
-  color: var(--W);
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-.spline-sub {
-  font-size: 16px;
-  color: rgba(196,181,253,.7);
-  line-height: 1.7;
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ SECTIONS ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.section {
-  position: relative;
-  padding: 100px 0;
-  overflow: hidden;
-}
-.s-dark { background: var(--ink); }
-.s-dark2 { background: var(--ink2); }
-.s-lift { background: linear-gradient(135deg, #120030 0%, #1C0040 100%); }
-.s-white { background: #F0EEFF; }
-.s-neon { background: linear-gradient(135deg, #120030 0%, #200050 100%); }
-
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
-
-.sec-tag {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 4px;
-  color: var(--cyan);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 12px;
-}
-.sec-h2 {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(28px, 4vw, 52px);
-  font-weight: 900;
-  color: var(--W);
-  line-height: 1.05;
-  margin-bottom: 12px;
-}
-.sec-h2-dark { color: var(--ink); }
-.sec-sub {
-  font-size: 18px;
-  color: rgba(196,181,253,.7);
-  line-height: 1.7;
-  max-width: 600px;
-  margin-bottom: 40px;
-}
-.sec-sub-dark { color: rgba(4,0,14,.6); }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ HOW IT WORKS PREVIEW ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--bord);
-  border: 1px solid var(--bord);
-  margin-top: 48px;
-}
-.step-card {
-  background: var(--ink2);
-  padding: 36px 28px;
-  position: relative;
-  overflow: hidden;
-  transition: background .3s;
-}
-.step-card:hover { background: #130035; }
-.step-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--neon), var(--neon2));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .4s;
-}
-.step-card:hover::before { transform: scaleX(1); }
-.step-num {
-  font-family: 'Orbitron', monospace;
-  font-size: 48px;
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 16px;
-  display: block;
-}
-.step-title {
-  font-family: 'Orbitron', monospace;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--W);
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-}
-.step-desc {
-  font-size: 14px;
-  color: rgba(196,181,253,.6);
-  line-height: 1.65;
-}
-.sec-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--cyan);
-  text-transform: uppercase;
-  margin-top: 36px;
-  border-bottom: 1px solid rgba(0,229,255,.3);
-  padding-bottom: 4px;
-  transition: gap .2s;
-}
-.sec-link:hover { gap: 16px; }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ SKILLS GRID ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 48px;
-}
-.skill-card {
-  background: rgba(255,255,255,.03);
-  border: 1px solid var(--bord);
-  padding: 28px 24px;
-  border-radius: 2px;
-  position: relative;
-  overflow: hidden;
-  transition: all .3s;
-}
-.skill-card:hover {
-  border-color: var(--bord2);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(139,92,246,.15);
-}
-.skill-accent {
-  width: 100%;
-  height: 2px;
-  position: absolute;
-  top: 0; left: 0;
-}
-.skill-num {
-  font-family: 'Orbitron', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  display: block;
-}
-.skill-name {
-  font-family: 'Orbitron', monospace;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--W);
-  margin-bottom: 10px;
-}
-.skill-desc {
-  font-size: 13px;
-  color: rgba(196,181,253,.6);
-  line-height: 1.6;
-}
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 16px;
-}
-.skill-tag {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 1px;
-  color: var(--lt);
-  background: rgba(139,92,246,.08);
-  border: 1px solid var(--bord);
-  padding: 3px 8px;
-  text-transform: uppercase;
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ RESULTS ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin: 48px 0 32px;
-}
-.result-card {
-  background: var(--W);
-  border: 2px solid #D4C8FF;
-  padding: 28px 20px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.result-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-}
-.result-val {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(28px, 3.5vw, 44px);
-  font-weight: 900;
-  line-height: 1;
-  display: block;
-  margin-bottom: 8px;
-}
-.result-lbl {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: #7C6B9E;
-  text-transform: uppercase;
-}
-.google-quote {
-  background: linear-gradient(135deg, #F8F5FF, #EEEAFF);
-  border: 1px solid #D4C8FF;
-  border-left: 4px solid var(--neon);
-  padding: 28px 32px;
-  margin-top: 32px;
-}
-.gq-text {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 18px;
-  font-style: italic;
-  color: #2D1A5A;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-.gq-attr {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: #7C6B9E;
-  text-transform: uppercase;
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ PRICING ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 52px;
-}
-.price-card {
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--bord);
-  padding: 36px 28px;
-  position: relative;
-  overflow: hidden;
-  transition: all .3s;
-}
-.price-card:hover { transform: translateY(-6px); border-color: var(--bord2); }
-.price-card.featured { border-color: rgba(0,229,255,.4); }
-.price-tag-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  padding: 5px 0;
-  text-align: center;
-  display: block;
-  margin: -36px -28px 28px;
-}
-.price-tier {
-  font-family: 'Orbitron', monospace;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 6px;
-  display: block;
-}
-.price-val {
-  font-family: 'Orbitron', monospace;
-  font-size: 48px;
-  font-weight: 900;
-  line-height: 1;
-  display: block;
-  margin-bottom: 4px;
-}
-.price-per {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 1px;
-  color: var(--mt);
-  margin-bottom: 28px;
-  display: block;
-}
-.price-features {
-  list-style: none;
-  margin-bottom: 32px;
-}
-.price-features li {
-  font-size: 14px;
-  color: rgba(196,181,253,.75);
-  padding: 7px 0;
-  border-bottom: 1px solid rgba(139,92,246,.08);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.price-features li::before {
-  content: 'ÃÂ¢ÃÂÃÂ';
-  color: var(--mint);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  flex-shrink: 0;
-}
-.btn-price {
-  width: 100%;
-  display: block;
-  text-align: center;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  padding: 14px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  transition: all .25s;
-}
-.btn-price-outline {
-  border: 1.5px solid var(--neon);
-  color: var(--neon);
-  background: transparent;
-}
-.btn-price-outline:hover { background: rgba(139,92,246,.12); transform: translateY(-2px); }
-.btn-price-solid {
-  background: linear-gradient(135deg, var(--neon), var(--neon2));
-  color: var(--W);
-  border: none;
-}
-.btn-price-solid:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,92,246,.4); }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ VS COMPETITORS PREVIEW ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.comp-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-top: 48px;
-}
-.comp-card {
-  background: rgba(255,255,255,.03);
-  border: 1px solid var(--bord);
-  padding: 28px;
-  position: relative;
-  overflow: hidden;
-}
-.comp-name {
-  font-family: 'Orbitron', monospace;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--W);
-  margin-bottom: 4px;
-}
-.comp-type {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: var(--mt);
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  display: block;
-}
-.comp-miss {
-  font-size: 13px;
-  color: rgba(196,181,253,.6);
-  line-height: 1.6;
-  padding-left: 14px;
-  border-left: 2px solid var(--pink);
-  margin-bottom: 10px;
-}
-.comp-win {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 1px;
-  color: var(--mint);
-  text-transform: uppercase;
-  margin-top: 14px;
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ CTA SECTION ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.cta-section {
-  text-align: center;
-  padding: 120px 48px;
-  background: var(--ink);
-  position: relative;
-  overflow: hidden;
-}
-.cta-glow {
-  position: absolute;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(139,92,246,.15) 0%, transparent 70%);
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  pointer-events: none;
-}
-.cta-h2 {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(28px, 4vw, 56px);
-  font-weight: 900;
-  color: var(--W);
-  line-height: 1.05;
-  margin-bottom: 20px;
-  position: relative;
-}
-.cta-sub {
-  font-size: 18px;
-  color: rgba(196,181,253,.6);
-  margin-bottom: 44px;
-  position: relative;
-}
-.cta-btns { display: flex; gap: 16px; justify-content: center; position: relative; flex-wrap: wrap; }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ FOOTER ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-footer {
-  background: var(--ink);
-  border-top: 1px solid var(--bord);
-  padding: 48px 0 28px;
-}
-.footer-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 48px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 40px;
-}
-.footer-brand .logo-text { font-size: 14px; letter-spacing: 4px; }
-.footer-brand p {
-  font-size: 13px;
-  color: var(--mt);
-  line-height: 1.7;
-  margin-top: 12px;
-  max-width: 280px;
-}
-.footer-col h4 {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: var(--mt);
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.footer-col a {
-  display: block;
-  font-size: 13px;
-  color: rgba(196,181,253,.6);
-  margin-bottom: 8px;
-  transition: color .2s;
-}
-.footer-col a:hover { color: var(--lt); }
-.footer-bottom {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 48px 0;
-  border-top: 1px solid var(--bord);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer-bottom p {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 1px;
-  color: var(--mt);
-  text-transform: uppercase;
-}
-.footer-legal { display: flex; gap: 24px; }
-.footer-legal a {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 1px;
-  color: var(--mt);
-  text-transform: uppercase;
-  transition: color .2s;
-}
-.footer-legal a:hover { color: var(--lt); }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ SCROLL REVEAL ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.rv {
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ SECTION NAV BUTTON ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-.section-nav-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--ink);
-  background: var(--neon);
-  padding: 10px 20px;
-  border-radius: 3px;
-  text-transform: uppercase;
-  font-weight: 700;
-  transition: all .2s;
-  margin-top: 28px;
-  clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-}
-.section-nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(139,92,246,.4); }
-
-/* ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ RESPONSIVE ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ */
-@media (max-width: 1024px) {
-  .steps-grid { grid-template-columns: repeat(2, 1fr); }
-  .skills-grid { grid-template-columns: repeat(2, 1fr); }
-  .results-grid { grid-template-columns: repeat(2, 1fr); }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
-  .comp-grid { grid-template-columns: 1fr; }
-  .footer-inner { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 768px) {
-  .nav-links, .nav-btns { display: none; }
-  .nav-toggle { display: flex; }
-  .wrap { padding: 0 20px; }
-  .section { padding: 72px 0; }
-  .steps-grid { grid-template-columns: 1fr; }
-  .skills-grid { grid-template-columns: 1fr; }
-  .results-grid { grid-template-columns: 1fr 1fr; }
-  .hero-stats { flex-direction: column; align-items: center; }
-  .hero-stat { border-left: none; border-top: 1px solid var(--bord); padding: 16px 40px; }
-  .hero-stat:first-child { border-top: none; }
-  .footer-inner { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .spline-section { height: 400px; }
-  .spline-overlay { display: none; }
-  #cursor, #cursor-ring { display: none; }
-  body { cursor: auto; }
-}
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/trip.css">
 </head>
-<body data-barba="wrapper">
+<body>
 
-<!-- CURSOR -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<div id="meta-strip" class="meta-strip"></div>
+<nav id="site-nav"></nav>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="index.html" class="nav-logo">
-    <svg viewBox="0 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C840FF"/><stop offset="100%" stop-color="#5500DD"/></linearGradient>
-        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF2D9B"/><stop offset="100%" stop-color="#00E5FF"/></linearGradient>
-      </defs>
-      <rect x="14" y="15" width="12" height="28" rx="2" fill="url(#g1)"/>
-      <rect x="4" y="13" width="32" height="8" rx="2" fill="url(#g1)"/>
-      <rect x="4" y="37" width="32" height="8" rx="2" fill="url(#g1)"/>
-      <rect x="4" y="27" width="32" height="3" rx="1" fill="#00E5FF" opacity=".9"/>
-      <polygon points="20,1 27,9 20,17 13,9" fill="url(#g2)"/>
-    </svg>
-    <span class="logo-text">INDIGO</span>
-  </a>
-  <div class="nav-links">
-    <a href="how-it-works.html" class="nav-link">How It Works</a>
-    <a href="skills.html" class="nav-link">Skills</a>
-    <a href="peer-review.html" class="nav-link">Peer Review</a>
-    <a href="results.html" class="nav-link">Results</a>
-    <a href="vs-competitors.html" class="nav-link">VS Competitors</a>
-    <a href="contact.html" class="nav-link">Contact</a>
+<!-- HERO -->
+<section class="hero" style="position:relative;overflow:hidden;min-height:94vh;display:flex;align-items:center;padding:80px 0 60px;">
+  <div class="hero-word" aria-hidden="true">goindigo</div>
+  <div class="wrap" style="position:relative;z-index:2;width:100%;">
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;">
+      <span class="pill"><span class="dot"></span>Agent Active</span>
+      <span class="pill pill--accent">Flat $299/mo</span>
+      <span class="pill">5 Campaigns Live</span>
+    </div>
+    <h1 class="display-1 rv" style="max-width:960px;margin-bottom:20px;">
+      Other tools<br>
+      <span class="italic-serif accent">optimize</span> your ads.<br>
+      We <span class="italic-serif accent">build</span> them.
+    </h1>
+    <p class="rv" style="font-size:var(--t-lg);color:var(--fg-2);max-width:560px;line-height:1.65;margin-bottom:40px;animation-delay:0.1s;">
+      AdTurbo, Madgicx, and Optmyzr all require you to set up campaigns first.
+      GoIndigo starts from nothing -- researching your market, writing every word
+      of copy, and launching in under 24 hours.
+    </p>
+    <div class="rv" style="display:flex;gap:12px;flex-wrap:wrap;animation-delay:0.2s;">
+      <a href="contact.html" class="btn btn-primary"><span>Start for $299/mo</span></a>
+      <a href="results.html" class="btn btn-ghost"><span>See Verified Results</span></a>
+    </div>
+    <!-- Hero stats row -->
+    <div class="rv" style="display:grid;grid-template-columns:repeat(4,auto);gap:0;margin-top:72px;border:1px solid var(--ink-line);border-radius:var(--radius);overflow:hidden;width:fit-content;animation-delay:0.3s;">
+      <div style="padding:20px 32px;border-right:1px solid var(--ink-line);">
+        <div style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-3xl);color:var(--green);filter:drop-shadow(0 0 10px oklch(82% 0.20 145 / 0.4));line-height:1;margin-bottom:4px;" class="count-up" data-target="94" data-prefix="$">$0</div>
+        <div style="font-size:var(--t-xs);color:var(--fg-3);letter-spacing:0.10em;text-transform:uppercase;">Avg Cost / Lead</div>
+      </div>
+      <div style="padding:20px 32px;border-right:1px solid var(--ink-line);">
+        <div style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-3xl);color:var(--indigo);filter:drop-shadow(0 0 10px oklch(78% 0.22 295 / 0.4));line-height:1;margin-bottom:4px;" class="count-up" data-target="122">0</div>
+        <div style="font-size:var(--t-xs);color:var(--fg-3);letter-spacing:0.10em;text-transform:uppercase;">Conversions / Mo</div>
+      </div>
+      <div style="padding:20px 32px;border-right:1px solid var(--ink-line);">
+        <div style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-3xl);color:var(--cyan);filter:drop-shadow(0 0 10px oklch(82% 0.16 215 / 0.4));line-height:1;margin-bottom:4px;" class="count-up" data-target="1222" data-decimal="2" data-suffix="%">0%</div>
+        <div style="font-size:var(--t-xs);color:var(--fg-3);letter-spacing:0.10em;text-transform:uppercase;">Click-Through Rate</div>
+      </div>
+      <div style="padding:20px 32px;">
+        <div style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-3xl);color:var(--amber);filter:drop-shadow(0 0 10px oklch(82% 0.16 75 / 0.4));line-height:1;margin-bottom:4px;">24hr</div>
+        <div style="font-size:var(--t-xs);color:var(--fg-3);letter-spacing:0.10em;text-transform:uppercase;">Campaign Launch</div>
+      </div>
+    </div>
   </div>
-  <div class="nav-btns">
-    <a href="https://create-repl-danielt51.replit.app/login" class="btn-login">Client Login</a>
-    <a href="contact.html" class="btn-start">Get Started</a>
-  </div>
-  <div class="nav-toggle" id="navToggle">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="how-it-works.html" class="mm-link">How It Works</a>
-  <a href="skills.html" class="mm-link">Skills</a>
-  <a href="peer-review.html" class="mm-link">Peer Review</a>
-  <a href="results.html" class="mm-link">Results</a>
-  <a href="vs-competitors.html" class="mm-link">VS Competitors</a>
-  <a href="contact.html" class="mm-link">Contact</a>
-  <a href="https://create-repl-danielt51.replit.app/login" class="mm-login">Client Login</a>
-</div>
+</section>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker-track" id="ticker">
-    <div class="ticker-item"><span class="ticker-dot"></span>AGENT ACTIVE</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>12.22% CTR ÃÂ¢ÃÂÃÂ 3ÃÂÃÂ INDUSTRY AVG</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>$94 AVG CPA ÃÂ¢ÃÂÃÂ GOOGLE VERIFIED</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>122 CONVERSIONS THIS MONTH</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>LIVE IN 24 HOURS</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>FLAT $299/MO ÃÂ¢ÃÂÃÂ NO % OF SPEND</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>BUILDS EVERY CAMPAIGN FROM SCRATCH</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>WRITES ALL YOUR AD COPY</div>
-    <!-- Duplicate for seamless loop -->
-    <div class="ticker-item"><span class="ticker-dot"></span>AGENT ACTIVE</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>12.22% CTR ÃÂ¢ÃÂÃÂ 3ÃÂÃÂ INDUSTRY AVG</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>$94 AVG CPA ÃÂ¢ÃÂÃÂ GOOGLE VERIFIED</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>122 CONVERSIONS THIS MONTH</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>LIVE IN 24 HOURS</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>FLAT $299/MO ÃÂ¢ÃÂÃÂ NO % OF SPEND</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>BUILDS EVERY CAMPAIGN FROM SCRATCH</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>WRITES ALL YOUR AD COPY</div>
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="pill pill--green">Google Verified</span>12.22% CTR -- 3x industry avg</div>
+    <div class="ticker-item"><span class="pill pill--accent">$299/mo flat</span>No % of spend. Ever.</div>
+    <div class="ticker-item"><span class="pill"><span class="dot"></span>Agent Active</span>5 campaigns live right now</div>
+    <div class="ticker-item"><span class="pill pill--amber">$94 avg CPA</span>Verified by Google account team</div>
+    <div class="ticker-item"><span>Builds every campaign from scratch</span></div>
+    <div class="ticker-item"><span>Writes all your ad copy</span></div>
+    <div class="ticker-item"><span>Lives in 24 hours</span></div>
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
-<main data-barba="container" data-barba-namespace="home">
-
-<!-- HERO -->
-<section id="hero">
-  <canvas id="three-canvas"></canvas>
-  <div class="hero-content">
-    <div class="hero-badge" id="heroBadge">
-      <span class="hero-badge-dot"></span>
-      AI AGENT RUNNING ÃÂ¢ÃÂÃÂ 5 CAMPAIGNS LIVE
+<!-- AGENT MONITOR -->
+<section class="section wrap">
+  <div style="margin-bottom:32px;">
+    <span class="bracket">Agent Monitor</span>
+    <p style="font-size:var(--t-sm);color:var(--fg-3);margin-top:8px;">Live view of the autonomous agent running campaigns right now</p>
+  </div>
+  <div class="agent-monitor rv">
+    <div class="agent-monitor__header">
+      <div class="eye-glyph" style="width:14px;height:14px;"></div>
+      <span class="agent-monitor__title">GoIndigo Agent -- All Dry USA</span>
+      <span class="pill pill--green" style="margin-left:auto;"><span class="dot"></span>Read + Write</span>
     </div>
-    <h1 class="hero-h1" id="heroH1">Other tools optimize your ads.</h1>
-    <h2 class="hero-h2" id="heroH2">Indigo builds them.</h2>
-    <p class="hero-sub" id="heroSub">AdTurbo, Madgicx, and Optmyzr all require you to set up campaigns first. Indigo starts from nothing ÃÂ¢ÃÂÃÂ researching your market, writing every word of copy, and launching in under 24 hours.</p>
-    <div class="hero-ctas" id="heroCtas">
-      <a href="contact.html" class="btn-hero-primary">Start for $299/mo &rarr;</a>
-      <a href="results.html" class="btn-hero-outline">See Verified Results</a>
+    <div class="agent-monitor__body">
+      <!-- Live log -->
+      <div class="monitor-col">
+        <div class="monitor-col__head"><span class="dot" style="width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.6s ease-in-out infinite;"></span>Live Log</div>
+        <div id="live-log" style="display:flex;flex-direction:column;gap:2px;min-height:180px;"></div>
+      </div>
+      <!-- Campaign run -->
+      <div class="monitor-col">
+        <div class="monitor-col__head">Campaign Run</div>
+        <div class="kv"><span class="kv__k">Campaign</span><span class="kv__v">AllDry Charlotte NC</span></div>
+        <div class="kv"><span class="kv__k">Budget</span><span class="kv__v kv__v--green">$100/day</span></div>
+        <div class="kv"><span class="kv__k">CPA Target</span><span class="kv__v">$150</span></div>
+        <div class="kv"><span class="kv__k">Avg CPA</span><span class="kv__v kv__v--green">$94</span></div>
+        <div class="kv"><span class="kv__k">Status</span><span class="kv__v kv__v--indigo">Enabled</span></div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Build Progress</span><span id="progress-pct">12%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+        <div class="kv" style="margin-top:8px;"><span class="kv__k">ETA Launch</span><span class="kv__v" id="eta-timer">23:47:12</span></div>
+      </div>
+      <!-- KPI Deck -->
+      <div class="monitor-col">
+        <div class="monitor-col__head">KPI Deck</div>
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-card__v count-up" data-target="30995" data-prefix="$">$0</div><div class="kpi-card__k">Total Spend</div></div>
+          <div class="kpi-card"><div class="kpi-card__v count-up" data-target="307">0</div><div class="kpi-card__k">Conversions</div></div>
+          <div class="kpi-card"><div class="kpi-card__v" style="font-size:var(--t-xl);">5.1%</div><div class="kpi-card__k">CTR</div></div>
+          <div class="kpi-card"><div class="kpi-card__v" style="font-size:var(--t-xl);">48,850</div><div class="kpi-card__k">Impressions</div></div>
+        </div>
+        <div style="font-size:var(--t-xs);color:var(--fg-3);margin-top:12px;">Updated <span id="update-time">just now</span></div>
+      </div>
     </div>
-    <div class="hero-stats" id="heroStats">
-      <div class="hero-stat">
-        <span class="stat-val" style="color:var(--mint)" data-target="94">$0</span>
-        <span class="stat-lbl">Avg Cost / Lead</span>
-      </div>
-      <div class="hero-stat">
-        <span class="stat-val" style="color:var(--neon)" data-target="122">0</span>
-        <span class="stat-lbl">Conversions / Mo</span>
-      </div>
-      <div class="hero-stat">
-        <span class="stat-val" style="color:var(--cyan)" data-pct="12.22">0%</span>
-        <span class="stat-lbl">Click-Through Rate</span>
-      </div>
-      <div class="hero-stat">
-        <span class="stat-val" style="color:var(--yel)">24hr</span>
-        <span class="stat-lbl">Campaign Launch</span>
+    <!-- Marquee ticker -->
+    <div class="monitor-footer">
+      <div class="ticker-track" style="font-size:var(--t-xs);">
+        <span style="padding:0 24px;color:var(--fg-3);">SPEND $30,995</span>
+        <span style="padding:0 24px;color:var(--fg-3);">|</span>
+        <span style="padding:0 24px;color:var(--green);">CPA $100.96 -- UNDER TARGET</span>
+        <span style="padding:0 24px;color:var(--fg-3);">|</span>
+        <span style="padding:0 24px;color:var(--fg-3);">CLICKS 2,495</span>
+        <span style="padding:0 24px;color:var(--fg-3);">|</span>
+        <span style="padding:0 24px;color:var(--indigo);">AGENT ACTIVE -- READ+WRITE MODE</span>
+        <span style="padding:0 24px;color:var(--fg-3);">|</span>
+        <span style="padding:0 24px;color:var(--fg-3);">SPEND $30,995</span>
+        <span style="padding:0 24px;color:var(--fg-3);">|</span>
+        <span style="padding:0 24px;color:var(--green);">CPA $100.96 -- UNDER TARGET</span>
+        <span style="padding:0 24px;color:var(--fg-3);">|</span>
+        <span style="padding:0 24px;color:var(--fg-3);">CLICKS 2,495</span>
+        <span style="padding:0 24px;color:var(--fg-3);">|</span>
+        <span style="padding:0 24px;color:var(--indigo);">AGENT ACTIVE -- READ+WRITE MODE</span>
       </div>
     </div>
   </div>
 </section>
-
-<!-- SPLINE 3D SCENE -->
-<div class="spline-section">
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
-  <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9TWHHT/scene.splinecode" style="width:100%;height:100%;"></spline-viewer>
-  <div class="spline-overlay">
-    <span class="spline-tag">// AI AGENT ÃÂ¢ÃÂÃÂ LIVE</span>
-    <h3 class="spline-title">Your campaigns.<br>Fully autonomous.</h3>
-    <p class="spline-sub">The agent monitors, optimizes, and scales ÃÂ¢ÃÂÃÂ 24 hours a day, 7 days a week.</p>
-  </div>
-</div>
 
 <!-- HOW IT WORKS PREVIEW -->
-<section class="section s-lift">
-  <div class="wrap">
-    <div class="rv">
-      <span class="sec-tag">// How It Works</span>
-      <h2 class="sec-h2">From zero to live in 24 hours</h2>
-      <p class="sec-sub">No setup. No brief. Tell Indigo your market ÃÂ¢ÃÂÃÂ the agent handles everything else.</p>
+<section class="section wrap">
+  <div class="s-head rv">
+    <div class="s-head__num">
+      <span class="label-upper">Section 01 / Operations</span>
+      <span class="big serif italic-serif">/how it works</span>
     </div>
-    <div class="steps-grid rv">
-      <div class="step-card">
-        <span class="step-num" style="color:var(--neon)">01</span>
-        <div class="step-title">You Name the Market</div>
-        <p class="step-desc">Service type + target city. That's your only input. No keyword lists. No brief document.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-num" style="color:var(--cyan)">02</span>
-        <div class="step-title">Indigo Builds Everything</div>
-        <p class="step-desc">Keywords, copy, ad groups, bidding ÃÂ¢ÃÂÃÂ fully autonomous. No human involved at any stage.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-num" style="color:var(--mint)">03</span>
-        <div class="step-title">Live in 24 Hours</div>
-        <p class="step-desc">Campaigns launch. Agent monitors CPA around the clock. You approve every change before it executes.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-num" style="color:var(--yel)">04</span>
-        <div class="step-title">Leads Flow. You Scale.</div>
-        <p class="step-desc">New market? Another 24-hour autonomous build. Same agent, new city, same results.</p>
-      </div>
+    <div class="s-head__title">
+      <h2>From two fields to a live campaign in 24 hours</h2>
+      <p>Tell us your service and target city. The agent handles every keyword, every headline, every bid -- autonomously.</p>
+      <a href="how-it-works.html" class="btn btn-ghost" style="margin-top:24px;height:40px;"><span>See Full Protocol</span></a>
     </div>
-    <a href="how-it-works.html" class="sec-link rv">Full breakdown &rarr;</a>
   </div>
-</section>
-
-<!-- SKILLS PREVIEW -->
-<section class="section s-dark2">
-  <div class="wrap">
-    <div class="rv">
-      <span class="sec-tag">// Campaign Skills</span>
-      <h2 class="sec-h2">The agent doesn't guess.<br>It knows your industry.</h2>
-      <p class="sec-sub">Six deep skill domains powering every campaign Indigo builds.</p>
+  <div class="grid-4" style="gap:1px;background:var(--ink-line);border:1px solid var(--ink-line);border-radius:var(--radius);overflow:hidden;margin-top:0;">
+    <div class="rv" style="background:var(--ink-1);padding:32px 24px;">
+      <div style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-4xl);color:var(--fg-3);line-height:1;margin-bottom:16px;">01</div>
+      <div style="font-size:var(--t-md);font-weight:600;color:var(--fg-0);margin-bottom:8px;letter-spacing:0.04em;text-transform:uppercase;font-size:var(--t-sm);">You Name the Market</div>
+      <p style="font-size:var(--t-sm);color:var(--fg-2);line-height:1.6;">Service type plus target city. That is your only input. No keyword lists. No brief.</p>
     </div>
-    <div class="skills-grid">
-      <div class="skill-card rv">
-        <div class="skill-accent" style="background:var(--neon)"></div>
-        <span class="skill-num" style="color:var(--neon)">01</span>
-        <div class="skill-name">Keyword Intelligence</div>
-        <p class="skill-desc">Maps high-intent queries by service type, geo, urgency, and commercial intent ÃÂ¢ÃÂÃÂ with negatives from day one.</p>
-        <div class="skill-tags"><span class="skill-tag">Intent Mapping</span><span class="skill-tag">Geo Mods</span><span class="skill-tag">Negatives</span></div>
-      </div>
-      <div class="skill-card rv">
-        <div class="skill-accent" style="background:var(--cyan)"></div>
-        <span class="skill-num" style="color:var(--cyan)">02</span>
-        <div class="skill-name">AI Copywriting</div>
-        <p class="skill-desc">Writes all RSA headlines, descriptions, sitelinks, and callouts ÃÂ¢ÃÂÃÂ original copy for your exact market.</p>
-        <div class="skill-tags"><span class="skill-tag">RSA Headlines</span><span class="skill-tag">Descriptions</span><span class="skill-tag">Extensions</span></div>
-      </div>
-      <div class="skill-card rv">
-        <div class="skill-accent" style="background:var(--mint)"></div>
-        <span class="skill-num" style="color:var(--mint)">03</span>
-        <div class="skill-name">Bid Intelligence</div>
-        <p class="skill-desc">Sets tCPA bidding, monitors hourly, auto-adjusts bids to hit your target cost per conversion.</p>
-        <div class="skill-tags"><span class="skill-tag">tCPA</span><span class="skill-tag">Bid Adjust</span><span class="skill-tag">CPA Guard</span></div>
-      </div>
-      <div class="skill-card rv">
-        <div class="skill-accent" style="background:var(--yel)"></div>
-        <span class="skill-num" style="color:var(--yel)">04</span>
-        <div class="skill-name">Budget Reallocation</div>
-        <p class="skill-desc">Shifts spend from underperformers to winners in real time ÃÂ¢ÃÂÃÂ maximising return on every dollar.</p>
-        <div class="skill-tags"><span class="skill-tag">Budget Shift</span><span class="skill-tag">ROI Max</span><span class="skill-tag">Scale Winners</span></div>
-      </div>
-      <div class="skill-card rv">
-        <div class="skill-accent" style="background:var(--pink)"></div>
-        <span class="skill-num" style="color:var(--pink)">05</span>
-        <div class="skill-name">Competitor Intel</div>
-        <p class="skill-desc">Monitors auction insights, impression share, and competitor ad angles ÃÂ¢ÃÂÃÂ and adjusts your strategy accordingly.</p>
-        <div class="skill-tags"><span class="skill-tag">Auction Insights</span><span class="skill-tag">Ad Spy</span><span class="skill-tag">Impr Share</span></div>
-      </div>
-      <div class="skill-card rv">
-        <div class="skill-accent" style="background:var(--org)"></div>
-        <span class="skill-num" style="color:var(--org)">06</span>
-        <div class="skill-name">GA4 + Search Console</div>
-        <p class="skill-desc">Cross-references paid performance with organic data ÃÂ¢ÃÂÃÂ optimising campaigns using the full traffic picture.</p>
-        <div class="skill-tags"><span class="skill-tag">GA4</span><span class="skill-tag">Search Console</span><span class="skill-tag">Organic</span></div>
-      </div>
+    <div class="rv" style="background:var(--ink-1);padding:32px 24px;animation-delay:0.07s;">
+      <div style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-4xl);color:var(--fg-3);line-height:1;margin-bottom:16px;">02</div>
+      <div style="font-size:var(--t-sm);font-weight:600;color:var(--fg-0);margin-bottom:8px;letter-spacing:0.04em;text-transform:uppercase;">Indigo Builds Everything</div>
+      <p style="font-size:var(--t-sm);color:var(--fg-2);line-height:1.6;">Keywords, copy, ad groups, bidding -- fully autonomous. No human involved at any stage.</p>
     </div>
-    <a href="skills.html" class="sec-link rv">All 6 skills &rarr;</a>
+    <div class="rv" style="background:var(--ink-1);padding:32px 24px;animation-delay:0.14s;">
+      <div style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-4xl);color:var(--fg-3);line-height:1;margin-bottom:16px;">03</div>
+      <div style="font-size:var(--t-sm);font-weight:600;color:var(--fg-0);margin-bottom:8px;letter-spacing:0.04em;text-transform:uppercase;">Live in 24 Hours</div>
+      <p style="font-size:var(--t-sm);color:var(--fg-2);line-height:1.6;">Campaigns launch. Agent monitors CPA around the clock. You approve every change first.</p>
+    </div>
+    <div class="rv" style="background:var(--ink-1);padding:32px 24px;animation-delay:0.21s;">
+      <div style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-4xl);color:var(--fg-3);line-height:1;margin-bottom:16px;">04</div>
+      <div style="font-size:var(--t-sm);font-weight:600;color:var(--fg-0);margin-bottom:8px;letter-spacing:0.04em;text-transform:uppercase;">Leads Flow. You Scale.</div>
+      <p style="font-size:var(--t-sm);color:var(--fg-2);line-height:1.6;">New market? Another 24-hour build. Same agent, new city, same results.</p>
+    </div>
   </div>
 </section>
 
 <!-- RESULTS PREVIEW -->
-<section class="section s-white">
+<section class="section" style="background:var(--ink-1);border-top:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);">
   <div class="wrap">
-    <div class="rv">
-      <span class="sec-tag" style="color:var(--neon)">// Verified Results</span>
-      <h2 class="sec-h2 sec-h2-dark">Real campaigns.<br>Real numbers.</h2>
-      <p class="sec-sub sec-sub-dark">Every figure is from a live Indigo campaign ÃÂ¢ÃÂÃÂ independently verified by Google's own account team.</p>
-    </div>
-    <div class="results-grid">
-      <div class="result-card rv">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--mint)"></div>
-        <span class="result-val" style="color:var(--neon)">12.22%</span>
-        <span class="result-lbl">Click-Through Rate ÃÂ¢ÃÂÃÂ 3ÃÂÃÂ Industry Avg</span>
+    <div class="s-head rv">
+      <div class="s-head__num">
+        <span class="label-upper">Section 04 / Verified</span>
+        <span class="big serif italic-serif">/results</span>
       </div>
-      <div class="result-card rv">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--cyan)"></div>
-        <span class="result-val" style="color:#0A0020">$94</span>
-        <span class="result-lbl">Avg Cost Per Lead ÃÂ¢ÃÂÃÂ Google Verified</span>
-      </div>
-      <div class="result-card rv">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--neon)"></div>
-        <span class="result-val" style="color:var(--neon2)">122</span>
-        <span class="result-lbl">Conversions This Month</span>
-      </div>
-      <div class="result-card rv">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--yel)"></div>
-        <span class="result-val" style="color:#0A0020">$65K</span>
-        <span class="result-lbl">Revenue Collected From $18.1K Spend</span>
+      <div class="s-head__title">
+        <h2>Real campaigns. Real numbers.</h2>
+        <p>Every figure independently reviewed by Google's own account team. Not projections.</p>
+        <a href="results.html" class="btn btn-ghost" style="margin-top:24px;height:40px;"><span>See Full Results</span></a>
       </div>
     </div>
-    <div class="google-quote rv">
-      <p class="gq-text">"This campaign is showing incredible intent ÃÂ¢ÃÂÃÂ 13.12% conversion rate with a very low cost per conversion. We're flagging this account for immediate scaling."</p>
-      <span class="gq-attr">ÃÂ¢ÃÂÃÂ Google Point of Contact &middot; Verified Account Review &middot; March 2026 &nbsp; ÃÂ¢ÃÂÃÂ GOOGLE VERIFIED</span>
+    <div class="bignums rv">
+      <div class="bignum">
+        <span class="bignum__k">CTR</span>
+        <span class="bignum__v">12.22%</span>
+        <span class="bignum__d">3x industry average</span>
+      </div>
+      <div class="bignum">
+        <span class="bignum__k">Avg CPA</span>
+        <span class="bignum__v">$94</span>
+        <span class="bignum__d">Google account verified</span>
+      </div>
+      <div class="bignum">
+        <span class="bignum__k">Conversions</span>
+        <span class="bignum__v">122</span>
+        <span class="bignum__d">This month</span>
+      </div>
+      <div class="bignum">
+        <span class="bignum__k">Revenue</span>
+        <span class="bignum__v">$65K</span>
+        <span class="bignum__d">From $18.1K spend</span>
+      </div>
     </div>
-    <a href="results.html" class="section-nav-btn rv" style="color:var(--ink);background:var(--neon);margin-top:32px;display:inline-flex">See Full Results &rarr;</a>
+    <div class="rv" style="border:1px solid var(--ink-line);border-radius:var(--radius);padding:28px 32px;margin-top:24px;background:var(--ink-2);border-left:3px solid var(--indigo);">
+      <p style="font-family:var(--font-serif);font-style:italic;font-size:var(--t-xl);color:var(--fg-1);line-height:1.5;margin-bottom:12px;">"This campaign is showing incredible intent -- 13.12% conversion rate with a very low cost per conversion. We are flagging this account for immediate scaling."</p>
+      <span style="font-size:var(--t-xs);color:var(--fg-3);letter-spacing:0.10em;text-transform:uppercase;">-- Google Point of Contact &nbsp; Verified Account Review &nbsp; March 2026 &nbsp; </span><span class="pill pill--green" style="height:18px;font-size:9px;">Google Verified</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS PREVIEW -->
+<section class="section wrap">
+  <div class="s-head rv">
+    <div class="s-head__num">
+      <span class="label-upper">Section 02 / Capabilities</span>
+      <span class="big serif italic-serif">/skills</span>
+    </div>
+    <div class="s-head__title">
+      <h2>The agent does not guess. It knows your industry.</h2>
+      <p>Six deep skill domains powering every campaign GoIndigo builds.</p>
+      <a href="skills.html" class="btn btn-ghost" style="margin-top:24px;height:40px;"><span>All 6 Skills</span></a>
+    </div>
+  </div>
+  <div class="grid-3">
+    <div class="skill-card rv">
+      <div class="skill-card__num">01 / Keyword Intelligence</div>
+      <div class="skill-card__name">Maps Intent</div>
+      <p class="skill-card__desc">High-intent queries by service, geo, urgency and commercial intent -- with negatives from day one.</p>
+      <div class="skill-card__tags"><span class="skill-tag">Intent Mapping</span><span class="skill-tag">Geo Mods</span><span class="skill-tag">Negatives</span></div>
+      <div class="skill-card__score">96/100</div>
+    </div>
+    <div class="skill-card rv" style="animation-delay:0.07s;">
+      <div class="skill-card__num">02 / AI Copywriting</div>
+      <div class="skill-card__name">Writes Everything</div>
+      <p class="skill-card__desc">RSA headlines, descriptions, sitelinks and callouts -- original copy for your exact market.</p>
+      <div class="skill-card__tags"><span class="skill-tag">RSA Headlines</span><span class="skill-tag">Descriptions</span><span class="skill-tag">Extensions</span></div>
+      <div class="skill-card__score">94/100</div>
+    </div>
+    <div class="skill-card rv" style="animation-delay:0.14s;">
+      <div class="skill-card__num">03 / Bid Intelligence</div>
+      <div class="skill-card__name">Hits Your CPA</div>
+      <p class="skill-card__desc">Sets tCPA bidding, monitors hourly, auto-adjusts bids to hit your target cost per conversion.</p>
+      <div class="skill-card__tags"><span class="skill-tag">tCPA</span><span class="skill-tag">Bid Adjust</span><span class="skill-tag">CPA Guard</span></div>
+      <div class="skill-card__score">91/100</div>
+    </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section class="section s-neon">
+<section class="section" style="background:var(--ink-1);border-top:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);">
   <div class="wrap">
-    <div style="text-align:center" class="rv">
-      <span class="sec-tag" style="text-align:center;display:block">// Flat Monthly Pricing ÃÂ¢ÃÂÃÂ No % of Spend, Ever</span>
-      <h2 class="sec-h2" style="text-align:center">Simple pricing.<br>Serious results.</h2>
-      <p class="sec-sub" style="text-align:center;margin:0 auto 0">One flat fee. No contracts. No percentage of your ad spend. Cancel anytime.</p>
+    <div class="s-head rv">
+      <div class="s-head__num">
+        <span class="label-upper">Section / Pricing</span>
+        <span class="big serif italic-serif">/plans</span>
+      </div>
+      <div class="s-head__title">
+        <h2>Flat fee. No percentage of spend. Ever.</h2>
+        <p>One monthly fee covers everything. No setup costs. No contracts. Cancel anytime.</p>
+      </div>
     </div>
-    <div class="pricing-grid">
-      <div class="price-card rv">
-        <span class="price-tag-label" style="background:rgba(139,92,246,.2);color:var(--lt)">STARTER</span>
-        <span class="price-tier" style="color:var(--neon)">1 Campaign</span>
-        <span class="price-val" style="color:var(--W)">$299</span>
-        <span class="price-per">/month ÃÂ¢ÃÂÃÂ flat fee</span>
-        <ul class="price-features">
+    <div class="pricing-grid rv">
+      <div class="plan">
+        <div class="plan__tier">Starter</div>
+        <div class="plan__price"><sup>$</sup>299</div>
+        <div class="plan__billing">/month -- flat fee</div>
+        <ul class="plan__features">
           <li>1 Google Ads campaign built from scratch</li>
-          <li>Full keyword research & ad copy</li>
+          <li>Full keyword research and ad copy</li>
           <li>24/7 autonomous CPA monitoring</li>
           <li>Weekly performance report</li>
           <li>Client portal access</li>
         </ul>
-        <a href="contact.html" class="btn-price btn-price-outline">Get Started</a>
+        <a href="contact.html" class="btn btn-ghost" style="width:100%;justify-content:center;"><span>Get Started</span></a>
       </div>
-      <div class="price-card featured rv">
-        <span class="price-tag-label" style="background:var(--cyan);color:var(--ink)">MOST POPULAR</span>
-        <span class="price-tier" style="color:var(--cyan)">2ÃÂ¢ÃÂÃÂ3 Campaigns</span>
-        <span class="price-val" style="color:var(--W)">$399</span>
-        <span class="price-per">/month ÃÂ¢ÃÂÃÂ flat fee</span>
-        <ul class="price-features">
-          <li>2ÃÂ¢ÃÂÃÂ3 campaigns across markets or services</li>
-          <li>All copy & keywords built autonomously</li>
+      <div class="plan plan--featured">
+        <div class="plan__tier" style="color:var(--indigo);">Most Popular</div>
+        <div class="plan__price"><sup>$</sup>399</div>
+        <div class="plan__billing">/month -- flat fee</div>
+        <ul class="plan__features">
+          <li>2-3 campaigns across markets or services</li>
+          <li>All copy and keywords built autonomously</li>
           <li>Budget reallocation across campaigns</li>
           <li>Competitor intel monitoring</li>
           <li>Priority support</li>
         </ul>
-        <a href="contact.html" class="btn-price btn-price-solid">Get Started</a>
+        <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center;"><span>Get Started</span></a>
       </div>
-      <div class="price-card rv">
-        <span class="price-tag-label" style="background:rgba(255,214,0,.15);color:var(--yel)">SCALE</span>
-        <span class="price-tier" style="color:var(--yel)">4ÃÂ¢ÃÂÃÂ5 Campaigns</span>
-        <span class="price-val" style="color:var(--W)">$499</span>
-        <span class="price-per">/month ÃÂ¢ÃÂÃÂ flat fee</span>
-        <ul class="price-features">
-          <li>4ÃÂ¢ÃÂÃÂ5 campaigns ÃÂ¢ÃÂÃÂ full multi-market coverage</li>
-          <li>GA4 + Search Console integration</li>
+      <div class="plan">
+        <div class="plan__tier">Scale</div>
+        <div class="plan__price"><sup>$</sup>499</div>
+        <div class="plan__billing">/month -- flat fee</div>
+        <ul class="plan__features">
+          <li>4-5 campaigns -- full multi-market coverage</li>
+          <li>GA4 and Search Console integration</li>
           <li>Advanced budget reallocation</li>
           <li>Weekly agent strategy report</li>
           <li>Dedicated account access</li>
         </ul>
-        <a href="contact.html" class="btn-price btn-price-outline" style="border-color:var(--yel);color:var(--yel)">Get Started</a>
+        <a href="contact.html" class="btn btn-ghost" style="width:100%;justify-content:center;"><span>Get Started</span></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<div class="cta-section">
-  <div class="cta-glow"></div>
-  <span class="sec-tag" style="display:block;text-align:center;margin-bottom:20px">// Start Today</span>
-  <h2 class="cta-h2">Your next campaign builds<br>itself in 24 hours.</h2>
-  <p class="cta-sub">Tell us your market. The agent handles everything else.</p>
-  <div class="cta-btns">
-    <a href="contact.html" class="btn-hero-primary">Start for $299/mo &rarr;</a>
-    <a href="results.html" class="btn-hero-outline">See the Proof First</a>
+<div class="cta-strip">
+  <div class="cta-strip__inner wrap rv">
+    <h2>Your next campaign<br><span class="italic-serif accent">builds itself</span> in 24 hours.</h2>
+    <p>Tell us your market. The agent handles everything else.</p>
+    <div class="cta-strip__btns">
+      <a href="contact.html" class="btn btn-primary"><span>Start for $299/mo</span></a>
+      <a href="results.html" class="btn btn-ghost"><span>See the Proof First</span></a>
+    </div>
   </div>
 </div>
 
-</main>
+<footer id="site-footer"></footer>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <span class="logo-text">INDIGO</span>
-      <p>AI-powered Google Ads management. Campaigns built from scratch, monitored 24/7, and optimized autonomously.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Product</h4>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="skills.html">Skills</a>
-      <a href="peer-review.html">Peer Review</a>
-      <a href="results.html">Results</a>
-      <a href="vs-competitors.html">VS Competitors</a>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="contact.html">Contact</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="https://create-repl-danielt51.replit.app/login">Client Login</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 Indigo &middot; AI-Powered Google Ads</p>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-
-<!-- LENIS SMOOTH SCROLL -->
+<script src="assets/shell.js"></script>
 <script>
-(function(){
-  // Minimal Lenis-like smooth scroll using native CSS
-  document.documentElement.style.scrollBehavior = 'smooth';
-
-  // Custom smooth scroll implementation
-  let currentY = window.scrollY;
-  let targetY = window.scrollY;
-  let ticking = false;
-
-  window.addEventListener('wheel', function(e) {
-    targetY += e.deltaY * 0.8;
-    targetY = Math.max(0, Math.min(targetY, document.body.scrollHeight - window.innerHeight));
-    if(!ticking) {
-      requestAnimationFrame(smoothUpdate);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  function smoothUpdate() {
-    currentY += (targetY - currentY) * 0.1;
-    if(Math.abs(targetY - currentY) > 0.5) {
-      window.scrollTo(0, currentY);
-      requestAnimationFrame(smoothUpdate);
-    } else {
-      window.scrollTo(0, targetY);
-      currentY = targetY;
-      ticking = false;
-    }
-  }
-})();
-</script>
-
-<!-- THREE.JS PARTICLE FIELD -->
-<script>
+/* ── AGENT MONITOR LIVE LOG ── */
 (function() {
-  const canvas = document.getElementById('three-canvas');
-  if (!canvas || typeof THREE === 'undefined') return;
-
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(canvas.parentElement.offsetWidth, canvas.parentElement.offsetHeight);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, canvas.parentElement.offsetWidth / canvas.parentElement.offsetHeight, 0.1, 1000);
-  camera.position.z = 50;
-
-  // Grid lines
-  const gridGeo = new THREE.BufferGeometry();
-  const gridVerts = [];
-  const gridSize = 80, gridDivs = 20;
-  const step = gridSize / gridDivs;
-  for (let i = 0; i <= gridDivs; i++) {
-    const x = -gridSize/2 + i * step;
-    gridVerts.push(x, -gridSize/2, -20, x, gridSize/2, -20);
-    gridVerts.push(-gridSize/2, x, -20, gridSize/2, x, -20);
-  }
-  gridGeo.setAttribute('position', new THREE.Float32BufferAttribute(gridVerts, 3));
-  const gridMat = new THREE.LineBasicMaterial({ color: 0x8B5CF6, transparent: true, opacity: 0.08 });
-  scene.add(new THREE.LineSegments(gridGeo, gridMat));
-
-  // Particles
-  const count = 800;
-  const positions = new Float32Array(count * 3);
-  const colors = new Float32Array(count * 3);
-  const pColors = [
-    new THREE.Color(0x8B5CF6),
-    new THREE.Color(0xC840FF),
-    new THREE.Color(0x00E5FF),
-    new THREE.Color(0xFF2D9B),
-    new THREE.Color(0x00FF9F),
+  const LOG_ENTRIES = [
+    { type: 'build', msg: 'Campaign structure initialized -- 4 ad groups' },
+    { type: 'ok', msg: 'Keywords loaded -- 38 terms mapped' },
+    { type: 'build', msg: 'RSA copy generated -- Charlotte NC' },
+    { type: 'bid', msg: 'Bid adjusted -- $3.12 -> $2.87 on [water damage]' },
+    { type: 'ok', msg: 'CPA at $94 -- under $150 target' },
+    { type: 'build', msg: 'Negative keywords added -- 12 exclusions' },
+    { type: 'bid', msg: 'Budget realloc -- Charlotte +$20 Charlotte FL -$20' },
+    { type: 'ok', msg: 'Conversion tracked -- Lead form submit #307' },
+    { type: 'build', msg: 'Sitelinks refreshed -- 4 extensions updated' },
+    { type: 'bid', msg: 'Peak hours modifier -- +15% 8am-6pm weekdays' },
+    { type: 'ok', msg: 'Google API sync -- all campaigns healthy' },
+    { type: 'build', msg: 'Ad strength improved -- Excellent on 3 ads' },
   ];
-  for (let i = 0; i < count; i++) {
-    positions[i*3] = (Math.random()-0.5)*120;
-    positions[i*3+1] = (Math.random()-0.5)*120;
-    positions[i*3+2] = (Math.random()-0.5)*60 - 10;
-    const c = pColors[Math.floor(Math.random() * pColors.length)];
-    colors[i*3] = c.r; colors[i*3+1] = c.g; colors[i*3+2] = c.b;
-  }
-  const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-  pGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-  const pMat = new THREE.PointsMaterial({ size: 0.35, vertexColors: true, transparent: true, opacity: 0.7 });
-  const particles = new THREE.Points(pGeo, pMat);
-  scene.add(particles);
+  const logEl = document.getElementById('live-log');
+  if (!logEl) return;
 
-  // Floating neon lines
-  for (let i = 0; i < 6; i++) {
-    const lGeo = new THREE.BufferGeometry();
-    const lVerts = [];
-    const x = (Math.random()-0.5)*80, y = (Math.random()-0.5)*80;
-    const len = 5 + Math.random()*15;
-    lVerts.push(x, y, -5, x+len, y+Math.random()*4, -5);
-    lGeo.setAttribute('position', new THREE.Float32BufferAttribute(lVerts, 3));
-    const lMat = new THREE.LineBasicMaterial({
-      color: pColors[Math.floor(Math.random()*pColors.length)],
-      transparent: true, opacity: 0.3
+  let idx = 0;
+  function addEntry() {
+    const entry = LOG_ENTRIES[idx % LOG_ENTRIES.length];
+    idx++;
+    const now = new Date();
+    const ts = now.toTimeString().slice(0,8);
+    const row = document.createElement('div');
+    row.className = 'log-entry';
+    row.innerHTML = `<span class="log-ts">${ts}</span><span class="log-tag tag--${entry.type}">${entry.type.toUpperCase()}</span><span class="log-msg">${entry.msg}</span>`;
+    logEl.appendChild(row);
+    if (logEl.children.length > 8) logEl.removeChild(logEl.firstChild);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+  for (let i = 0; i < 4; i++) addEntry();
+  setInterval(addEntry, 2400);
+
+  /* ETA countdown */
+  let secs = 85632;
+  const etaEl = document.getElementById('eta-timer');
+  setInterval(() => {
+    if (!etaEl || secs <= 0) return;
+    secs--;
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    etaEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }, 1000);
+
+  /* Update time */
+  const upEl = document.getElementById('update-time');
+  let mins = 0;
+  setInterval(() => {
+    if (!upEl) return;
+    mins++;
+    upEl.textContent = mins === 1 ? '1 min ago' : `${mins} mins ago`;
+  }, 60000);
+})();
+
+/* ── COUNT UP ANIMATION ── */
+(function() {
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function animateCount(el) {
+    const target = parseInt(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = el.dataset.decimal;
+    const duration = 1800;
+    const start = performance.now();
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const val = target * easeOut(progress);
+      if (isDecimal) {
+        el.textContent = prefix + (val / 100).toFixed(2) + suffix;
+      } else {
+        el.textContent = prefix + Math.floor(val).toLocaleString() + suffix;
+      }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCount(e.target);
+        io.unobserve(e.target);
+      }
     });
-    scene.add(new THREE.Line(lGeo, lMat));
-  }
-
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', e => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 0.3;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 0.3;
-  });
-
-  let frame = 0;
-  function animate() {
-    requestAnimationFrame(animate);
-    frame += 0.003;
-    particles.rotation.y = frame * 0.05 + mouseX;
-    particles.rotation.x = mouseY * 0.3;
-    gridMat.opacity = 0.06 + Math.sin(frame * 0.5) * 0.02;
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener('resize', () => {
-    const w = canvas.parentElement.offsetWidth;
-    const h = canvas.parentElement.offsetHeight;
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.count-up').forEach(el => io.observe(el));
 })();
 </script>
-
-<!-- GSAP ANIMATIONS -->
-<script>
-gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
-// Cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-if (cursor && ring) {
-  document.addEventListener('mousemove', e => {
-    gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
-    gsap.to(ring, { x: e.clientX, y: e.clientY, duration: 0.35 });
-  });
-}
-
-// Hero entrance
-const tl = gsap.timeline({ delay: 0.2 });
-tl.from('#heroBadge', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' })
-  .from('#heroH1', { opacity: 0, y: 50, duration: 0.9, ease: 'power3.out' }, '-=0.4')
-  .from('#heroH2', { opacity: 0, y: 50, duration: 0.9, ease: 'power3.out' }, '-=0.6')
-  .from('#heroSub', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.5')
-  .from('#heroCtas', { opacity: 0, y: 20, duration: 0.7, ease: 'power3.out' }, '-=0.4')
-  .from('#heroStats .hero-stat', { opacity: 0, y: 24, stagger: 0.12, duration: 0.7, ease: 'power3.out' }, '-=0.3');
-
-// Anime.js counter animation
-const stats = document.querySelectorAll('[data-target]');
-const statsPct = document.querySelectorAll('[data-pct]');
-
-ScrollTrigger.create({
-  trigger: '#heroStats',
-  start: 'top 90%',
-  once: true,
-  onEnter: () => {
-    stats.forEach(el => {
-      const target = parseInt(el.dataset.target);
-      const isPrice = el.textContent.includes('$');
-      anime({ targets: el, innerHTML: [0, target], duration: 1800, easing: 'easeOutExpo',
-        update: a => { const v = parseFloat(a.animations[0].currentValue)||0; el.textContent = (isPrice ? '
-      });
-    });
-    statsPct.forEach(el => {
-      const target = parseFloat(el.dataset.pct);
-      anime({ targets: el, innerHTML: [0, target], duration: 2000, easing: 'easeOutExpo',
-        update: a => { const v = parseFloat(a.animations[0].currentValue)||0; el.textContent = v.toFixed(2) + '%'; }
-      });
-    });
-  }
-});
-
-// Scroll reveals
-gsap.utils.toArray('.rv').forEach((el, i) => {
-  ScrollTrigger.create({
-    trigger: el,
-    start: 'top 88%',
-    onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', delay: (i % 4) * 0.08 })
-  });
-});
-
-// Nav scroll effect
-ScrollTrigger.create({
-  start: 'top -80',
-  onUpdate: self => {
-    const nav = document.getElementById('nav');
-    if (self.direction === 1) { gsap.to(nav, { y: -80, duration: 0.3 }); }
-    else { gsap.to(nav, { y: 0, duration: 0.3 }); }
-  }
-});
-
-// Mobile nav toggle
-document.getElementById('navToggle')?.addEventListener('click', () => {
-  document.getElementById('mobileMenu')?.classList.toggle('open');
-});
-
-// Pricing card hover glow
-document.querySelectorAll('.price-card').forEach(card => {
-  card.addEventListener('mouseenter', () => gsap.to(card, { boxShadow: '0 20px 60px rgba(139,92,246,.25)', duration: 0.3 }));
-  card.addEventListener('mouseleave', () => gsap.to(card, { boxShadow: 'none', duration: 0.3 }));
-});
-
-// Step cards stagger
-ScrollTrigger.create({
-  trigger: '.steps-grid',
-  start: 'top 80%',
-  onEnter: () => {
-    gsap.from('.step-card', { opacity: 0, y: 40, stagger: 0.1, duration: 0.7, ease: 'power3.out' });
-  }
-});
-
-console.log('INDIGO | GSAP + Three.js + Anime.js loaded');
-</script>
-
-</body>
-</html>
- : '') + Math.floor(v); }
-      });
-    });
-    statsPct.forEach(el => {
-      const target = parseFloat(el.dataset.pct);
-      anime({ targets: el, innerHTML: [0, target], duration: 2000, easing: 'easeOutExpo',
-        update: a => { const v = parseFloat(a.animations[0].currentValue)||0; el.textContent = v.toFixed(2) + '%'; }
-      });
-    });
-  }
-});
-
-// Scroll reveals
-gsap.utils.toArray('.rv').forEach((el, i) => {
-  ScrollTrigger.create({
-    trigger: el,
-    start: 'top 88%',
-    onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', delay: (i % 4) * 0.08 })
-  });
-});
-
-// Nav scroll effect
-ScrollTrigger.create({
-  start: 'top -80',
-  onUpdate: self => {
-    const nav = document.getElementById('nav');
-    if (self.direction === 1) { gsap.to(nav, { y: -80, duration: 0.3 }); }
-    else { gsap.to(nav, { y: 0, duration: 0.3 }); }
-  }
-});
-
-// Mobile nav toggle
-document.getElementById('navToggle')?.addEventListener('click', () => {
-  document.getElementById('mobileMenu')?.classList.toggle('open');
-});
-
-// Pricing card hover glow
-document.querySelectorAll('.price-card').forEach(card => {
-  card.addEventListener('mouseenter', () => gsap.to(card, { boxShadow: '0 20px 60px rgba(139,92,246,.25)', duration: 0.3 }));
-  card.addEventListener('mouseleave', () => gsap.to(card, { boxShadow: 'none', duration: 0.3 }));
-});
-
-// Step cards stagger
-ScrollTrigger.create({
-  trigger: '.steps-grid',
-  start: 'top 80%',
-  onEnter: () => {
-    gsap.from('.step-card', { opacity: 0, y: 40, stagger: 0.1, duration: 0.7, ease: 'power3.out' });
-  }
-});
-
-console.log('INDIGO | GSAP + Three.js + Anime.js loaded');
-</script>
-
 </body>
 </html>
