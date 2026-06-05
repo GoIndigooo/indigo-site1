@@ -1,15 +1,15 @@
 /* ============================================================
-   GOINDIGO SHELL.JS — SHARED CHROME + INTERACTIONS
+   GOINDIGO SHELL.JS â SHARED CHROME + INTERACTIONS
    ============================================================ */
 (function () {
   'use strict';
 
   const PAGES = [
     { href: 'index.html', label: 'Home', short: '00', meta: 'COMMAND DECK' },
-    { href: 'how-it-works.html', label: 'How It Works', short: '01', meta: 'PROTOCOL · T+24H' },
+    { href: 'how-it-works.html', label: 'How It Works', short: '01', meta: 'PROTOCOL Â· T+24H' },
     { href: 'skills.html', label: 'Skills', short: '02', meta: 'AGENT CAPABILITIES' },
     { href: 'peer-review.html', label: 'Peer Review', short: '03', meta: 'FIELD AUDITS' },
-    { href: 'results.html', label: 'Results', short: '04', meta: 'VERIFIED · GOOGLE' },
+    { href: 'results.html', label: 'Results', short: '04', meta: 'VERIFIED Â· GOOGLE' },
     { href: 'vs-competitors.html', label: 'VS Competitors', short: '05', meta: 'FIELD COMPARISON' },
     { href: 'contact.html', label: 'Contact', short: '06', meta: 'OPEN A CHANNEL' },
   ];
@@ -21,7 +21,7 @@
     return p ? p.label.toUpperCase() : 'PAGE';
   })();
 
-  /* ── UTC CLOCK ── */
+  /* ââ UTC CLOCK ââ */
   function utcClock() {
     const now = new Date();
     return now.toISOString().slice(11, 19) + ' UTC';
@@ -37,14 +37,14 @@
     setInterval(tick, 1000);
   }
 
-  /* ── META STRIP ── */
+  /* ââ META STRIP ââ */
   function renderMeta() {
     const strip = document.getElementById('meta-strip');
     if (!strip) return;
     strip.innerHTML = `
       <span class="meta-strip__item">SYS GOINDIGO/2026.04</span>
       <span class="meta-strip__sep">|</span>
-      <span class="meta-strip__item">NODE 0X · ${PAGE_NAME}</span>
+      <span class="meta-strip__item">NODE 0X Â· ${PAGE_NAME}</span>
       <span class="meta-strip__sep">|</span>
       <span class="meta-strip__item"><span class="dot"></span>STATUS OPERATIONAL</span>
       <span class="meta-strip__sep">|</span>
@@ -53,7 +53,7 @@
     `;
   }
 
-  /* ── NAV ── */
+  /* ââ NAV ââ */
   function renderNav() {
     const nav = document.getElementById('site-nav');
     if (!nav) return;
@@ -65,7 +65,7 @@
       <div></div>
       <div class="nav-actions">
         <a href="${REPLIT_URL}" class="nav-login">Client Login</a>
-        <a href="contact.html" class="btn btn-primary" style="height:36px;padding:0 18px;font-size:11px;"><span>Get Started</span></a>
+        <a href="https://create-repl-danielt51.replit.app/client-intake" class="btn btn-primary" style="height:36px;padding:0 18px;font-size:11px;"><span>Get Started</span></a>
         <button class="ham" id="ham-btn" aria-expanded="false" aria-label="Toggle menu">
           <span class="ham__bar"></span>
           <span class="ham__bar"></span>
@@ -76,7 +76,7 @@
     nav.classList.add('site-nav');
   }
 
-  /* ── HAMBURGER MENU ── */
+  /* ââ HAMBURGER MENU ââ */
   function renderMenu() {
     const existing = document.getElementById('menu-overlay');
     if (existing) return;
@@ -110,7 +110,7 @@
     document.body.appendChild(overlay);
   }
 
-  /* ── MENU TOGGLE ── */
+  /* ââ MENU TOGGLE ââ */
   function bindMenu() {
     const hamBtn = document.getElementById('ham-btn');
     const overlay = document.getElementById('menu-overlay');
@@ -140,7 +140,7 @@
     });
   }
 
-  /* ── FOOTER ── */
+  /* ââ FOOTER ââ */
   function renderFooter() {
     const footer = document.getElementById('site-footer');
     if (!footer) return;
@@ -188,7 +188,7 @@
     footer.classList.add('site-footer');
   }
 
-  /* ── BACKGROUND GRID ── */
+  /* ââ BACKGROUND GRID ââ */
   function renderBgGrid() {
     if (document.querySelector('.bg-grid')) return;
     const grid = document.createElement('div');
@@ -196,7 +196,7 @@
     document.body.insertBefore(grid, document.body.firstChild);
   }
 
-  /* ── SCROLL REVEALS ── */
+  /* ââ SCROLL REVEALS ââ */
   function initReveals() {
     const els = document.querySelectorAll('.rv');
     if (!els.length) return;
@@ -211,7 +211,7 @@
     els.forEach(el => io.observe(el));
   }
 
-  /* ── TICKER DUPLICATION ── */
+  /* ââ TICKER DUPLICATION ââ */
   function initTicker() {
     const track = document.querySelector('.ticker-track');
     if (!track) return;
@@ -219,7 +219,7 @@
     track.innerHTML += clone;
   }
 
-  /* ── INIT ── */
+  /* ââ INIT ââ */
   function init() {
     renderMeta();
     renderNav();
