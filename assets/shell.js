@@ -65,7 +65,7 @@
       <div></div>
       <div class="nav-actions">
         <a href="${REPLIT_URL}" class="nav-login">Client Login</a>
-        <a href="contact.html" class="btn btn-primary" style="height:36px;padding:0 18px;font-size:11px;"><span>Get Started</span></a>
+        <a href="https://create-repl-danielt51.replit.app/client-intake" class="btn btn-primary" style="height:36px;padding:0 18px;font-size:11px;"><span>Get Started</span></a>
         <button class="ham" id="ham-btn" aria-expanded="false" aria-label="Toggle menu">
           <span class="ham__bar"></span>
           <span class="ham__bar"></span>
